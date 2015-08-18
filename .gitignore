@@ -3,3 +3,4 @@ src/main/generated-recurces/
 .project
 .classpath
 /target/
+.settings
