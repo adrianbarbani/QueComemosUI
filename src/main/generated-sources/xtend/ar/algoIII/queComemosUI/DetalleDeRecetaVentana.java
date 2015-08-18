@@ -16,6 +16,6 @@ public class DetalleDeRecetaVentana extends MainWindow<Receta> {
   }
   
   public void createContents(final Panel mainPanel) {
-    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+    this.setTitle("Detalle De Receta");
   }
 }

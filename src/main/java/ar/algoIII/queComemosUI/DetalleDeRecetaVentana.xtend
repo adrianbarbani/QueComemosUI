@@ -15,7 +15,7 @@ class DetalleDeRecetaVentana extends MainWindow<Receta> {
 	}
 	
 	override createContents(Panel mainPanel) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+			this.title = "Detalle De Receta"
 	}
 	
 	
