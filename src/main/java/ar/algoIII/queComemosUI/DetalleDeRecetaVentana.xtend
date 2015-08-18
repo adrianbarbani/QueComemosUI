@@ -12,7 +12,7 @@ import org.uqbar.commons.utils.Observable
 import org.uqbar.arena.widgets.Label
 
 @Accessors
-
+//-Djava.system.class.loader=com.uqbar.apo.APOClassLoader
 class DetalleDeRecetaVentana extends MainWindow<Receta> {
 	Receta pizza
 	static Comida prepizza = new Comida(200, "prepizza", 50)
