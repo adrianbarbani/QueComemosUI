@@ -1,0 +1,5 @@
+src/test/generated-recurces/
+src/main/generated-recurces/
+.project
+.classpath
+/target/
