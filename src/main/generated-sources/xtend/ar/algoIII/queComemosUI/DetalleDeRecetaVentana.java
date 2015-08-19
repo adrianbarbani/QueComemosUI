@@ -10,7 +10,9 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.uqbar.arena.layout.HorizontalLayout;
 import org.uqbar.arena.widgets.Button;
+import org.uqbar.arena.widgets.CheckBox;
 import org.uqbar.arena.widgets.Label;
+import org.uqbar.arena.widgets.List;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.windows.MainWindow;
 import org.uqbar.lacar.ui.model.ControlBuilder;
@@ -67,6 +69,23 @@ public class DetalleDeRecetaVentana extends MainWindow<Receta> {
     _label_7.setText("Ingredientes");
     Label _label_8 = new Label(panelCondimentos);
     _label_8.setText("Condimentos");
+    Panel _panel = new Panel(panelCondimentos);
+    final Procedure1<Panel> _function = new Procedure1<Panel>() {
+      public void apply(final Panel it) {
+        HorizontalLayout _horizontalLayout = new HorizontalLayout();
+        it.setLayout(_horizontalLayout);
+        List<Object> _list = new List<Object>(it);
+        final Procedure1<List<Object>> _function = new Procedure1<List<Object>>() {
+          public void apply(final List<Object> it) {
+            it.bindItemsToProperty("subRecetaseIngredientes");
+            it.setWidth(100);
+            it.setHeight(120);
+          }
+        };
+        ObjectExtensions.<List<Object>>operator_doubleArrow(_list, _function);
+      }
+    };
+    ObjectExtensions.<Panel>operator_doubleArrow(_panel, _function);
     final Panel panelFavoritaYCondiciones = new Panel(mainPanel);
     HorizontalLayout _horizontalLayout_3 = new HorizontalLayout();
     panelFavoritaYCondiciones.setLayout(_horizontalLayout_3);
@@ -76,6 +95,7 @@ public class DetalleDeRecetaVentana extends MainWindow<Receta> {
     final Panel panelCondiciones = new Panel(panelFavoritaYCondiciones);
     Label _label_9 = new Label(panelFavorita);
     _label_9.setText("Favorita");
+    CheckBox checkResumen = new CheckBox(panelFavorita);
     Label _label_10 = new Label(panelCondiciones);
     _label_10.setText("Condiciones Preexistentes");
     final Panel panelProcesoDePreparacion = new Panel(mainPanel);
@@ -85,12 +105,12 @@ public class DetalleDeRecetaVentana extends MainWindow<Receta> {
     _label_12.<Object, ControlBuilder>bindValueToProperty("explicacionDeLaPreparacion");
     final Panel panelBotonVolver = new Panel(mainPanel);
     Button _button = new Button(panelBotonVolver);
-    final Procedure1<Button> _function = new Procedure1<Button>() {
+    final Procedure1<Button> _function_1 = new Procedure1<Button>() {
       public void apply(final Button it) {
         it.setCaption("Volver");
       }
     };
-    ObjectExtensions.<Button>operator_doubleArrow(_button, _function);
+    ObjectExtensions.<Button>operator_doubleArrow(_button, _function_1);
   }
   
   @Pure
