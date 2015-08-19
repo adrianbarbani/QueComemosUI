@@ -84,6 +84,7 @@ class DetalleDeRecetaVentana extends MainWindow<Receta> {
 		//------------------------------------------------------------------------
 		
 		val panelProcesoDePreparacion = new Panel (mainPanel)	//Repito el proceso de antes
+		new Label(panelProcesoDePreparacion).text= "Proceso de Preparación"
 		new Label(panelProcesoDePreparacion).bindValueToProperty("explicacionDeLaPreparacion") //agregar en el builder	
 		
 		//------------------------------------------------------------------------

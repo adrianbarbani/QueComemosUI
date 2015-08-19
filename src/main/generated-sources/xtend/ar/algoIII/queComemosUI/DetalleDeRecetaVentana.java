@@ -80,7 +80,9 @@ public class DetalleDeRecetaVentana extends MainWindow<Receta> {
     _label_10.setText("Condiciones Preexistentes");
     final Panel panelProcesoDePreparacion = new Panel(mainPanel);
     Label _label_11 = new Label(panelProcesoDePreparacion);
-    _label_11.<Object, ControlBuilder>bindValueToProperty("explicacionDeLaPreparacion");
+    _label_11.setText("Proceso de Preparación");
+    Label _label_12 = new Label(panelProcesoDePreparacion);
+    _label_12.<Object, ControlBuilder>bindValueToProperty("explicacionDeLaPreparacion");
     final Panel panelBotonVolver = new Panel(mainPanel);
     Button _button = new Button(panelBotonVolver);
     final Procedure1<Button> _function = new Procedure1<Button>() {
