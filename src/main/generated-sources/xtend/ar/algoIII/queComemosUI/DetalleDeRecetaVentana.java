@@ -19,7 +19,8 @@ public class DetalleDeRecetaVentana extends MainWindow<Receta> {
   private static Comida prepizza = new Comida(200, "prepizza", 50);
   
   public DetalleDeRecetaVentana() {
-    super(new RecetaBuilder().tipoDeReceta(new Publica()).nombreDelPlato("Pizza de muzzarella").agregarIngrediente(DetalleDeRecetaVentana.prepizza).setearCalorias(500).build());
+    super(
+      new RecetaBuilder().tipoDeReceta(new Publica()).nombreDelPlato("Pizza de muzzarella").agregarIngrediente(DetalleDeRecetaVentana.prepizza).setearCalorias(500).build());
     Receta _modelObject = this.getModelObject();
     this.pizza = _modelObject;
   }
@@ -33,6 +34,8 @@ public class DetalleDeRecetaVentana extends MainWindow<Receta> {
     this.setTitle("Detalle De Receta");
     Label _label = new Label(mainPanel);
     _label.<Object, ControlBuilder>bindValueToProperty("nombreDelPlato");
+    Label _label_1 = new Label(mainPanel);
+    _label_1.<Object, ControlBuilder>bindValueToProperty("caloriasReceta");
   }
   
   @Pure
