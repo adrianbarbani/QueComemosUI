@@ -14,6 +14,8 @@ import org.uqbar.arena.widgets.CheckBox;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.List;
 import org.uqbar.arena.widgets.Panel;
+import org.uqbar.arena.widgets.tables.Column;
+import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.MainWindow;
 import org.uqbar.lacar.ui.model.ControlBuilder;
 
@@ -22,11 +24,13 @@ import org.uqbar.lacar.ui.model.ControlBuilder;
 public class DetalleDeRecetaVentana extends MainWindow<Receta> {
   private Receta pizza;
   
-  private static Comida prepizza = new Comida(200, "prepizza", 50);
+  private static Comida prepizza = new Comida(0, "prepizza", 1);
+  
+  private static Comida salsaDeTomate = new Comida(300, "Salsa de tomate", 0);
   
   public DetalleDeRecetaVentana() {
     super(
-      new RecetaBuilder().tipoDeReceta(new Publica()).nombreDelPlato("Pizza de muzzarella").agregarIngrediente(DetalleDeRecetaVentana.prepizza).setearCalorias(500).setearDificultad("Facil").setearTemporadas("Todo el año").build());
+      new RecetaBuilder().tipoDeReceta(new Publica()).nombreDelPlato("Pizza de muzzarella").agregarIngrediente(DetalleDeRecetaVentana.prepizza).agregarIngrediente(DetalleDeRecetaVentana.salsaDeTomate).setearCalorias(500).setearDificultad("Facil").setearTemporadas("Todo el año").setearPreparacion("En la prepizza volcar la salsa de tomate y cocinar por 15 minutos").build());
     Receta _modelObject = this.getModelObject();
     this.pizza = _modelObject;
   }
@@ -67,6 +71,7 @@ public class DetalleDeRecetaVentana extends MainWindow<Receta> {
     final Panel panelCondimentos = new Panel(panelIngredientesYCondimentos);
     Label _label_7 = new Label(panelIngredientes);
     _label_7.setText("Ingredientes");
+    this.grillaIngredientes(panelIngredientes);
     Label _label_8 = new Label(panelCondimentos);
     _label_8.setText("Condimentos");
     Panel _panel = new Panel(panelCondimentos);
@@ -111,6 +116,38 @@ public class DetalleDeRecetaVentana extends MainWindow<Receta> {
       }
     };
     ObjectExtensions.<Button>operator_doubleArrow(_button, _function_1);
+  }
+  
+  public Column<Comida> grillaIngredientes(final Panel panel) {
+    Column<Comida> _xblockexpression = null;
+    {
+      Table<Comida> _table = new Table<Comida>(panel, Comida.class);
+      final Procedure1<Table<Comida>> _function = new Procedure1<Table<Comida>>() {
+        public void apply(final Table<Comida> it) {
+          it.setWidth(300);
+          it.setHeight(100);
+          it.bindItemsToProperty("ingredientes");
+        }
+      };
+      final Table<Comida> gridIngredientes = ObjectExtensions.<Table<Comida>>operator_doubleArrow(_table, _function);
+      Column<Comida> _column = new Column<Comida>(gridIngredientes);
+      final Procedure1<Column<Comida>> _function_1 = new Procedure1<Column<Comida>>() {
+        public void apply(final Column<Comida> it) {
+          it.setTitle("Dosis");
+          it.bindContentsToProperty("cantidad");
+        }
+      };
+      ObjectExtensions.<Column<Comida>>operator_doubleArrow(_column, _function_1);
+      Column<Comida> _column_1 = new Column<Comida>(gridIngredientes);
+      final Procedure1<Column<Comida>> _function_2 = new Procedure1<Column<Comida>>() {
+        public void apply(final Column<Comida> it) {
+          it.setTitle("Ingrediente");
+          it.bindContentsToProperty("nombre");
+        }
+      };
+      _xblockexpression = ObjectExtensions.<Column<Comida>>operator_doubleArrow(_column_1, _function_2);
+    }
+    return _xblockexpression;
   }
   
   @Pure

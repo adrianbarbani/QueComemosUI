@@ -1,32 +1,33 @@
 package ar.algoIII.queComemosUI
 
-import ar.algo.adriba.tp1.Receta
-import org.uqbar.arena.windows.MainWindow
-import org.uqbar.arena.widgets.Panel
-import org.uqbar.arena.widgets.TextBox
-import ar.algo.adriba.tp1.RecetaBuilder
-import ar.algo.adriba.tp1.Publica
 import ar.algo.adriba.tp1.Comida
+import ar.algo.adriba.tp1.Cosas
+import ar.algo.adriba.tp1.Publica
+import ar.algo.adriba.tp1.Receta
+import ar.algo.adriba.tp1.RecetaBuilder
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.uqbar.commons.utils.Observable
-import org.uqbar.arena.widgets.Label
+import org.uqbar.arena.bindings.PropertyAdapter
 import org.uqbar.arena.layout.HorizontalLayout
 import org.uqbar.arena.widgets.Button
-import org.uqbar.arena.widgets.List
 import org.uqbar.arena.widgets.CheckBox
-import ar.algo.adriba.tp1.CondicionPreexistente
+import org.uqbar.arena.widgets.Label
+import org.uqbar.arena.widgets.List
+import org.uqbar.arena.widgets.Panel
+import org.uqbar.arena.widgets.tables.Column
+import org.uqbar.arena.widgets.tables.Table
+import org.uqbar.arena.windows.MainWindow
 
 @Accessors
-//-Djava.system.class.loader=com.uqbar.apo.APOClassLoader
 class DetalleDeRecetaVentana extends MainWindow<Receta> {
 	Receta pizza
-	static Comida prepizza = new Comida(200, "prepizza", 50)
+	static Comida prepizza = new Comida(0, "prepizza", 1)
+	static Comida salsaDeTomate = new Comida (300, "Salsa de tomate",0)
 
 	new() {
 		super(
 			new RecetaBuilder().tipoDeReceta(new Publica).nombreDelPlato("Pizza de muzzarella").
-				agregarIngrediente(prepizza).setearCalorias(500).setearDificultad("Facil").
-				setearTemporadas("Todo el año").build)
+				agregarIngrediente(prepizza).agregarIngrediente(salsaDeTomate).setearCalorias(500).setearDificultad("Facil").
+				setearTemporadas("Todo el año").setearPreparacion("En la prepizza volcar la salsa de tomate y cocinar por 15 minutos").build)
 		this.pizza = this.modelObject
 	}
 
@@ -64,7 +65,7 @@ class DetalleDeRecetaVentana extends MainWindow<Receta> {
 		val panelCondimentos = new Panel(panelIngredientesYCondimentos)
 
 		new Label(panelIngredientes).text = "Ingredientes"
-
+		grillaIngredientes(panelIngredientes)
 		//aca hay que hacer la tabla
 		
 		new Label(panelCondimentos).text = "Condimentos"
@@ -106,7 +107,7 @@ class DetalleDeRecetaVentana extends MainWindow<Receta> {
 		//------------------------------------------------------------------------
 		val panelProcesoDePreparacion = new Panel(mainPanel) //Repito el proceso de antes
 		new Label(panelProcesoDePreparacion).text = "Proceso de Preparación"
-		new Label(panelProcesoDePreparacion).bindValueToProperty("explicacionDeLaPreparacion") //agregar en el builder	
+		new Label(panelProcesoDePreparacion).bindValueToProperty("explicacionDeLaPreparacion") 
 
 		//------------------------------------------------------------------------
 		val panelBotonVolver = new Panel(mainPanel)
@@ -114,6 +115,26 @@ class DetalleDeRecetaVentana extends MainWindow<Receta> {
 			//onClick [ | ] aca hay que ver que hace cuando lo tocamos
 			caption = "Volver"
 		]
+	}
+	
+//Grilla de ingredientes
+	def grillaIngredientes(Panel panel) {
+		val gridIngredientes = new Table(panel, typeof(Comida)) => [
+			width = 300
+			height = 100
+			bindItemsToProperty("ingredientes")//.ingredientes
+		]
+		
+		new Column<Comida>(gridIngredientes) => [
+			title = "Dosis"
+			bindContentsToProperty("cantidad")
+		]
+		
+		new Column<Comida>(gridIngredientes) => [
+			title = "Ingrediente"
+			bindContentsToProperty("nombre")
+		]
+		
 	}
 
 }
