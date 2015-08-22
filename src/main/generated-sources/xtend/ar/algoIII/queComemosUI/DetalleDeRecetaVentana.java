@@ -101,6 +101,23 @@ public class DetalleDeRecetaVentana extends MainWindow<Receta> {
     CheckBox checkResumen = new CheckBox(panelFavorita);
     Label _label_10 = new Label(panelCondiciones);
     _label_10.setText("Condiciones Preexistentes");
+    this.listaCondicionesPreexistentes(panelCondiciones);
+    final Panel panelProcesoDePreparacion = new Panel(mainPanel);
+    Label _label_11 = new Label(panelProcesoDePreparacion);
+    _label_11.setText("Proceso de Preparación");
+    Label _label_12 = new Label(panelProcesoDePreparacion);
+    _label_12.<Object, ControlBuilder>bindValueToProperty("explicacionDeLaPreparacion");
+    final Panel panelBotonVolver = new Panel(mainPanel);
+    Button _button = new Button(panelBotonVolver);
+    final Procedure1<Button> _function = new Procedure1<Button>() {
+      public void apply(final Button it) {
+        it.setCaption("Volver");
+      }
+    };
+    ObjectExtensions.<Button>operator_doubleArrow(_button, _function);
+  }
+  
+  public Panel listaCondicionesPreexistentes(final Panel panelCondiciones) {
     Panel _panel = new Panel(panelCondiciones);
     final Procedure1<Panel> _function = new Procedure1<Panel>() {
       public void apply(final Panel it) {
@@ -119,20 +136,7 @@ public class DetalleDeRecetaVentana extends MainWindow<Receta> {
         ObjectExtensions.<List<Object>>operator_doubleArrow(_list, _function);
       }
     };
-    ObjectExtensions.<Panel>operator_doubleArrow(_panel, _function);
-    final Panel panelProcesoDePreparacion = new Panel(mainPanel);
-    Label _label_11 = new Label(panelProcesoDePreparacion);
-    _label_11.setText("Proceso de Preparación");
-    Label _label_12 = new Label(panelProcesoDePreparacion);
-    _label_12.<Object, ControlBuilder>bindValueToProperty("explicacionDeLaPreparacion");
-    final Panel panelBotonVolver = new Panel(mainPanel);
-    Button _button = new Button(panelBotonVolver);
-    final Procedure1<Button> _function_1 = new Procedure1<Button>() {
-      public void apply(final Button it) {
-        it.setCaption("Volver");
-      }
-    };
-    ObjectExtensions.<Button>operator_doubleArrow(_button, _function_1);
+    return ObjectExtensions.<Panel>operator_doubleArrow(_panel, _function);
   }
   
   public Panel listaDeCondimentos(final Panel panelCondimentos) {
@@ -148,7 +152,7 @@ public class DetalleDeRecetaVentana extends MainWindow<Receta> {
             PropertyAdapter _propertyAdapter = new PropertyAdapter(Cosas.class, "nombre");
             propiedadCondimentos.setAdapter(_propertyAdapter);
             it.setWidth(100);
-            it.setHeight(120);
+            it.setHeight(200);
           }
         };
         ObjectExtensions.<List<Object>>operator_doubleArrow(_list, _function);
@@ -163,8 +167,8 @@ public class DetalleDeRecetaVentana extends MainWindow<Receta> {
       Table<Comida> _table = new Table<Comida>(panel, Comida.class);
       final Procedure1<Table<Comida>> _function = new Procedure1<Table<Comida>>() {
         public void apply(final Table<Comida> it) {
-          it.setWidth(300);
-          it.setHeight(100);
+          it.setWidth(1000);
+          it.setHeight(8000);
           it.bindItemsToProperty("ingredientes");
         }
       };
