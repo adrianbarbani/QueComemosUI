@@ -1,6 +1,7 @@
 package ar.algoIII.queComemosUI
 
 import ar.algo.adriba.tp1.Comida
+import ar.algo.adriba.tp1.CondicionPreexistente
 import ar.algo.adriba.tp1.Cosas
 import ar.algo.adriba.tp1.Publica
 import ar.algo.adriba.tp1.Receta
@@ -25,11 +26,12 @@ class DetalleDeRecetaVentana extends MainWindow<Receta> {
 	static Comida salsaDeTomate = new Comida (0, "Salsa de tomate",200)
 	static Comida jamon = new Comida(0,"Jamon", 100)
 	static Comida oregano = new Comida (100, "Oregano", 0)
+	static Comida azucar = new Comida(0,"azucar",200)
 
 	new() {
 		super(
 			new RecetaBuilder().tipoDeReceta(new Publica).nombreDelPlato("Pizza de Jamon y Morrones").
-				agregarIngrediente(prepizza).agregarIngrediente(jamon).agregarIngrediente(queso).agregarIngrediente(salsaDeTomate).agregarIngrediente(oregano).setearCalorias(500).setearDificultad("Facil").
+				agregarIngrediente(prepizza).agregarIngrediente(azucar).agregarIngrediente(jamon).agregarIngrediente(queso).agregarIngrediente(salsaDeTomate).agregarIngrediente(oregano).setearCalorias(500).setearDificultad("Facil").
 				setearTemporadas("Todo el año").setearPreparacion("En la prepizza volcar la salsa de tomate y cocinar por 15 minutos, luego sumar el queso y volver a cocinar. Agregar el jamon y el morron; oregano a gusto.").build)
 		this.pizza = this.modelObject
 	}
@@ -92,12 +94,13 @@ class DetalleDeRecetaVentana extends MainWindow<Receta> {
 		//aca hay que hacer el cosito para marcar
 		new Label(panelCondiciones).text = "Condiciones Preexistentes"
 		
-		/*new Panel(panelCondiciones) => [layout = new HorizontalLayout
+		new Panel(panelCondiciones) => [layout = new HorizontalLayout
 			new List(it) => [
-				bindItemsToProperty("paraQueCondicionesSoyInadecuada") //no lo tengo en una propiedad lo tengo en un metodo
+				var propiedadCondiciones = bindItemsToProperty("paraQueCondicionesSoyInadecuada")
+				propiedadCondiciones.adapter = new PropertyAdapter(typeof(CondicionPreexistente), "nombre") //no lo tengo en una propiedad lo tengo en un metodo
 				width = 100
 				height = 120
-			]]*/
+			]] 
 
 		//aca hay que hacer la lista
 		//------------------------------------------------------------------------

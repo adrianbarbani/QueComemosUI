@@ -1,6 +1,7 @@
 package ar.algoIII.queComemosUI;
 
 import ar.algo.adriba.tp1.Comida;
+import ar.algo.adriba.tp1.CondicionPreexistente;
 import ar.algo.adriba.tp1.Cosas;
 import ar.algo.adriba.tp1.Publica;
 import ar.algo.adriba.tp1.Receta;
@@ -39,9 +40,11 @@ public class DetalleDeRecetaVentana extends MainWindow<Receta> {
   
   private static Comida oregano = new Comida(100, "Oregano", 0);
   
+  private static Comida azucar = new Comida(0, "azucar", 200);
+  
   public DetalleDeRecetaVentana() {
     super(
-      new RecetaBuilder().tipoDeReceta(new Publica()).nombreDelPlato("Pizza de Jamon y Morrones").agregarIngrediente(DetalleDeRecetaVentana.prepizza).agregarIngrediente(DetalleDeRecetaVentana.jamon).agregarIngrediente(DetalleDeRecetaVentana.queso).agregarIngrediente(DetalleDeRecetaVentana.salsaDeTomate).agregarIngrediente(DetalleDeRecetaVentana.oregano).setearCalorias(500).setearDificultad("Facil").setearTemporadas("Todo el año").setearPreparacion("En la prepizza volcar la salsa de tomate y cocinar por 15 minutos, luego sumar el queso y volver a cocinar. Agregar el jamon y el morron; oregano a gusto.").build());
+      new RecetaBuilder().tipoDeReceta(new Publica()).nombreDelPlato("Pizza de Jamon y Morrones").agregarIngrediente(DetalleDeRecetaVentana.prepizza).agregarIngrediente(DetalleDeRecetaVentana.azucar).agregarIngrediente(DetalleDeRecetaVentana.jamon).agregarIngrediente(DetalleDeRecetaVentana.queso).agregarIngrediente(DetalleDeRecetaVentana.salsaDeTomate).agregarIngrediente(DetalleDeRecetaVentana.oregano).setearCalorias(500).setearDificultad("Facil").setearTemporadas("Todo el año").setearPreparacion("En la prepizza volcar la salsa de tomate y cocinar por 15 minutos, luego sumar el queso y volver a cocinar. Agregar el jamon y el morron; oregano a gusto.").build());
     Receta _modelObject = this.getModelObject();
     this.pizza = _modelObject;
   }
@@ -98,6 +101,25 @@ public class DetalleDeRecetaVentana extends MainWindow<Receta> {
     CheckBox checkResumen = new CheckBox(panelFavorita);
     Label _label_10 = new Label(panelCondiciones);
     _label_10.setText("Condiciones Preexistentes");
+    Panel _panel = new Panel(panelCondiciones);
+    final Procedure1<Panel> _function = new Procedure1<Panel>() {
+      public void apply(final Panel it) {
+        HorizontalLayout _horizontalLayout = new HorizontalLayout();
+        it.setLayout(_horizontalLayout);
+        List<Object> _list = new List<Object>(it);
+        final Procedure1<List<Object>> _function = new Procedure1<List<Object>>() {
+          public void apply(final List<Object> it) {
+            Binding<?, Selector<Object>, ListBuilder<Object>> propiedadCondiciones = it.bindItemsToProperty("paraQueCondicionesSoyInadecuada");
+            PropertyAdapter _propertyAdapter = new PropertyAdapter(CondicionPreexistente.class, "nombre");
+            propiedadCondiciones.setAdapter(_propertyAdapter);
+            it.setWidth(100);
+            it.setHeight(120);
+          }
+        };
+        ObjectExtensions.<List<Object>>operator_doubleArrow(_list, _function);
+      }
+    };
+    ObjectExtensions.<Panel>operator_doubleArrow(_panel, _function);
     final Panel panelProcesoDePreparacion = new Panel(mainPanel);
     Label _label_11 = new Label(panelProcesoDePreparacion);
     _label_11.setText("Proceso de Preparación");
@@ -105,12 +127,12 @@ public class DetalleDeRecetaVentana extends MainWindow<Receta> {
     _label_12.<Object, ControlBuilder>bindValueToProperty("explicacionDeLaPreparacion");
     final Panel panelBotonVolver = new Panel(mainPanel);
     Button _button = new Button(panelBotonVolver);
-    final Procedure1<Button> _function = new Procedure1<Button>() {
+    final Procedure1<Button> _function_1 = new Procedure1<Button>() {
       public void apply(final Button it) {
         it.setCaption("Volver");
       }
     };
-    ObjectExtensions.<Button>operator_doubleArrow(_button, _function);
+    ObjectExtensions.<Button>operator_doubleArrow(_button, _function_1);
   }
   
   public Panel listaDeCondimentos(final Panel panelCondimentos) {
