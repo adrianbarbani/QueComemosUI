@@ -1,6 +1,7 @@
 package ar.algoIII.queComemosUI;
 
 import ar.algo.adriba.tp1.Comida;
+import ar.algo.adriba.tp1.Cosas;
 import ar.algo.adriba.tp1.Publica;
 import ar.algo.adriba.tp1.Receta;
 import ar.algo.adriba.tp1.RecetaBuilder;
@@ -8,29 +9,39 @@ import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
+import org.uqbar.arena.bindings.PropertyAdapter;
 import org.uqbar.arena.layout.HorizontalLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.CheckBox;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.List;
 import org.uqbar.arena.widgets.Panel;
+import org.uqbar.arena.widgets.Selector;
 import org.uqbar.arena.widgets.tables.Column;
 import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.MainWindow;
 import org.uqbar.lacar.ui.model.ControlBuilder;
+import org.uqbar.lacar.ui.model.ListBuilder;
+import org.uqbar.lacar.ui.model.bindings.Binding;
 
 @Accessors
 @SuppressWarnings("all")
 public class DetalleDeRecetaVentana extends MainWindow<Receta> {
   private Receta pizza;
   
-  private static Comida prepizza = new Comida(0, "prepizza", 1);
+  private static Comida prepizza = new Comida(0, "Prepizza", 1);
   
-  private static Comida salsaDeTomate = new Comida(300, "Salsa de tomate", 0);
+  private static Comida queso = new Comida(0, "Muzzarella", 200);
+  
+  private static Comida salsaDeTomate = new Comida(0, "Salsa de tomate", 200);
+  
+  private static Comida jamon = new Comida(0, "Jamon", 100);
+  
+  private static Comida oregano = new Comida(100, "Oregano", 0);
   
   public DetalleDeRecetaVentana() {
     super(
-      new RecetaBuilder().tipoDeReceta(new Publica()).nombreDelPlato("Pizza de muzzarella").agregarIngrediente(DetalleDeRecetaVentana.prepizza).agregarIngrediente(DetalleDeRecetaVentana.salsaDeTomate).setearCalorias(500).setearDificultad("Facil").setearTemporadas("Todo el año").setearPreparacion("En la prepizza volcar la salsa de tomate y cocinar por 15 minutos").build());
+      new RecetaBuilder().tipoDeReceta(new Publica()).nombreDelPlato("Pizza de Jamon y Morrones").agregarIngrediente(DetalleDeRecetaVentana.prepizza).agregarIngrediente(DetalleDeRecetaVentana.jamon).agregarIngrediente(DetalleDeRecetaVentana.queso).agregarIngrediente(DetalleDeRecetaVentana.salsaDeTomate).agregarIngrediente(DetalleDeRecetaVentana.oregano).setearCalorias(500).setearDificultad("Facil").setearTemporadas("Todo el año").setearPreparacion("En la prepizza volcar la salsa de tomate y cocinar por 15 minutos, luego sumar el queso y volver a cocinar. Agregar el jamon y el morron; oregano a gusto.").build());
     Receta _modelObject = this.getModelObject();
     this.pizza = _modelObject;
   }
@@ -74,23 +85,7 @@ public class DetalleDeRecetaVentana extends MainWindow<Receta> {
     this.grillaIngredientes(panelIngredientes);
     Label _label_8 = new Label(panelCondimentos);
     _label_8.setText("Condimentos");
-    Panel _panel = new Panel(panelCondimentos);
-    final Procedure1<Panel> _function = new Procedure1<Panel>() {
-      public void apply(final Panel it) {
-        HorizontalLayout _horizontalLayout = new HorizontalLayout();
-        it.setLayout(_horizontalLayout);
-        List<Object> _list = new List<Object>(it);
-        final Procedure1<List<Object>> _function = new Procedure1<List<Object>>() {
-          public void apply(final List<Object> it) {
-            it.bindItemsToProperty("subRecetaseIngredientes");
-            it.setWidth(100);
-            it.setHeight(120);
-          }
-        };
-        ObjectExtensions.<List<Object>>operator_doubleArrow(_list, _function);
-      }
-    };
-    ObjectExtensions.<Panel>operator_doubleArrow(_panel, _function);
+    this.listaDeCondimentos(panelCondimentos);
     final Panel panelFavoritaYCondiciones = new Panel(mainPanel);
     HorizontalLayout _horizontalLayout_3 = new HorizontalLayout();
     panelFavoritaYCondiciones.setLayout(_horizontalLayout_3);
@@ -110,12 +105,34 @@ public class DetalleDeRecetaVentana extends MainWindow<Receta> {
     _label_12.<Object, ControlBuilder>bindValueToProperty("explicacionDeLaPreparacion");
     final Panel panelBotonVolver = new Panel(mainPanel);
     Button _button = new Button(panelBotonVolver);
-    final Procedure1<Button> _function_1 = new Procedure1<Button>() {
+    final Procedure1<Button> _function = new Procedure1<Button>() {
       public void apply(final Button it) {
         it.setCaption("Volver");
       }
     };
-    ObjectExtensions.<Button>operator_doubleArrow(_button, _function_1);
+    ObjectExtensions.<Button>operator_doubleArrow(_button, _function);
+  }
+  
+  public Panel listaDeCondimentos(final Panel panelCondimentos) {
+    Panel _panel = new Panel(panelCondimentos);
+    final Procedure1<Panel> _function = new Procedure1<Panel>() {
+      public void apply(final Panel it) {
+        HorizontalLayout _horizontalLayout = new HorizontalLayout();
+        it.setLayout(_horizontalLayout);
+        List<Object> _list = new List<Object>(it);
+        final Procedure1<List<Object>> _function = new Procedure1<List<Object>>() {
+          public void apply(final List<Object> it) {
+            Binding<?, Selector<Object>, ListBuilder<Object>> propiedadCondimentos = it.bindItemsToProperty("condimentos");
+            PropertyAdapter _propertyAdapter = new PropertyAdapter(Cosas.class, "nombre");
+            propiedadCondimentos.setAdapter(_propertyAdapter);
+            it.setWidth(100);
+            it.setHeight(120);
+          }
+        };
+        ObjectExtensions.<List<Object>>operator_doubleArrow(_list, _function);
+      }
+    };
+    return ObjectExtensions.<Panel>operator_doubleArrow(_panel, _function);
   }
   
   public Column<Comida> grillaIngredientes(final Panel panel) {

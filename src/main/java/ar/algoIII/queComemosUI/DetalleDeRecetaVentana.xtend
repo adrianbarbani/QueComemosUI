@@ -20,14 +20,17 @@ import org.uqbar.arena.windows.MainWindow
 @Accessors
 class DetalleDeRecetaVentana extends MainWindow<Receta> {
 	Receta pizza
-	static Comida prepizza = new Comida(0, "prepizza", 1)
-	static Comida salsaDeTomate = new Comida (300, "Salsa de tomate",0)
+	static Comida prepizza = new Comida(0, "Prepizza", 1)
+	static Comida queso = new Comida(0, "Muzzarella", 200)
+	static Comida salsaDeTomate = new Comida (0, "Salsa de tomate",200)
+	static Comida jamon = new Comida(0,"Jamon", 100)
+	static Comida oregano = new Comida (100, "Oregano", 0)
 
 	new() {
 		super(
-			new RecetaBuilder().tipoDeReceta(new Publica).nombreDelPlato("Pizza de muzzarella").
-				agregarIngrediente(prepizza).agregarIngrediente(salsaDeTomate).setearCalorias(500).setearDificultad("Facil").
-				setearTemporadas("Todo el año").setearPreparacion("En la prepizza volcar la salsa de tomate y cocinar por 15 minutos").build)
+			new RecetaBuilder().tipoDeReceta(new Publica).nombreDelPlato("Pizza de Jamon y Morrones").
+				agregarIngrediente(prepizza).agregarIngrediente(jamon).agregarIngrediente(queso).agregarIngrediente(salsaDeTomate).agregarIngrediente(oregano).setearCalorias(500).setearDificultad("Facil").
+				setearTemporadas("Todo el año").setearPreparacion("En la prepizza volcar la salsa de tomate y cocinar por 15 minutos, luego sumar el queso y volver a cocinar. Agregar el jamon y el morron; oregano a gusto.").build)
 		this.pizza = this.modelObject
 	}
 
@@ -46,6 +49,7 @@ class DetalleDeRecetaVentana extends MainWindow<Receta> {
 		new Label(panelCaloriasYDueño).text = "calorias"
 
 		//Falta ver el tema del dueño (en este mismo panel)
+		
 		//------------------------------------------------------------------------
 		val panelDificultadYTemporada = new Panel(mainPanel) //Hago un panel grande que sea horizontal
 		panelDificultadYTemporada.layout = new HorizontalLayout
@@ -66,17 +70,9 @@ class DetalleDeRecetaVentana extends MainWindow<Receta> {
 
 		new Label(panelIngredientes).text = "Ingredientes"
 		grillaIngredientes(panelIngredientes)
-		//aca hay que hacer la tabla
 		
 		new Label(panelCondimentos).text = "Condimentos"
-
-		//aca hay que hacer la lista
-		new Panel(panelCondimentos) => [layout = new HorizontalLayout
-			new List(it) => [
-				bindItemsToProperty("subRecetaseIngredientes") // los condimentos junto con las subrecetas y las comidas las tenemos todas juntas en esta col.
-				width = 100
-				height = 120
-			]]
+		listaDeCondimentos(panelCondimentos)
 
 		//------------------------------------------------------------------------
 		val panelFavoritaYCondiciones = new Panel(mainPanel) //Repito el proceso de antes
@@ -105,6 +101,7 @@ class DetalleDeRecetaVentana extends MainWindow<Receta> {
 
 		//aca hay que hacer la lista
 		//------------------------------------------------------------------------
+		
 		val panelProcesoDePreparacion = new Panel(mainPanel) //Repito el proceso de antes
 		new Label(panelProcesoDePreparacion).text = "Proceso de Preparación"
 		new Label(panelProcesoDePreparacion).bindValueToProperty("explicacionDeLaPreparacion") 
@@ -115,6 +112,26 @@ class DetalleDeRecetaVentana extends MainWindow<Receta> {
 			//onClick [ | ] aca hay que ver que hace cuando lo tocamos
 			caption = "Volver"
 		]
+	}
+
+
+
+
+
+
+
+
+//Lista de condimentos	
+	def listaDeCondimentos(Panel panelCondimentos) {
+		new Panel(panelCondimentos) => [layout = new HorizontalLayout
+			new List(it) => [
+				var propiedadCondimentos = bindItemsToProperty("condimentos") // los condimentos junto con las subrecetas y las comidas las tenemos todas juntas en esta col.
+				propiedadCondimentos.adapter = new PropertyAdapter(typeof(Cosas), "nombre")
+				width = 100
+				height = 120
+				
+			
+			]]
 	}
 	
 //Grilla de ingredientes
