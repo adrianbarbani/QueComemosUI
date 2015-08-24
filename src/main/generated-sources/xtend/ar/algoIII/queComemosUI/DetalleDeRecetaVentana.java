@@ -6,6 +6,7 @@ import ar.algo.adriba.tp1.Cosas;
 import ar.algo.adriba.tp1.Publica;
 import ar.algo.adriba.tp1.Receta;
 import ar.algo.adriba.tp1.RecetaBuilder;
+import java.awt.Color;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -99,32 +100,19 @@ public class DetalleDeRecetaVentana extends MainWindow<Receta> {
     Label _label_9 = new Label(panelFavorita);
     _label_9.setText("Favorita");
     CheckBox checkResumen = new CheckBox(panelFavorita);
-    Label _label_10 = new Label(panelCondiciones);
-    _label_10.setText("Condiciones Preexistentes");
-    Panel _panel = new Panel(panelCondiciones);
-    final Procedure1<Panel> _function = new Procedure1<Panel>() {
-      public void apply(final Panel it) {
-        HorizontalLayout _horizontalLayout = new HorizontalLayout();
-        it.setLayout(_horizontalLayout);
-        List<Object> _list = new List<Object>(it);
-        final Procedure1<List<Object>> _function = new Procedure1<List<Object>>() {
-          public void apply(final List<Object> it) {
-            Binding<?, Selector<Object>, ListBuilder<Object>> propiedadCondiciones = it.bindItemsToProperty("paraQueCondicionesSoyInadecuada");
-            PropertyAdapter _propertyAdapter = new PropertyAdapter(CondicionPreexistente.class, "nombre");
-            propiedadCondiciones.setAdapter(_propertyAdapter);
-            it.setWidth(100);
-            it.setHeight(120);
-          }
-        };
-        ObjectExtensions.<List<Object>>operator_doubleArrow(_list, _function);
+    this.grillaDeCondicionesPreexistentes(panelCondiciones);
+    final Panel panelProcesoDePreparacion = new Panel(mainPanel);
+    Label _label_10 = new Label(panelProcesoDePreparacion);
+    _label_10.setText("Proceso de Preparación");
+    Label _label_11 = new Label(panelProcesoDePreparacion);
+    final Procedure1<Label> _function = new Procedure1<Label>() {
+      public void apply(final Label it) {
+        it.<Object, ControlBuilder>bindValueToProperty("explicacionDeLaPreparacion");
+        Color _color = new Color(156, 208, 204);
+        it.setBackground(_color);
       }
     };
-    ObjectExtensions.<Panel>operator_doubleArrow(_panel, _function);
-    final Panel panelProcesoDePreparacion = new Panel(mainPanel);
-    Label _label_11 = new Label(panelProcesoDePreparacion);
-    _label_11.setText("Proceso de Preparación");
-    Label _label_12 = new Label(panelProcesoDePreparacion);
-    _label_12.<Object, ControlBuilder>bindValueToProperty("explicacionDeLaPreparacion");
+    ObjectExtensions.<Label>operator_doubleArrow(_label_11, _function);
     final Panel panelBotonVolver = new Panel(mainPanel);
     Button _button = new Button(panelBotonVolver);
     final Procedure1<Button> _function_1 = new Procedure1<Button>() {
@@ -133,6 +121,34 @@ public class DetalleDeRecetaVentana extends MainWindow<Receta> {
       }
     };
     ObjectExtensions.<Button>operator_doubleArrow(_button, _function_1);
+  }
+  
+  public Panel grillaDeCondicionesPreexistentes(final Panel panelCondiciones) {
+    Panel _xblockexpression = null;
+    {
+      Label _label = new Label(panelCondiciones);
+      _label.setText("Condiciones Preexistentes");
+      Panel _panel = new Panel(panelCondiciones);
+      final Procedure1<Panel> _function = new Procedure1<Panel>() {
+        public void apply(final Panel it) {
+          HorizontalLayout _horizontalLayout = new HorizontalLayout();
+          it.setLayout(_horizontalLayout);
+          List<Object> _list = new List<Object>(it);
+          final Procedure1<List<Object>> _function = new Procedure1<List<Object>>() {
+            public void apply(final List<Object> it) {
+              Binding<?, Selector<Object>, ListBuilder<Object>> propiedadCondiciones = it.bindItemsToProperty("paraQueCondicionesSoyInadecuada");
+              PropertyAdapter _propertyAdapter = new PropertyAdapter(CondicionPreexistente.class, "nombre");
+              propiedadCondiciones.setAdapter(_propertyAdapter);
+              it.setWidth(200);
+              it.setHeight(100);
+            }
+          };
+          ObjectExtensions.<List<Object>>operator_doubleArrow(_list, _function);
+        }
+      };
+      _xblockexpression = ObjectExtensions.<Panel>operator_doubleArrow(_panel, _function);
+    }
+    return _xblockexpression;
   }
   
   public Panel listaDeCondimentos(final Panel panelCondimentos) {
@@ -147,8 +163,8 @@ public class DetalleDeRecetaVentana extends MainWindow<Receta> {
             Binding<?, Selector<Object>, ListBuilder<Object>> propiedadCondimentos = it.bindItemsToProperty("condimentos");
             PropertyAdapter _propertyAdapter = new PropertyAdapter(Cosas.class, "nombre");
             propiedadCondimentos.setAdapter(_propertyAdapter);
-            it.setWidth(100);
-            it.setHeight(120);
+            it.setWidth(200);
+            it.setHeight(100);
           }
         };
         ObjectExtensions.<List<Object>>operator_doubleArrow(_list, _function);
@@ -163,7 +179,7 @@ public class DetalleDeRecetaVentana extends MainWindow<Receta> {
       Table<Comida> _table = new Table<Comida>(panel, Comida.class);
       final Procedure1<Table<Comida>> _function = new Procedure1<Table<Comida>>() {
         public void apply(final Table<Comida> it) {
-          it.setWidth(300);
+          it.setWidth(200);
           it.setHeight(100);
           it.bindItemsToProperty("ingredientes");
         }

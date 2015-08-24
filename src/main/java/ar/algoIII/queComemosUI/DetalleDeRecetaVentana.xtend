@@ -17,6 +17,7 @@ import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.widgets.tables.Column
 import org.uqbar.arena.widgets.tables.Table
 import org.uqbar.arena.windows.MainWindow
+import java.awt.Color
 
 @Accessors
 class DetalleDeRecetaVentana extends MainWindow<Receta> {
@@ -92,22 +93,18 @@ class DetalleDeRecetaVentana extends MainWindow<Receta> {
 		//*************
 		
 		//aca hay que hacer el cosito para marcar
-		new Label(panelCondiciones).text = "Condiciones Preexistentes"
-		
-		new Panel(panelCondiciones) => [layout = new HorizontalLayout
-			new List(it) => [
-				var propiedadCondiciones = bindItemsToProperty("paraQueCondicionesSoyInadecuada")
-				propiedadCondiciones.adapter = new PropertyAdapter(typeof(CondicionPreexistente), "nombre") //no lo tengo en una propiedad lo tengo en un metodo
-				width = 100
-				height = 120
-			]] 
+		grillaDeCondicionesPreexistentes(panelCondiciones) 
 
 		//aca hay que hacer la lista
 		//------------------------------------------------------------------------
 		
 		val panelProcesoDePreparacion = new Panel(mainPanel) //Repito el proceso de antes
 		new Label(panelProcesoDePreparacion).text = "Proceso de Preparación"
-		new Label(panelProcesoDePreparacion).bindValueToProperty("explicacionDeLaPreparacion") 
+		new Label(panelProcesoDePreparacion)=>[
+			bindValueToProperty("explicacionDeLaPreparacion")
+			background = new Color(156,208,204)
+			
+		 ]
 
 		//------------------------------------------------------------------------
 		val panelBotonVolver = new Panel(mainPanel)
@@ -116,12 +113,20 @@ class DetalleDeRecetaVentana extends MainWindow<Receta> {
 			caption = "Volver"
 		]
 	}
-
-
-
-
-
-
+	
+	
+	
+	def grillaDeCondicionesPreexistentes(Panel panelCondiciones) {
+		new Label(panelCondiciones).text = "Condiciones Preexistentes"
+		
+		new Panel(panelCondiciones) => [layout = new HorizontalLayout
+			new List(it) => [
+				var propiedadCondiciones = bindItemsToProperty("paraQueCondicionesSoyInadecuada")
+				propiedadCondiciones.adapter = new PropertyAdapter(typeof(CondicionPreexistente), "nombre") //no lo tengo en una propiedad lo tengo en un metodo
+				width = 200
+				height = 100
+			]]
+	}
 
 
 //Lista de condimentos	
@@ -130,17 +135,16 @@ class DetalleDeRecetaVentana extends MainWindow<Receta> {
 			new List(it) => [
 				var propiedadCondimentos = bindItemsToProperty("condimentos") // los condimentos junto con las subrecetas y las comidas las tenemos todas juntas en esta col.
 				propiedadCondimentos.adapter = new PropertyAdapter(typeof(Cosas), "nombre")
-				width = 100
-				height = 120
+				width = 200
+				height = 100
 				
-			
 			]]
 	}
 	
 //Grilla de ingredientes
 	def grillaIngredientes(Panel panel) {
 		val gridIngredientes = new Table(panel, typeof(Comida)) => [
-			width = 300
+			width = 200
 			height = 100
 			bindItemsToProperty("ingredientes")//.ingredientes
 		]
@@ -154,7 +158,7 @@ class DetalleDeRecetaVentana extends MainWindow<Receta> {
 			title = "Ingrediente"
 			bindContentsToProperty("nombre")
 		]
-		
+
 	}
 
 }
