@@ -1,5 +1,6 @@
 package ar.algoIII.queComemosUI
 
+import ar.algo.adriba.tp1.Persona
 import ar.algo.adriba.tp1.Receta
 import ar.algo.adriba.tp1.Usuario
 import org.eclipse.xtend.lib.annotations.Accessors
@@ -9,7 +10,8 @@ import org.uqbar.commons.utils.Observable
 @Observable
 class RecetaWindow {
 	Receta unaReceta
-	Usuario unUsuario
+	Persona unUsuario
+	
 
 	new(Receta receta, Usuario usuario) {
 		unaReceta = receta
@@ -17,5 +19,20 @@ class RecetaWindow {
 		
 	}
 
+	def void setFavorita(boolean recetaFavorita){
+		if (recetaFavorita){
+			unUsuario.marcarComoFavorita(unaReceta)
+		}
+		else{unUsuario.desmarcarComoFavorita(unaReceta)}
+	}
+	
+	def	boolean getFavorita(){
+		unUsuario.esRecetaFavorita(unaReceta)
+	}
+	
+	
+//	def String setPropietario(boolean propietario){
+//		unaReceta.duenioPara(unUsuario)
+//	}
 	
 }
