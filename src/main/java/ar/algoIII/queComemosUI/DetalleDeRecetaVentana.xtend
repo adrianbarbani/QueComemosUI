@@ -19,26 +19,28 @@ import org.uqbar.arena.widgets.tables.Column
 import org.uqbar.arena.widgets.tables.Table
 import org.uqbar.arena.windows.MainWindow
 import java.awt.Color
+import ar.algo.adriba.tp1.Usuario
 
 @Accessors
-class DetalleDeRecetaVentana extends MainWindow<Receta> {
-	Receta pizza
+class DetalleDeRecetaVentana extends MainWindow<RecetaWindow> {
+	RecetaWindow pizza
 	static Comida prepizza = new Comida(0, "Prepizza", 1)
 	static Comida queso = new Comida(0, "Muzzarella", 200)
 	static Comida salsaDeTomate = new Comida(0, "Salsa de tomate", 200)
 	static Comida jamon = new Comida(0, "Jamon", 100)
 	static Comida oregano = new Comida(100, "Oregano", 0)
 	static Comida azucar = new Comida(0, "azucar", 200)
-
+	
 	new() {
 		super(
-			new RecetaBuilder().tipoDeReceta(new Publica).nombreDelPlato("Pizza de Jamon y Morrones").
+			new RecetaWindow((new RecetaBuilder().tipoDeReceta(new Publica).nombreDelPlato("Pizza de Jamon y Morrones").
 				agregarIngrediente(prepizza).agregarIngrediente(azucar).agregarIngrediente(jamon).
 				agregarIngrediente(queso).agregarIngrediente(salsaDeTomate).agregarIngrediente(oregano).
 				setearCalorias(500).setearDificultad("Facil").setearTemporadas("Todo el año").
 				setearPreparacion(
 					"En la prepizza volcar la salsa de tomate y cocinar por 15 minutos, luego sumar el queso y volver a cocinar. Agregar el jamon y el morron; oregano a gusto.").
-				build)
+				build),new Usuario))
+		
 		this.pizza = this.modelObject
 	}
 
@@ -49,14 +51,14 @@ class DetalleDeRecetaVentana extends MainWindow<Receta> {
 	override createContents(Panel mainPanel) { //Panel principal
 		this.title = "Detalle De Receta"
 		new Label(mainPanel)=>[
-			bindValueToProperty("nombreDelPlato")
+			bindValueToProperty("unaReceta.nombreDelPlato")//Receta.
 			foreground = new Color (0,0,0)
 			fontSize = 14
 		]
 		//------------------------------------------------------------------------
 		val panelCaloriasYDueño = new Panel(mainPanel) //Panel que tiene una sola linea
 		panelCaloriasYDueño.layout = new HorizontalLayout
-		new Label(panelCaloriasYDueño).bindValueToProperty("caloriasReceta")
+		new Label(panelCaloriasYDueño).bindValueToProperty("unaReceta.caloriasReceta")//Receta.
 		new Label(panelCaloriasYDueño).text = "calorias"
 
 		//Falta ver el tema del dueño (en este mismo panel)
@@ -68,9 +70,9 @@ class DetalleDeRecetaVentana extends MainWindow<Receta> {
 		val panelTemporada = new Panel(panelDificultadYTemporada)
 
 		new Label(panelDificultad).text = "Dificultad"
-		new Label(panelDificultad).bindValueToProperty("dificultad")
+		new Label(panelDificultad).bindValueToProperty("unaReceta.dificultad")//Receta.
 		new Label(panelTemporada).text = "Temporada"
-		new Label(panelTemporada).bindValueToProperty("temporada")
+		new Label(panelTemporada).bindValueToProperty("unaReceta.temporada")//Receta.
 
 		//------------------------------------------------------------------------
 		val panelIngredientesYCondimentos = new Panel(mainPanel) //Repito el proceso de antes
@@ -92,9 +94,8 @@ class DetalleDeRecetaVentana extends MainWindow<Receta> {
 		val panelCondiciones = new Panel(panelFavoritaYCondiciones)
 
 		new Label(panelFavorita).text = "Favorita"
-
 		//*************
-		var checkResumen = new CheckBox(panelFavorita)
+		var checkFavorita = new CheckBox(panelFavorita)
 
 		//checkResumen.bindValueToProperty("recibeResumenCuenta")// metodo que la hace favorita supongo que va.
 		//*************
@@ -105,7 +106,7 @@ class DetalleDeRecetaVentana extends MainWindow<Receta> {
 		val panelProcesoDePreparacion = new Panel(mainPanel) //Repito el proceso de antes
 		new Label(panelProcesoDePreparacion).text = "Proceso de Preparación"
 		new Label(panelProcesoDePreparacion) => [
-			bindValueToProperty("explicacionDeLaPreparacion")
+			bindValueToProperty("unaReceta.explicacionDeLaPreparacion")//Receta.
 			foreground = new Color(156, 208, 204)
 		]
 
@@ -121,7 +122,7 @@ class DetalleDeRecetaVentana extends MainWindow<Receta> {
 	def listaCondicionesPreexistentes(Panel panelCondiciones) {
 		new Panel(panelCondiciones) => [layout = new HorizontalLayout
 			new List(it) => [
-				var propiedadCondiciones = bindItemsToProperty("paraQueCondicionesSoyInadecuada")
+				var propiedadCondiciones = bindItemsToProperty("unaReceta.paraQueCondicionesSoyInadecuada")//Receta.
 				propiedadCondiciones.adapter = new PropertyAdapter(typeof(CondicionPreexistente), "nombre") //no lo tengo en una propiedad lo tengo en un metodo
 				width = 100
 				height = 120
@@ -132,7 +133,7 @@ class DetalleDeRecetaVentana extends MainWindow<Receta> {
 	def listaDeCondimentos(Panel panelCondimentos) {
 		new Panel(panelCondimentos) => [layout = new HorizontalLayout
 			new List(it) => [
-				var propiedadCondimentos = bindItemsToProperty("condimentos") // los condimentos junto con las subrecetas y las comidas las tenemos todas juntas en esta col.
+				var propiedadCondimentos = bindItemsToProperty("unaReceta.condimentos") // los condimentos junto con las subrecetas y las comidas las tenemos todas juntas en esta col.Receta.
 				propiedadCondimentos.adapter = new PropertyAdapter(typeof(Cosas), "nombre")
 				width = 100
 				height = 200
@@ -144,17 +145,17 @@ class DetalleDeRecetaVentana extends MainWindow<Receta> {
 		val gridIngredientes = new Table(panel, typeof(Comida)) => [
 			width = 1000
 			height = 8000
-			bindItemsToProperty("ingredientes") //.ingredientes
+			bindItemsToProperty("unaReceta.ingredientes") //.ingredientes
 		]
 
 		new Column<Comida>(gridIngredientes) => [
 			title = "Dosis"
-			bindContentsToProperty("cantidad")
+			bindContentsToProperty("cantidad")//Receta.
 		]
 
 		new Column<Comida>(gridIngredientes) => [
 			title = "Ingrediente"
-			bindContentsToProperty("nombre")
+			bindContentsToProperty("nombre")//Receta.
 		]
 
 	}

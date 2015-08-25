@@ -4,8 +4,9 @@ import ar.algo.adriba.tp1.Comida;
 import ar.algo.adriba.tp1.CondicionPreexistente;
 import ar.algo.adriba.tp1.Cosas;
 import ar.algo.adriba.tp1.Publica;
-import ar.algo.adriba.tp1.Receta;
 import ar.algo.adriba.tp1.RecetaBuilder;
+import ar.algo.adriba.tp1.Usuario;
+import ar.algoIII.queComemosUI.RecetaWindow;
 import java.awt.Color;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -28,8 +29,8 @@ import org.uqbar.lacar.ui.model.bindings.Binding;
 
 @Accessors
 @SuppressWarnings("all")
-public class DetalleDeRecetaVentana extends MainWindow<Receta> {
-  private Receta pizza;
+public class DetalleDeRecetaVentana extends MainWindow<RecetaWindow> {
+  private RecetaWindow pizza;
   
   private static Comida prepizza = new Comida(0, "Prepizza", 1);
   
@@ -45,9 +46,9 @@ public class DetalleDeRecetaVentana extends MainWindow<Receta> {
   
   public DetalleDeRecetaVentana() {
     super(
-      new RecetaBuilder().tipoDeReceta(new Publica()).nombreDelPlato("Pizza de Jamon y Morrones").agregarIngrediente(DetalleDeRecetaVentana.prepizza).agregarIngrediente(DetalleDeRecetaVentana.azucar).agregarIngrediente(DetalleDeRecetaVentana.jamon).agregarIngrediente(DetalleDeRecetaVentana.queso).agregarIngrediente(DetalleDeRecetaVentana.salsaDeTomate).agregarIngrediente(DetalleDeRecetaVentana.oregano).setearCalorias(500).setearDificultad("Facil").setearTemporadas("Todo el año").setearPreparacion(
-        "En la prepizza volcar la salsa de tomate y cocinar por 15 minutos, luego sumar el queso y volver a cocinar. Agregar el jamon y el morron; oregano a gusto.").build());
-    Receta _modelObject = this.getModelObject();
+      new RecetaWindow(new RecetaBuilder().tipoDeReceta(new Publica()).nombreDelPlato("Pizza de Jamon y Morrones").agregarIngrediente(DetalleDeRecetaVentana.prepizza).agregarIngrediente(DetalleDeRecetaVentana.azucar).agregarIngrediente(DetalleDeRecetaVentana.jamon).agregarIngrediente(DetalleDeRecetaVentana.queso).agregarIngrediente(DetalleDeRecetaVentana.salsaDeTomate).agregarIngrediente(DetalleDeRecetaVentana.oregano).setearCalorias(500).setearDificultad("Facil").setearTemporadas("Todo el año").setearPreparacion(
+        "En la prepizza volcar la salsa de tomate y cocinar por 15 minutos, luego sumar el queso y volver a cocinar. Agregar el jamon y el morron; oregano a gusto.").build(), new Usuario()));
+    RecetaWindow _modelObject = this.getModelObject();
     this.pizza = _modelObject;
   }
   
@@ -61,7 +62,7 @@ public class DetalleDeRecetaVentana extends MainWindow<Receta> {
     Label _label = new Label(mainPanel);
     final Procedure1<Label> _function = new Procedure1<Label>() {
       public void apply(final Label it) {
-        it.<Object, ControlBuilder>bindValueToProperty("nombreDelPlato");
+        it.<Object, ControlBuilder>bindValueToProperty("unaReceta.nombreDelPlato");
         Color _color = new Color(0, 0, 0);
         it.setForeground(_color);
         it.setFontSize(14);
@@ -72,7 +73,7 @@ public class DetalleDeRecetaVentana extends MainWindow<Receta> {
     HorizontalLayout _horizontalLayout = new HorizontalLayout();
     panelCaloriasYDueño.setLayout(_horizontalLayout);
     Label _label_1 = new Label(panelCaloriasYDueño);
-    _label_1.<Object, ControlBuilder>bindValueToProperty("caloriasReceta");
+    _label_1.<Object, ControlBuilder>bindValueToProperty("unaReceta.caloriasReceta");
     Label _label_2 = new Label(panelCaloriasYDueño);
     _label_2.setText("calorias");
     final Panel panelDificultadYTemporada = new Panel(mainPanel);
@@ -83,11 +84,11 @@ public class DetalleDeRecetaVentana extends MainWindow<Receta> {
     Label _label_3 = new Label(panelDificultad);
     _label_3.setText("Dificultad");
     Label _label_4 = new Label(panelDificultad);
-    _label_4.<Object, ControlBuilder>bindValueToProperty("dificultad");
+    _label_4.<Object, ControlBuilder>bindValueToProperty("unaReceta.dificultad");
     Label _label_5 = new Label(panelTemporada);
     _label_5.setText("Temporada");
     Label _label_6 = new Label(panelTemporada);
-    _label_6.<Object, ControlBuilder>bindValueToProperty("temporada");
+    _label_6.<Object, ControlBuilder>bindValueToProperty("unaReceta.temporada");
     final Panel panelIngredientesYCondimentos = new Panel(mainPanel);
     HorizontalLayout _horizontalLayout_2 = new HorizontalLayout();
     panelIngredientesYCondimentos.setLayout(_horizontalLayout_2);
@@ -108,7 +109,7 @@ public class DetalleDeRecetaVentana extends MainWindow<Receta> {
     final Panel panelCondiciones = new Panel(panelFavoritaYCondiciones);
     Label _label_9 = new Label(panelFavorita);
     _label_9.setText("Favorita");
-    CheckBox checkResumen = new CheckBox(panelFavorita);
+    CheckBox checkFavorita = new CheckBox(panelFavorita);
     Label _label_10 = new Label(panelCondiciones);
     _label_10.setText("Condiciones Preexistentes");
     this.listaCondicionesPreexistentes(panelCondiciones);
@@ -118,7 +119,7 @@ public class DetalleDeRecetaVentana extends MainWindow<Receta> {
     Label _label_12 = new Label(panelProcesoDePreparacion);
     final Procedure1<Label> _function_1 = new Procedure1<Label>() {
       public void apply(final Label it) {
-        it.<Object, ControlBuilder>bindValueToProperty("explicacionDeLaPreparacion");
+        it.<Object, ControlBuilder>bindValueToProperty("unaReceta.explicacionDeLaPreparacion");
         Color _color = new Color(156, 208, 204);
         it.setForeground(_color);
       }
@@ -143,7 +144,7 @@ public class DetalleDeRecetaVentana extends MainWindow<Receta> {
         List<Object> _list = new List<Object>(it);
         final Procedure1<List<Object>> _function = new Procedure1<List<Object>>() {
           public void apply(final List<Object> it) {
-            Binding<?, Selector<Object>, ListBuilder<Object>> propiedadCondiciones = it.bindItemsToProperty("paraQueCondicionesSoyInadecuada");
+            Binding<?, Selector<Object>, ListBuilder<Object>> propiedadCondiciones = it.bindItemsToProperty("unaReceta.paraQueCondicionesSoyInadecuada");
             PropertyAdapter _propertyAdapter = new PropertyAdapter(CondicionPreexistente.class, "nombre");
             propiedadCondiciones.setAdapter(_propertyAdapter);
             it.setWidth(100);
@@ -165,7 +166,7 @@ public class DetalleDeRecetaVentana extends MainWindow<Receta> {
         List<Object> _list = new List<Object>(it);
         final Procedure1<List<Object>> _function = new Procedure1<List<Object>>() {
           public void apply(final List<Object> it) {
-            Binding<?, Selector<Object>, ListBuilder<Object>> propiedadCondimentos = it.bindItemsToProperty("condimentos");
+            Binding<?, Selector<Object>, ListBuilder<Object>> propiedadCondimentos = it.bindItemsToProperty("unaReceta.condimentos");
             PropertyAdapter _propertyAdapter = new PropertyAdapter(Cosas.class, "nombre");
             propiedadCondimentos.setAdapter(_propertyAdapter);
             it.setWidth(100);
@@ -186,7 +187,7 @@ public class DetalleDeRecetaVentana extends MainWindow<Receta> {
         public void apply(final Table<Comida> it) {
           it.setWidth(1000);
           it.setHeight(8000);
-          it.bindItemsToProperty("ingredientes");
+          it.bindItemsToProperty("unaReceta.ingredientes");
         }
       };
       final Table<Comida> gridIngredientes = ObjectExtensions.<Table<Comida>>operator_doubleArrow(_table, _function);
@@ -211,11 +212,11 @@ public class DetalleDeRecetaVentana extends MainWindow<Receta> {
   }
   
   @Pure
-  public Receta getPizza() {
+  public RecetaWindow getPizza() {
     return this.pizza;
   }
   
-  public void setPizza(final Receta pizza) {
+  public void setPizza(final RecetaWindow pizza) {
     this.pizza = pizza;
   }
 }
