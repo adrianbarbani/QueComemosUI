@@ -96,9 +96,11 @@ class DetalleDeRecetaVentana extends MainWindow<RecetaWindow> {
 		new Label(panelFavorita).text = "Favorita"
 		//*************
 		var checkFavorita = new CheckBox(panelFavorita)
-
-		//checkResumen.bindValueToProperty("recibeResumenCuenta")// metodo que la hace favorita supongo que va.
+		//checkFavorita.bindValueToProperty("unUsuario.marcarComoFavorita(unaReceta)")// metodo que la hace favorita supongo que va.
+		
+		
 		//*************
+		
 		new Label(panelCondiciones).text = "Condiciones Preexistentes"
 		listaCondicionesPreexistentes(panelCondiciones)
 
