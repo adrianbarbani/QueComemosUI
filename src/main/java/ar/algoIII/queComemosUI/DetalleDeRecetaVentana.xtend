@@ -58,10 +58,10 @@ class DetalleDeRecetaVentana extends MainWindow<RecetaWindow> {
 		new DetalleDeRecetaVentana().startApplication
 	}
 
-	override createContents(Panel mainPanel) { //Panel principal
+	override createContents(Panel mainPanel) { 
 		this.title = "Detalle De Receta"
 		new Label(mainPanel) => [
-			bindValueToProperty("unaReceta.nombreDelPlato") //Receta.
+			bindValueToProperty("unaReceta.nombreDelPlato") 
 			foreground = new Color(0, 0, 0)
 			fontSize = 14
 		]
@@ -71,19 +71,10 @@ class DetalleDeRecetaVentana extends MainWindow<RecetaWindow> {
 		
 		//Falta ver el tema del dueño (en este mismo panel)
 		//------------------------------------------------------------------------
-		val panelDificultadYTemporada = new Panel(mainPanel) //Hago un panel grande que sea horizontal
-		panelDificultadYTemporada.layout = new HorizontalLayout
-
-		val panelDificultad = new Panel(panelDificultadYTemporada) //Ese mismo panel lo divido en dos verticales
-		new Label(panelDificultad).text = "Dificultad"
-		new Label(panelDificultad).bindValueToProperty("unaReceta.dificultad")
-
-		val panelTemporada = new Panel(panelDificultadYTemporada)
-		new Label(panelTemporada).text = "Temporada"
-		new Label(panelTemporada).bindValueToProperty("unaReceta.temporada") 
+		addPanelDificultadYTemporada(mainPanel) 
 
 		//------------------------------------------------------------------------
-		val panelIngredientesYCondimentos = new Panel(mainPanel) //Repito el proceso de antes
+		val panelIngredientesYCondimentos = new Panel(mainPanel) 
 		panelIngredientesYCondimentos.layout = new HorizontalLayout
 		val panelIngredientes = new Panel(panelIngredientesYCondimentos)
 		val panelCondimentos = new Panel(panelIngredientesYCondimentos)
@@ -95,10 +86,10 @@ class DetalleDeRecetaVentana extends MainWindow<RecetaWindow> {
 		listaDeCondimentos(panelCondimentos)
 
 		//------------------------------------------------------------------------
-		val panelFavoritaYCondiciones = new Panel(mainPanel) //Repito el proceso de antes
+		val panelFavoritaYCondiciones = new Panel(mainPanel) 
 		panelFavoritaYCondiciones.layout = new HorizontalLayout
 		val panelFavorita = new Panel(panelFavoritaYCondiciones)
-		panelFavorita.layout = new HorizontalLayout //Lo hago horizontal asi el cosito para marcar y la palabra favorita quedan juntos
+		panelFavorita.layout = new HorizontalLayout 
 		val panelCondiciones = new Panel(panelFavoritaYCondiciones)
 
 		new Label(panelFavorita).text = "Favorita"
@@ -130,12 +121,26 @@ class DetalleDeRecetaVentana extends MainWindow<RecetaWindow> {
 		new Label (panelBotonVolver).bindValueToProperty("unUsuario.cantidadDeFavorita") 
 	}
 	
+	def addPanelDificultadYTemporada(Panel mainPanel) {
+		val panelDificultadYTemporada = new Panel(mainPanel) //Hago un panel grande que sea horizontal
+		panelDificultadYTemporada.layout = new HorizontalLayout
+		
+		val panelDificultad = new Panel(panelDificultadYTemporada) //Ese mismo panel lo divido en dos verticales
+		new Label(panelDificultad).text = "Dificultad"
+		new Label(panelDificultad).bindValueToProperty("unaReceta.dificultad")
+		
+		val panelTemporada = new Panel(panelDificultadYTemporada)
+		new Label(panelTemporada).text = "Temporada"
+		new Label(panelTemporada).bindValueToProperty("unaReceta.temporada")
+	}
+	
 	def addPanelCalorias(Panel mainPanel) {
 		val panelCaloriasYDueño = new GroupPanel(mainPanel) //Panel que tiene una sola linea
 		panelCaloriasYDueño.title = ("")		
 		panelCaloriasYDueño.layout = new HorizontalLayout
 		new Label(panelCaloriasYDueño).bindValueToProperty("unaReceta.caloriasReceta") 
 		new Label(panelCaloriasYDueño).text = "calorias"
+		new Label(panelCaloriasYDueño).bindValueToProperty("propietario")
 	}
 
 	//Lista de condiciones preexistentes

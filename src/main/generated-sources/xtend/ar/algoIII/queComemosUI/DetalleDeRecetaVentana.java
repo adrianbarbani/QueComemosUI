@@ -21,6 +21,7 @@ import org.uqbar.arena.bindings.PropertyAdapter;
 import org.uqbar.arena.layout.HorizontalLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.CheckBox;
+import org.uqbar.arena.widgets.Control;
 import org.uqbar.arena.widgets.GroupPanel;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
@@ -81,47 +82,35 @@ public class DetalleDeRecetaVentana extends MainWindow<RecetaWindow> {
     };
     ObjectExtensions.<Label>operator_doubleArrow(_label, _function);
     this.addPanelCalorias(mainPanel);
-    final Panel panelDificultadYTemporada = new Panel(mainPanel);
-    HorizontalLayout _horizontalLayout = new HorizontalLayout();
-    panelDificultadYTemporada.setLayout(_horizontalLayout);
-    final Panel panelDificultad = new Panel(panelDificultadYTemporada);
-    Label _label_1 = new Label(panelDificultad);
-    _label_1.setText("Dificultad");
-    Label _label_2 = new Label(panelDificultad);
-    _label_2.<Object, ControlBuilder>bindValueToProperty("unaReceta.dificultad");
-    final Panel panelTemporada = new Panel(panelDificultadYTemporada);
-    Label _label_3 = new Label(panelTemporada);
-    _label_3.setText("Temporada");
-    Label _label_4 = new Label(panelTemporada);
-    _label_4.<Object, ControlBuilder>bindValueToProperty("unaReceta.temporada");
+    this.addPanelDificultadYTemporada(mainPanel);
     final Panel panelIngredientesYCondimentos = new Panel(mainPanel);
-    HorizontalLayout _horizontalLayout_1 = new HorizontalLayout();
-    panelIngredientesYCondimentos.setLayout(_horizontalLayout_1);
+    HorizontalLayout _horizontalLayout = new HorizontalLayout();
+    panelIngredientesYCondimentos.setLayout(_horizontalLayout);
     final Panel panelIngredientes = new Panel(panelIngredientesYCondimentos);
     final Panel panelCondimentos = new Panel(panelIngredientesYCondimentos);
-    Label _label_5 = new Label(panelIngredientes);
-    _label_5.setText("Ingredientes");
+    Label _label_1 = new Label(panelIngredientes);
+    _label_1.setText("Ingredientes");
     this.grillaIngredientes(panelIngredientes);
-    Label _label_6 = new Label(panelCondimentos);
-    _label_6.setText("Condimentos");
+    Label _label_2 = new Label(panelCondimentos);
+    _label_2.setText("Condimentos");
     this.listaDeCondimentos(panelCondimentos);
     final Panel panelFavoritaYCondiciones = new Panel(mainPanel);
-    HorizontalLayout _horizontalLayout_2 = new HorizontalLayout();
-    panelFavoritaYCondiciones.setLayout(_horizontalLayout_2);
+    HorizontalLayout _horizontalLayout_1 = new HorizontalLayout();
+    panelFavoritaYCondiciones.setLayout(_horizontalLayout_1);
     final Panel panelFavorita = new Panel(panelFavoritaYCondiciones);
-    HorizontalLayout _horizontalLayout_3 = new HorizontalLayout();
-    panelFavorita.setLayout(_horizontalLayout_3);
+    HorizontalLayout _horizontalLayout_2 = new HorizontalLayout();
+    panelFavorita.setLayout(_horizontalLayout_2);
     final Panel panelCondiciones = new Panel(panelFavoritaYCondiciones);
-    Label _label_7 = new Label(panelFavorita);
-    _label_7.setText("Favorita");
+    Label _label_3 = new Label(panelFavorita);
+    _label_3.setText("Favorita");
     CheckBox checkFavorita = new CheckBox(panelFavorita);
     checkFavorita.<Object, ControlBuilder>bindValueToProperty("favorita");
-    Label _label_8 = new Label(panelCondiciones);
-    _label_8.setText("Condiciones Preexistentes");
+    Label _label_4 = new Label(panelCondiciones);
+    _label_4.setText("Condiciones Preexistentes");
     this.listaCondicionesPreexistentes(panelCondiciones);
     final GroupPanel panelProcesoDePreparacion = new GroupPanel(mainPanel);
     panelProcesoDePreparacion.setTitle("Proceso de Preparación");
-    Label _label_9 = new Label(panelProcesoDePreparacion);
+    Label _label_5 = new Label(panelProcesoDePreparacion);
     final Procedure1<Label> _function_1 = new Procedure1<Label>() {
       public void apply(final Label it) {
         it.<Object, ControlBuilder>bindValueToProperty("unaReceta.explicacionDeLaPreparacion");
@@ -129,7 +118,7 @@ public class DetalleDeRecetaVentana extends MainWindow<RecetaWindow> {
         it.setBackground(_color);
       }
     };
-    ObjectExtensions.<Label>operator_doubleArrow(_label_9, _function_1);
+    ObjectExtensions.<Label>operator_doubleArrow(_label_5, _function_1);
     final Panel panelBotonVolver = new Panel(mainPanel);
     Button _button = new Button(panelBotonVolver);
     final Procedure1<Button> _function_2 = new Procedure1<Button>() {
@@ -138,12 +127,32 @@ public class DetalleDeRecetaVentana extends MainWindow<RecetaWindow> {
       }
     };
     ObjectExtensions.<Button>operator_doubleArrow(_button, _function_2);
-    Label _label_10 = new Label(panelBotonVolver);
-    _label_10.<Object, ControlBuilder>bindValueToProperty("unUsuario.cantidadDeFavorita");
+    Label _label_6 = new Label(panelBotonVolver);
+    _label_6.<Object, ControlBuilder>bindValueToProperty("unUsuario.cantidadDeFavorita");
   }
   
-  public Label addPanelCalorias(final Panel mainPanel) {
-    Label _xblockexpression = null;
+  public Binding<Object, Control, ControlBuilder> addPanelDificultadYTemporada(final Panel mainPanel) {
+    Binding<Object, Control, ControlBuilder> _xblockexpression = null;
+    {
+      final Panel panelDificultadYTemporada = new Panel(mainPanel);
+      HorizontalLayout _horizontalLayout = new HorizontalLayout();
+      panelDificultadYTemporada.setLayout(_horizontalLayout);
+      final Panel panelDificultad = new Panel(panelDificultadYTemporada);
+      Label _label = new Label(panelDificultad);
+      _label.setText("Dificultad");
+      Label _label_1 = new Label(panelDificultad);
+      _label_1.<Object, ControlBuilder>bindValueToProperty("unaReceta.dificultad");
+      final Panel panelTemporada = new Panel(panelDificultadYTemporada);
+      Label _label_2 = new Label(panelTemporada);
+      _label_2.setText("Temporada");
+      Label _label_3 = new Label(panelTemporada);
+      _xblockexpression = _label_3.<Object, ControlBuilder>bindValueToProperty("unaReceta.temporada");
+    }
+    return _xblockexpression;
+  }
+  
+  public Binding<Object, Control, ControlBuilder> addPanelCalorias(final Panel mainPanel) {
+    Binding<Object, Control, ControlBuilder> _xblockexpression = null;
     {
       final GroupPanel panelCaloriasYDueño = new GroupPanel(mainPanel);
       panelCaloriasYDueño.setTitle("");
@@ -152,7 +161,9 @@ public class DetalleDeRecetaVentana extends MainWindow<RecetaWindow> {
       Label _label = new Label(panelCaloriasYDueño);
       _label.<Object, ControlBuilder>bindValueToProperty("unaReceta.caloriasReceta");
       Label _label_1 = new Label(panelCaloriasYDueño);
-      _xblockexpression = _label_1.setText("calorias");
+      _label_1.setText("calorias");
+      Label _label_2 = new Label(panelCaloriasYDueño);
+      _xblockexpression = _label_2.<Object, ControlBuilder>bindValueToProperty("propietario");
     }
     return _xblockexpression;
   }

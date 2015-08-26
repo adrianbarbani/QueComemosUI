@@ -31,8 +31,14 @@ class RecetaWindow {
 	}
 	
 	
-//	def String setPropietario(boolean propietario){
-//		unaReceta.duenioPara(unUsuario)
-//	}
+	def String getPropietario(){
+		unUsuario.sosDuenioDe(unaReceta)
+	}
 	
+	
+	
+	
+
+	
+
 }

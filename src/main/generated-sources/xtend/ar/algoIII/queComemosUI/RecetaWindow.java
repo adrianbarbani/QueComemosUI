@@ -32,6 +32,10 @@ public class RecetaWindow {
     return this.unUsuario.esRecetaFavorita(this.unaReceta);
   }
   
+  public String getPropietario() {
+    return this.unUsuario.sosDuenioDe(this.unaReceta);
+  }
+  
   @Pure
   public Receta getUnaReceta() {
     return this.unaReceta;
