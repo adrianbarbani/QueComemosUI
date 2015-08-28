@@ -44,7 +44,8 @@ public class DetalleDeRecetaVentana extends MainWindow<Receta> {
   
   public DetalleDeRecetaVentana() {
     super(
-      new RecetaBuilder().tipoDeReceta(new Publica()).nombreDelPlato("Pizza de Jamon y Morrones").agregarIngrediente(DetalleDeRecetaVentana.prepizza).agregarIngrediente(DetalleDeRecetaVentana.azucar).agregarIngrediente(DetalleDeRecetaVentana.jamon).agregarIngrediente(DetalleDeRecetaVentana.queso).agregarIngrediente(DetalleDeRecetaVentana.salsaDeTomate).agregarIngrediente(DetalleDeRecetaVentana.oregano).setearCalorias(500).setearDificultad("Facil").setearTemporadas("Todo el año").setearPreparacion("En la prepizza volcar la salsa de tomate y cocinar por 15 minutos, luego sumar el queso y volver a cocinar. Agregar el jamon y el morron; oregano a gusto.").build());
+      new RecetaBuilder().tipoDeReceta(new Publica()).nombreDelPlato("Pizza de Jamon y Morrones").agregarIngrediente(DetalleDeRecetaVentana.prepizza).agregarIngrediente(DetalleDeRecetaVentana.azucar).agregarIngrediente(DetalleDeRecetaVentana.jamon).agregarIngrediente(DetalleDeRecetaVentana.queso).agregarIngrediente(DetalleDeRecetaVentana.salsaDeTomate).agregarIngrediente(DetalleDeRecetaVentana.oregano).setearCalorias(500).setearDificultad("Facil").setearTemporadas("Todo el año").setearPreparacion(
+        "En la prepizza volcar la salsa de tomate y cocinar por 15 minutos, luego sumar el queso y volver a cocinar. Agregar el jamon y el morron; oregano a gusto.").build());
     Receta _modelObject = this.getModelObject();
     this.pizza = _modelObject;
   }
@@ -57,7 +58,13 @@ public class DetalleDeRecetaVentana extends MainWindow<Receta> {
   public void createContents(final Panel mainPanel) {
     this.setTitle("Detalle De Receta");
     Label _label = new Label(mainPanel);
-    _label.<Object, ControlBuilder>bindValueToProperty("nombreDelPlato");
+    final Procedure1<Label> _function = new Procedure1<Label>() {
+      public void apply(final Label it) {
+        it.<Object, ControlBuilder>bindValueToProperty("nombreDelPlato");
+        it.setFontSize(14);
+      }
+    };
+    ObjectExtensions.<Label>operator_doubleArrow(_label, _function);
     final Panel panelCaloriasYDueño = new Panel(mainPanel);
     HorizontalLayout _horizontalLayout = new HorizontalLayout();
     panelCaloriasYDueño.setLayout(_horizontalLayout);
@@ -109,12 +116,12 @@ public class DetalleDeRecetaVentana extends MainWindow<Receta> {
     _label_12.<Object, ControlBuilder>bindValueToProperty("explicacionDeLaPreparacion");
     final Panel panelBotonVolver = new Panel(mainPanel);
     Button _button = new Button(panelBotonVolver);
-    final Procedure1<Button> _function = new Procedure1<Button>() {
+    final Procedure1<Button> _function_1 = new Procedure1<Button>() {
       public void apply(final Button it) {
         it.setCaption("Volver");
       }
     };
-    ObjectExtensions.<Button>operator_doubleArrow(_button, _function);
+    ObjectExtensions.<Button>operator_doubleArrow(_button, _function_1);
   }
   
   public Panel listaCondicionesPreexistentes(final Panel panelCondiciones) {
