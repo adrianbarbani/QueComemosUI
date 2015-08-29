@@ -1,18 +1,18 @@
 package ar.algoIII.queComemosUI
 
+import ar.algo.adriba.tp1.Busqueda
 import ar.algo.adriba.tp1.Fecha
 import ar.algo.adriba.tp1.Receta
+import ar.algo.adriba.tp1.RepositorioExterno
 import ar.algo.adriba.tp1.Rutina
 import ar.algo.adriba.tp1.Sexo
-import ar.algo.adriba.tp1.Usuario
 import ar.algo.adriba.tp1.UsuarioBuilder
 import java.io.Serializable
 import java.util.ArrayList
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.utils.Observable
-import ar.algo.adriba.tp1.Busqueda
-import ar.algo.adriba.tp1.RepositorioExterno
+import ar.algo.adriba.tp1.Usuario
 
 @Accessors
 @Observable

@@ -2,14 +2,14 @@ package ar.algoIII.queComemosUI;
 
 import ar.algo.adriba.tp1.Receta;
 import ar.algoIII.queComemosUI.UltimasConsultasAppModel;
+import java.awt.Color;
+import org.apache.commons.collections15.Transformer;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.uqbar.arena.bindings.NotNullObservable;
-import org.uqbar.arena.layout.HorizontalLayout;
-import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.tables.Column;
 import org.uqbar.arena.widgets.tables.Table;
+import org.uqbar.arena.widgets.tables.labelprovider.BackgroundProvider;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
@@ -37,6 +37,19 @@ public class UltimasConsultasWindow extends SimpleWindow<UltimasConsultasAppMode
         it.setTitle("Nombre");
         it.setFixedSize(200);
         it.bindContentsToProperty("nombre");
+        BackgroundProvider<Receta, Color> _bindBackground = it.bindBackground("sosPublica");
+        final Transformer<Object, Color> _function = new Transformer<Object, Color>() {
+          public Color transform(final Object receta) {
+            Color _xifexpression = null;
+            if ((((Boolean) receta)).booleanValue()) {
+              _xifexpression = Color.BLUE;
+            } else {
+              _xifexpression = Color.RED;
+            }
+            return _xifexpression;
+          }
+        };
+        _bindBackground.setTransformer(_function);
       }
     };
     ObjectExtensions.<Column<Receta>>operator_doubleArrow(_column, _function);
@@ -46,57 +59,71 @@ public class UltimasConsultasWindow extends SimpleWindow<UltimasConsultasAppMode
         it.setTitle("Calorias");
         it.setFixedSize(100);
         it.bindContentsToProperty("caloriasReceta");
+        BackgroundProvider<Receta, Color> _bindBackground = it.bindBackground("sosPublica");
+        final Transformer<Object, Color> _function = new Transformer<Object, Color>() {
+          public Color transform(final Object receta) {
+            Color _xifexpression = null;
+            if ((((Boolean) receta)).booleanValue()) {
+              _xifexpression = Color.BLUE;
+            } else {
+              _xifexpression = Color.RED;
+            }
+            return _xifexpression;
+          }
+        };
+        _bindBackground.setTransformer(_function);
       }
     };
     ObjectExtensions.<Column<Receta>>operator_doubleArrow(_column_1, _function_1);
     Column<Receta> _column_2 = new Column<Receta>(table);
     final Procedure1<Column<Receta>> _function_2 = new Procedure1<Column<Receta>>() {
       public void apply(final Column<Receta> it) {
-        it.setTitle("Temporada");
+        it.setTitle("Dificultad");
         it.setFixedSize(200);
-        it.bindContentsToProperty("temporada");
+        it.bindContentsToProperty("dificultad");
+        BackgroundProvider<Receta, Color> _bindBackground = it.bindBackground("sosPublica");
+        final Transformer<Object, Color> _function = new Transformer<Object, Color>() {
+          public Color transform(final Object receta) {
+            Color _xifexpression = null;
+            if ((((Boolean) receta)).booleanValue()) {
+              _xifexpression = Color.BLUE;
+            } else {
+              _xifexpression = Color.RED;
+            }
+            return _xifexpression;
+          }
+        };
+        _bindBackground.setTransformer(_function);
       }
     };
     ObjectExtensions.<Column<Receta>>operator_doubleArrow(_column_2, _function_2);
+    Column<Receta> _column_3 = new Column<Receta>(table);
+    final Procedure1<Column<Receta>> _function_3 = new Procedure1<Column<Receta>>() {
+      public void apply(final Column<Receta> it) {
+        it.setTitle("Temporada");
+        it.setFixedSize(200);
+        it.bindContentsToProperty("temporada");
+        BackgroundProvider<Receta, Color> _bindBackground = it.bindBackground("sosPublica");
+        final Transformer<Object, Color> _function = new Transformer<Object, Color>() {
+          public Color transform(final Object receta) {
+            Color _xifexpression = null;
+            if ((((Boolean) receta)).booleanValue()) {
+              _xifexpression = Color.BLUE;
+            } else {
+              _xifexpression = Color.RED;
+            }
+            return _xifexpression;
+          }
+        };
+        _bindBackground.setTransformer(_function);
+      }
+    };
+    ObjectExtensions.<Column<Receta>>operator_doubleArrow(_column_3, _function_3);
   }
   
   protected void addActions(final Panel mainPanel) {
-    final NotNullObservable elementSelected = new NotNullObservable("recetaSeleccionada");
-    Panel _panel = new Panel(mainPanel);
-    HorizontalLayout _horizontalLayout = new HorizontalLayout();
-    final Panel actionsPanel = _panel.setLayout(_horizontalLayout);
-    Button _button = new Button(actionsPanel);
-    final Procedure1<Button> _function = new Procedure1<Button>() {
-      public void apply(final Button it) {
-        it.setCaption("Buscar");
-        final Action _function = new Action() {
-          public void execute() {
-            UltimasConsultasAppModel _modelObject = UltimasConsultasWindow.this.getModelObject();
-            _modelObject.search();
-          }
-        };
-        it.onClick(_function);
-        it.setAsDefault();
-        it.disableOnError();
-      }
-    };
-    ObjectExtensions.<Button>operator_doubleArrow(_button, _function);
-    Button _button_1 = new Button(actionsPanel);
-    final Procedure1<Button> _function_1 = new Procedure1<Button>() {
-      public void apply(final Button it) {
-        it.setCaption("Editar");
-        it.<Object, ControlBuilder>bindEnabled(elementSelected);
-      }
-    };
-    ObjectExtensions.<Button>operator_doubleArrow(_button_1, _function_1);
-    Button _button_2 = new Button(actionsPanel);
-    final Procedure1<Button> _function_2 = new Procedure1<Button>() {
-      public void apply(final Button it) {
-        it.setCaption("Borrar");
-        it.<Object, ControlBuilder>bindEnabled(elementSelected);
-      }
-    };
-    ObjectExtensions.<Button>operator_doubleArrow(_button_2, _function_2);
+    throw new Error("Unresolved compilation problems:"
+      + "\nType mismatch: cannot convert from NotNullObservable to Receta");
   }
   
   protected void createFormPanel(final Panel mainPanel) {
@@ -112,10 +139,6 @@ public class UltimasConsultasWindow extends SimpleWindow<UltimasConsultasAppMode
   }
   
   /**
-   * def void crearCelular() {
-   * this.openDialog(new CrearCelularWindow(this))
-   * }
-   * 
    * def void modificarCelular() {
    * this.openDialog(new EditarCelularWindow(this, modelObject.celularSeleccionado))
    * }
