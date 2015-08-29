@@ -5,6 +5,7 @@ import ar.algo.adriba.tp1.CondicionPreexistente
 import ar.algo.adriba.tp1.Cosas
 import ar.algo.adriba.tp1.Fecha
 import ar.algo.adriba.tp1.Publica
+import ar.algo.adriba.tp1.Receta
 import ar.algo.adriba.tp1.RecetaBuilder
 import ar.algo.adriba.tp1.Rutina
 import ar.algo.adriba.tp1.Sexo
@@ -23,7 +24,6 @@ import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.widgets.tables.Column
 import org.uqbar.arena.widgets.tables.Table
 import org.uqbar.arena.windows.MainWindow
-import ar.algo.adriba.tp1.Receta
 
 @Accessors
 class DetalleDeRecetaVentana extends MainWindow<RecetaWindow> {
@@ -42,6 +42,7 @@ class DetalleDeRecetaVentana extends MainWindow<RecetaWindow> {
 
 	new() {
 		super(
+
 			new RecetaWindow(
 				( new RecetaBuilder().tipoDeReceta(new Publica).nombreDelPlato("Pizza de Jamon y Morrones").
 					agregarIngrediente(prepizza).agregarIngrediente(azucar).agregarIngrediente(jamon).
@@ -62,6 +63,7 @@ class DetalleDeRecetaVentana extends MainWindow<RecetaWindow> {
 
 	override createContents(Panel mainPanel) { 
 		this.title = "Detalle De Receta"
+
 		new Label(mainPanel) => [
 			bindValueToProperty("unaReceta.nombreDelPlato") 
 			foreground = new Color(0, 0, 0)
@@ -69,6 +71,7 @@ class DetalleDeRecetaVentana extends MainWindow<RecetaWindow> {
 		]
 
 		//------------------------------------------------------------------------
+
 		addPanelCalorias(mainPanel)
 		
 		//Falta ver el tema del dueño (en este mismo panel)
