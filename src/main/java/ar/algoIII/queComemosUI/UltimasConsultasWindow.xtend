@@ -64,7 +64,7 @@ class UltimasConsultasWindow extends SimpleWindow<UltimasConsultasAppModel> {
 	override protected addActions(Panel mainPanel) {
 
 		val elementSelected = new NotNullObservable("recetaSeleccionada")
-		val elUsuario = modelObject.usuario
+		
 		val actionsPanel = new Panel(mainPanel).layout = new HorizontalLayout
 
 		new Button(actionsPanel) => [

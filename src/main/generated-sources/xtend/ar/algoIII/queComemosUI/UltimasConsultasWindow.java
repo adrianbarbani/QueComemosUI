@@ -129,8 +129,6 @@ public class UltimasConsultasWindow extends SimpleWindow<UltimasConsultasAppMode
   
   protected void addActions(final Panel mainPanel) {
     final NotNullObservable elementSelected = new NotNullObservable("recetaSeleccionada");
-    UltimasConsultasAppModel _modelObject = this.getModelObject();
-    final Usuario elUsuario = _modelObject.getUsuario();
     Panel _panel = new Panel(mainPanel);
     HorizontalLayout _horizontalLayout = new HorizontalLayout();
     final Panel actionsPanel = _panel.setLayout(_horizontalLayout);
