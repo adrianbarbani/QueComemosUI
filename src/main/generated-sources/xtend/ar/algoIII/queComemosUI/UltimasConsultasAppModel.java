@@ -32,46 +32,52 @@ public class UltimasConsultasAppModel implements Serializable {
   
   private List<Receta> resultados = new ArrayList<Receta>();
   
-  private Comida carne = new Comida(99, "carne", 1);
+  private Comida carne = new Comida(0, "Carne", 1);
   
-  private Comida harina = new Comida(25, "harina", 20);
+  private Comida harina = new Comida(0, "Harina", 20);
   
-  private Comida huevo = new Comida(10, "huevo", 3);
+  private Comida huevo = new Comida(0, "Huevo", 3);
   
-  private Comida panRallado = new Comida(12, "pan rallado", 50);
+  private Comida panRallado = new Comida(0, "Pan Rallado", 50);
   
-  private Comida verdura = new Comida(6, "verdura", 12);
+  private Comida verdura = new Comida(0, "Verdura", 12);
   
-  private Comida queso = new Comida(250, "queso", 800);
+  private Comida queso = new Comida(0, "Muzzarella", 200);
   
-  private Comida prepizza = new Comida(200, "prepizza", 50);
+  private Comida prepizza = new Comida(0, "Prepizza", 1);
   
-  private Comida salsaDeTomate = new Comida(20, "salsa de tomate", 50);
+  private Comida salsaDeTomate = new Comida(0, "Salsa de tomate", 200);
   
-  private Comida sal = new Comida(0, "sal", 0);
+  private Comida sal = new Comida(18, "Sal", 0);
   
-  private Comida salsaBlanca = new Comida(50, "salsa blanca", 400);
+  private Comida salsaBlanca = new Comida(0, "Salsa Blanca", 400);
   
-  private Comida lomo = new Comida(30, "lomo", 200);
+  private Comida lomo = new Comida(0, "Lomo", 200);
   
-  private Comida garbanzos = new Comida(30, "garbanzos", 500);
+  private Comida garbanzos = new Comida(0, "Garbanzos", 500);
   
-  private Comida limon = new Comida(1, "limon", 10);
+  private Comida limon = new Comida(10, "Limon", 0);
   
-  private Comida ajo = new Comida(1, "ajo", 10);
+  private Comida ajo = new Comida(5, "Ajo", 0);
   
-  private Receta milanesa = new RecetaBuilder().tipoDeReceta(new Publica()).nombreDelPlato("Milanesas").agregarIngrediente(this.harina).agregarIngrediente(this.huevo).agregarIngrediente(this.panRallado).agregarIngrediente(this.carne).setearCalorias(150).setearDificultad("Dificil").build();
+  private Comida jamon = new Comida(0, "Jamon", 100);
   
-  private Receta milanesaNapolitana = new RecetaBuilder().tipoDeReceta(new Publica()).nombreDelPlato("Milanesa napolitana").agregarIngrediente(this.harina).agregarIngrediente(this.huevo).agregarIngrediente(this.panRallado).agregarIngrediente(this.carne).agregarIngrediente(this.queso).agregarIngrediente(this.salsaDeTomate).setearCalorias(8000).build();
+  private Comida oregano = new Comida(100, "Oregano", 0);
   
-  private Receta sopaDeVerdura = new RecetaBuilder().tipoDeReceta(new Publica()).nombreDelPlato("Sopa de Verdura").agregarIngrediente(this.verdura).agregarIngrediente(this.sal).setearCalorias(200).setearDificultad("Dificil").build();
+  private Comida azucar = new Comida(0, "azucar", 200);
   
-  private Receta pizza = new RecetaBuilder().tipoDeReceta(new Publica()).nombreDelPlato("Pizza de muzzarella").agregarIngrediente(this.prepizza).agregarIngrediente(this.salsaDeTomate).agregarIngrediente(this.queso).setearCalorias(500).build();
+  private Receta milanesa = new RecetaBuilder().tipoDeReceta(new Publica()).nombreDelPlato("Milanesas").agregarIngrediente(this.harina).agregarIngrediente(this.huevo).setearTemporadas("Todo el año").agregarIngrediente(this.panRallado).agregarIngrediente(this.carne).setearCalorias(150).setearDificultad("Dificil").build();
+  
+  private Receta milanesaNapolitana = new RecetaBuilder().tipoDeReceta(new Publica()).nombreDelPlato("Milanesa napolitana").agregarIngrediente(this.harina).agregarIngrediente(this.huevo).agregarIngrediente(this.panRallado).agregarIngrediente(this.carne).agregarIngrediente(this.queso).agregarIngrediente(this.salsaDeTomate).setearCalorias(8000).setearTemporadas("Todo el año").setearDificultad("Dificil").build();
+  
+  private Receta sopaDeVerdura = new RecetaBuilder().tipoDeReceta(new Publica()).nombreDelPlato("Sopa de Verdura").agregarIngrediente(this.verdura).agregarIngrediente(this.sal).setearCalorias(200).setearTemporadas("Invierno").setearDificultad("Dificil").build();
+  
+  private Receta pizza = new RecetaBuilder().tipoDeReceta(new Publica()).nombreDelPlato("Pizza de muzzarella").agregarIngrediente(this.prepizza).agregarIngrediente(this.salsaDeTomate).agregarIngrediente(this.oregano).agregarIngrediente(this.queso).setearTemporadas("Todo el año").setearDificultad("Facil").setearCalorias(500).build();
   
   private Receta pizzaDeVerdura = new RecetaBuilder().tipoDeReceta(new Publica()).nombreDelPlato(
-    "Pizza de verdura y salsa blanca").agregarIngrediente(this.prepizza).agregarIngrediente(this.salsaDeTomate).agregarIngrediente(this.queso).agregarIngrediente(this.salsaBlanca).agregarIngrediente(this.verdura).setearCalorias(560).build();
+    "Pizza de verdura y salsa blanca").agregarIngrediente(this.prepizza).agregarIngrediente(this.salsaDeTomate).agregarIngrediente(this.queso).agregarIngrediente(this.salsaBlanca).agregarIngrediente(this.verdura).setearTemporadas("Todo el año").setearCalorias(560).setearDificultad("Dificil").build();
   
-  private Receta lomoALaPlancha = new RecetaBuilder().tipoDeReceta(new Publica()).nombreDelPlato("Lomo a la Plancha").agregarIngrediente(this.lomo).setearCalorias(300).build();
+  private Receta lomoALaPlancha = new RecetaBuilder().tipoDeReceta(new Publica()).nombreDelPlato("Lomo a la Plancha").agregarIngrediente(this.lomo).setearCalorias(300).setearTemporadas("Otoño").setearDificultad("Media").build();
   
   /**
    * Receta hummus = new RecetaBuilder().tipoDeReceta(new Privada(usuario, hummus)).nombreDelPlato(
@@ -258,6 +264,33 @@ public class UltimasConsultasAppModel implements Serializable {
   
   public void setAjo(final Comida ajo) {
     this.ajo = ajo;
+  }
+  
+  @Pure
+  public Comida getJamon() {
+    return this.jamon;
+  }
+  
+  public void setJamon(final Comida jamon) {
+    this.jamon = jamon;
+  }
+  
+  @Pure
+  public Comida getOregano() {
+    return this.oregano;
+  }
+  
+  public void setOregano(final Comida oregano) {
+    this.oregano = oregano;
+  }
+  
+  @Pure
+  public Comida getAzucar() {
+    return this.azucar;
+  }
+  
+  public void setAzucar(final Comida azucar) {
+    this.azucar = azucar;
   }
   
   @Pure
