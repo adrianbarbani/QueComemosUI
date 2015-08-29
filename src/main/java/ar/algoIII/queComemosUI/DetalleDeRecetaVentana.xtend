@@ -23,12 +23,14 @@ import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.widgets.tables.Column
 import org.uqbar.arena.widgets.tables.Table
 import org.uqbar.arena.windows.MainWindow
+import ar.algo.adriba.tp1.Receta
 
 @Accessors
 class DetalleDeRecetaVentana extends MainWindow<RecetaWindow> {
 	RecetaWindow pizza
 	java.util.List<String> comidaQueLeDisgusta = new ArrayList<String>
 
+	Receta pizzita
 	static Sexo Femenino = Sexo.FEMENINO
 	static Fecha fechaValida = new Fecha(System.currentTimeMillis() - 24 * 60 * 60 * 1000);
 	static Comida prepizza = new Comida(0, "Prepizza", 1)
@@ -41,7 +43,7 @@ class DetalleDeRecetaVentana extends MainWindow<RecetaWindow> {
 	new() {
 		super(
 			new RecetaWindow(
-				(new RecetaBuilder().tipoDeReceta(new Publica).nombreDelPlato("Pizza de Jamon y Morrones").
+				( new RecetaBuilder().tipoDeReceta(new Publica).nombreDelPlato("Pizza de Jamon y Morrones").
 					agregarIngrediente(prepizza).agregarIngrediente(azucar).agregarIngrediente(jamon).
 					agregarIngrediente(queso).agregarIngrediente(salsaDeTomate).agregarIngrediente(oregano).
 					setearCalorias(500).setearDificultad("Facil").setearTemporadas("Todo el año").

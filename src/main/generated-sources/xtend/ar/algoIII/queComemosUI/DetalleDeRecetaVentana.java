@@ -5,6 +5,7 @@ import ar.algo.adriba.tp1.CondicionPreexistente;
 import ar.algo.adriba.tp1.Cosas;
 import ar.algo.adriba.tp1.Fecha;
 import ar.algo.adriba.tp1.Publica;
+import ar.algo.adriba.tp1.Receta;
 import ar.algo.adriba.tp1.RecetaBuilder;
 import ar.algo.adriba.tp1.Rutina;
 import ar.algo.adriba.tp1.Sexo;
@@ -39,6 +40,8 @@ public class DetalleDeRecetaVentana extends MainWindow<RecetaWindow> {
   private RecetaWindow pizza;
   
   private List<String> comidaQueLeDisgusta = new ArrayList<String>();
+  
+  private Receta pizzita;
   
   private static Sexo Femenino = Sexo.FEMENINO;
   
@@ -260,5 +263,14 @@ public class DetalleDeRecetaVentana extends MainWindow<RecetaWindow> {
   
   public void setComidaQueLeDisgusta(final List<String> comidaQueLeDisgusta) {
     this.comidaQueLeDisgusta = comidaQueLeDisgusta;
+  }
+  
+  @Pure
+  public Receta getPizzita() {
+    return this.pizzita;
+  }
+  
+  public void setPizzita(final Receta pizzita) {
+    this.pizzita = pizzita;
   }
 }
