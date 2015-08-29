@@ -1,11 +1,17 @@
 package ar.algoIII.queComemosUI;
 
 import ar.algo.adriba.tp1.Receta;
+import ar.algo.adriba.tp1.Usuario;
+import ar.algoIII.queComemosUI.DetalleDeRecetaVentana;
+import ar.algoIII.queComemosUI.RecetaWindow;
 import ar.algoIII.queComemosUI.UltimasConsultasAppModel;
 import java.awt.Color;
 import org.apache.commons.collections15.Transformer;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.uqbar.arena.bindings.NotNullObservable;
+import org.uqbar.arena.layout.HorizontalLayout;
+import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.tables.Column;
 import org.uqbar.arena.widgets.tables.Table;
@@ -122,8 +128,42 @@ public class UltimasConsultasWindow extends SimpleWindow<UltimasConsultasAppMode
   }
   
   protected void addActions(final Panel mainPanel) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nType mismatch: cannot convert from NotNullObservable to Receta");
+    final NotNullObservable elementSelected = new NotNullObservable("recetaSeleccionada");
+    UltimasConsultasAppModel _modelObject = this.getModelObject();
+    final Usuario elUsuario = _modelObject.getUsuario();
+    Panel _panel = new Panel(mainPanel);
+    HorizontalLayout _horizontalLayout = new HorizontalLayout();
+    final Panel actionsPanel = _panel.setLayout(_horizontalLayout);
+    Button _button = new Button(actionsPanel);
+    final Procedure1<Button> _function = new Procedure1<Button>() {
+      public void apply(final Button it) {
+        it.setCaption("Ver");
+        final Action _function = new Action() {
+          public void execute() {
+            UltimasConsultasWindow.this.abrirDetalle();
+          }
+        };
+        it.onClick(_function);
+        it.setAsDefault();
+        it.disableOnError();
+      }
+    };
+    ObjectExtensions.<Button>operator_doubleArrow(_button, _function);
+    Button _button_1 = new Button(actionsPanel);
+    final Procedure1<Button> _function_1 = new Procedure1<Button>() {
+      public void apply(final Button it) {
+        it.setCaption("Favorita");
+        final Action _function = new Action() {
+          public void execute() {
+            UltimasConsultasAppModel _modelObject = UltimasConsultasWindow.this.getModelObject();
+            _modelObject.marcarComoFavorita();
+          }
+        };
+        it.onClick(_function);
+        it.<Object, ControlBuilder>bindEnabled(elementSelected);
+      }
+    };
+    ObjectExtensions.<Button>operator_doubleArrow(_button_1, _function_1);
   }
   
   protected void createFormPanel(final Panel mainPanel) {
@@ -138,11 +178,16 @@ public class UltimasConsultasWindow extends SimpleWindow<UltimasConsultasAppMode
     this.describeResultsGrid(table);
   }
   
-  /**
-   * def void modificarCelular() {
-   * this.openDialog(new EditarCelularWindow(this, modelObject.celularSeleccionado))
-   * }
-   */
+  public void abrirDetalle() {
+    UltimasConsultasAppModel _modelObject = this.getModelObject();
+    Receta _recetaSeleccionada = _modelObject.getRecetaSeleccionada();
+    UltimasConsultasAppModel _modelObject_1 = this.getModelObject();
+    Usuario _usuario = _modelObject_1.getUsuario();
+    RecetaWindow _recetaWindow = new RecetaWindow(_recetaSeleccionada, _usuario);
+    DetalleDeRecetaVentana _detalleDeRecetaVentana = new DetalleDeRecetaVentana(this, _recetaWindow);
+    this.openDialog(_detalleDeRecetaVentana);
+  }
+  
   public void openDialog(final Dialog<?> dialog) {
     final Action _function = new Action() {
       public void execute() {

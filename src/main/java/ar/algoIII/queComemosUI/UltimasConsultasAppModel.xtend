@@ -30,5 +30,9 @@ class UltimasConsultasAppModel implements Serializable {
 	def void search() {
 		resultados = new Busqueda(usuario, new RepositorioExterno).filtrar
 	}
-
+	
+	def marcarComoFavorita(){
+		usuario.marcarComoFavorita(recetaSeleccionada)
+	}
+	
 }

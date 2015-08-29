@@ -69,14 +69,14 @@ class UltimasConsultasWindow extends SimpleWindow<UltimasConsultasAppModel> {
 
 		new Button(actionsPanel) => [
 			caption = "Ver"
-			onClick = [|modelObject.search]
+			onClick = [|this.abrirDetalle]
 			setAsDefault
 			disableOnError
 		]
 
 		new Button(actionsPanel) => [
 			caption = "Favorita"
-			onClick = [|elUsuario.marcarComoFavorita(elementSelected)] //como pongo aca la receta que seleccione?
+			onClick = [|modelObject.marcarComoFavorita] 
 			bindEnabled(elementSelected)
 		]
 
@@ -94,9 +94,10 @@ class UltimasConsultasWindow extends SimpleWindow<UltimasConsultasAppModel> {
 //Acciones
 
 	
-	/*def void modificarCelular() {
-		this.openDialog(new EditarCelularWindow(this, modelObject.celularSeleccionado))
-	}*/
+	def void abrirDetalle() {
+		this.openDialog(new DetalleDeRecetaVentana(this, new RecetaWindow(modelObject.recetaSeleccionada, modelObject.usuario)))
+	}
+	
 	def openDialog(Dialog<?> dialog) {
 		dialog.onAccept[|modelObject.search]
 		dialog.open

@@ -4,15 +4,12 @@ import ar.algo.adriba.tp1.Comida
 import ar.algo.adriba.tp1.CondicionPreexistente
 import ar.algo.adriba.tp1.Cosas
 import ar.algo.adriba.tp1.Fecha
-import ar.algo.adriba.tp1.Publica
 import ar.algo.adriba.tp1.Receta
-import ar.algo.adriba.tp1.RecetaBuilder
-import ar.algo.adriba.tp1.Rutina
 import ar.algo.adriba.tp1.Sexo
-import ar.algo.adriba.tp1.UsuarioBuilder
 import java.awt.Color
 import java.util.ArrayList
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.uqbar.arena.aop.windows.TransactionalDialog
 import org.uqbar.arena.bindings.PropertyAdapter
 import org.uqbar.arena.layout.HorizontalLayout
 import org.uqbar.arena.widgets.Button
@@ -23,24 +20,29 @@ import org.uqbar.arena.widgets.List
 import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.widgets.tables.Column
 import org.uqbar.arena.widgets.tables.Table
-import org.uqbar.arena.windows.MainWindow
+import org.uqbar.arena.windows.WindowOwner
 
 @Accessors
-class DetalleDeRecetaVentana extends MainWindow<RecetaWindow> {
+class DetalleDeRecetaVentana extends TransactionalDialog<RecetaWindow> {
 	RecetaWindow pizza
 	java.util.List<String> comidaQueLeDisgusta = new ArrayList<String>
 
 	Receta pizzita
-	static Sexo Femenino = Sexo.FEMENINO
+	/*static Sexo Femenino = Sexo.FEMENINO
 	static Fecha fechaValida = new Fecha(System.currentTimeMillis() - 24 * 60 * 60 * 1000);
 	static Comida prepizza = new Comida(0, "Prepizza", 1)
 	static Comida queso = new Comida(0, "Muzzarella", 200)
 	static Comida salsaDeTomate = new Comida(0, "Salsa de tomate", 200)
 	static Comida jamon = new Comida(0, "Jamon", 100)
 	static Comida oregano = new Comida(100, "Oregano", 0)
-	static Comida azucar = new Comida(0, "azucar", 200)
+	static Comida azucar = new Comida(0, "azucar", 200)*/
 
-	new() {
+	new(WindowOwner owner, RecetaWindow model) {
+		super(owner, model)
+		
+	}
+	
+	/*new() {
 		super(
 
 			new RecetaWindow(
@@ -55,11 +57,11 @@ class DetalleDeRecetaVentana extends MainWindow<RecetaWindow> {
 			build())))
 
 		this.pizza = this.modelObject
-	}
+	}*/
 
-	def static main(String[] args) {
-		new DetalleDeRecetaVentana().startApplication
-	}
+	//def static main(String[] args) {
+		//new DetalleDeRecetaVentana().startApplication
+	//}
 
 	override createContents(Panel mainPanel) { 
 		this.title = "Detalle De Receta"
@@ -188,6 +190,10 @@ class DetalleDeRecetaVentana extends MainWindow<RecetaWindow> {
 			bindContentsToProperty("nombre") //Receta.
 		]
 
+	}
+	
+	override protected createFormPanel(Panel arg0) {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
 
 }

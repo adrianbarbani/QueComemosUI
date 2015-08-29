@@ -36,6 +36,10 @@ public class UltimasConsultasAppModel implements Serializable {
     this.resultados = _filtrar;
   }
   
+  public void marcarComoFavorita() {
+    this.usuario.marcarComoFavorita(this.recetaSeleccionada);
+  }
+  
   @Pure
   public Sexo getFemenino() {
     return this.Femenino;
