@@ -28,20 +28,6 @@ public class UltimasConsultasWindow extends SimpleWindow<UltimasConsultasAppMode
     this.setTitle("Bienvenido a ¿Que Comemos?");
     this.setTaskDescription("Estas fueron tus ultimas consultas");
     super.createMainTemplate(mainPanel);
-    this.createResultsGrid(mainPanel);
-    this.createGridActions(mainPanel);
-  }
-  
-  protected void createResultsGrid(final Panel mainPanel) {
-    Table<Receta> _table = new Table<Receta>(mainPanel, Receta.class);
-    final Procedure1<Table<Receta>> _function = new Procedure1<Table<Receta>>() {
-      public void apply(final Table<Receta> it) {
-        it.bindItemsToProperty("resultados");
-        it.<Object, ControlBuilder>bindValueToProperty("recetaSeleccionada");
-      }
-    };
-    final Table<Receta> table = ObjectExtensions.<Table<Receta>>operator_doubleArrow(_table, _function);
-    this.describeResultsGrid(table);
   }
   
   public void describeResultsGrid(final Table<Receta> table) {
@@ -74,30 +60,11 @@ public class UltimasConsultasWindow extends SimpleWindow<UltimasConsultasAppMode
     ObjectExtensions.<Column<Receta>>operator_doubleArrow(_column_2, _function_2);
   }
   
-  public void createGridActions(final Panel mainPanel) {
+  protected void addActions(final Panel mainPanel) {
     final NotNullObservable elementSelected = new NotNullObservable("recetaSeleccionada");
     Panel _panel = new Panel(mainPanel);
     HorizontalLayout _horizontalLayout = new HorizontalLayout();
     final Panel actionsPanel = _panel.setLayout(_horizontalLayout);
-    Button _button = new Button(actionsPanel);
-    final Procedure1<Button> _function = new Procedure1<Button>() {
-      public void apply(final Button it) {
-        it.setCaption("Editar");
-        it.<Object, ControlBuilder>bindEnabled(elementSelected);
-      }
-    };
-    ObjectExtensions.<Button>operator_doubleArrow(_button, _function);
-    Button _button_1 = new Button(actionsPanel);
-    final Procedure1<Button> _function_1 = new Procedure1<Button>() {
-      public void apply(final Button it) {
-        it.setCaption("Borrar");
-        it.<Object, ControlBuilder>bindEnabled(elementSelected);
-      }
-    };
-    ObjectExtensions.<Button>operator_doubleArrow(_button_1, _function_1);
-  }
-  
-  protected void addActions(final Panel actionsPanel) {
     Button _button = new Button(actionsPanel);
     final Procedure1<Button> _function = new Procedure1<Button>() {
       public void apply(final Button it) {
@@ -117,14 +84,16 @@ public class UltimasConsultasWindow extends SimpleWindow<UltimasConsultasAppMode
     Button _button_1 = new Button(actionsPanel);
     final Procedure1<Button> _function_1 = new Procedure1<Button>() {
       public void apply(final Button it) {
-        it.setCaption("Limpiar");
+        it.setCaption("Editar");
+        it.<Object, ControlBuilder>bindEnabled(elementSelected);
       }
     };
     ObjectExtensions.<Button>operator_doubleArrow(_button_1, _function_1);
     Button _button_2 = new Button(actionsPanel);
     final Procedure1<Button> _function_2 = new Procedure1<Button>() {
       public void apply(final Button it) {
-        it.setCaption("Nuevo Celular");
+        it.setCaption("Borrar");
+        it.<Object, ControlBuilder>bindEnabled(elementSelected);
       }
     };
     ObjectExtensions.<Button>operator_doubleArrow(_button_2, _function_2);
@@ -139,6 +108,7 @@ public class UltimasConsultasWindow extends SimpleWindow<UltimasConsultasAppMode
       }
     };
     final Table<Receta> table = ObjectExtensions.<Table<Receta>>operator_doubleArrow(_table, _function);
+    this.describeResultsGrid(table);
   }
   
   /**
