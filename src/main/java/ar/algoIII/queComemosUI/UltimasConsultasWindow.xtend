@@ -89,6 +89,7 @@ class UltimasConsultasWindow extends SimpleWindow<UltimasConsultasAppModel> {
 	def void modificarCelular() {
 		this.openDialog(new EditarCelularWindow(this, modelObject.celularSeleccionado))
 	}*/
+	
 	def openDialog(Dialog<?> dialog) {
 		dialog.onAccept[|modelObject.search]
 		dialog.open
