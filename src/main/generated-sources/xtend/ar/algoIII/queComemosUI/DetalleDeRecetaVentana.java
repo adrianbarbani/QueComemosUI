@@ -3,13 +3,7 @@ package ar.algoIII.queComemosUI;
 import ar.algo.adriba.tp1.Comida;
 import ar.algo.adriba.tp1.CondicionPreexistente;
 import ar.algo.adriba.tp1.Cosas;
-import ar.algo.adriba.tp1.Fecha;
-import ar.algo.adriba.tp1.Publica;
 import ar.algo.adriba.tp1.Receta;
-import ar.algo.adriba.tp1.RecetaBuilder;
-import ar.algo.adriba.tp1.Rutina;
-import ar.algo.adriba.tp1.Sexo;
-import ar.algo.adriba.tp1.UsuarioBuilder;
 import ar.algoIII.queComemosUI.RecetaWindow;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -18,6 +12,7 @@ import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
+import org.uqbar.arena.aop.windows.TransactionalDialog;
 import org.uqbar.arena.bindings.PropertyAdapter;
 import org.uqbar.arena.layout.HorizontalLayout;
 import org.uqbar.arena.widgets.Button;
@@ -29,49 +24,52 @@ import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.Selector;
 import org.uqbar.arena.widgets.tables.Column;
 import org.uqbar.arena.widgets.tables.Table;
-import org.uqbar.arena.windows.MainWindow;
+import org.uqbar.arena.windows.WindowOwner;
 import org.uqbar.lacar.ui.model.ControlBuilder;
 import org.uqbar.lacar.ui.model.ListBuilder;
 import org.uqbar.lacar.ui.model.bindings.Binding;
 
 @Accessors
 @SuppressWarnings("all")
-public class DetalleDeRecetaVentana extends MainWindow<RecetaWindow> {
+public class DetalleDeRecetaVentana extends TransactionalDialog<RecetaWindow> {
   private RecetaWindow pizza;
   
   private List<String> comidaQueLeDisgusta = new ArrayList<String>();
   
   private Receta pizzita;
   
-  private static Sexo Femenino = Sexo.FEMENINO;
-  
-  private static Fecha fechaValida = new Fecha((System.currentTimeMillis() - (((24 * 60) * 60) * 1000)));
-  
-  private static Comida prepizza = new Comida(0, "Prepizza", 1);
-  
-  private static Comida queso = new Comida(0, "Muzzarella", 200);
-  
-  private static Comida salsaDeTomate = new Comida(0, "Salsa de tomate", 200);
-  
-  private static Comida jamon = new Comida(0, "Jamon", 100);
-  
-  private static Comida oregano = new Comida(100, "Oregano", 0);
-  
-  private static Comida azucar = new Comida(0, "azucar", 200);
-  
-  public DetalleDeRecetaVentana() {
-    super(
-      new RecetaWindow(new RecetaBuilder().tipoDeReceta(new Publica()).nombreDelPlato("Pizza de Jamon y Morrones").agregarIngrediente(DetalleDeRecetaVentana.prepizza).agregarIngrediente(DetalleDeRecetaVentana.azucar).agregarIngrediente(DetalleDeRecetaVentana.jamon).agregarIngrediente(DetalleDeRecetaVentana.queso).agregarIngrediente(DetalleDeRecetaVentana.salsaDeTomate).agregarIngrediente(DetalleDeRecetaVentana.oregano).setearCalorias(500).setearDificultad("Facil").setearTemporadas("Todo el año").setearPreparacion(
-        "En la prepizza volcar la salsa de tomate y cocinar por 15 minutos, luego sumar el queso y volver a cocinar. Agregar el jamon y el morron; oregano a gusto.").build(), new UsuarioBuilder().agregarPeso(52).agregarAltura(1.64).agregarSexo(DetalleDeRecetaVentana.Femenino).agregarNombre("Esteban").agregarFechaNacimiento(DetalleDeRecetaVentana.fechaValida).agregarRutina(new Rutina(61, true)).build()));
-    RecetaWindow _modelObject = this.getModelObject();
-    this.pizza = _modelObject;
+  /**
+   * static Sexo Femenino = Sexo.FEMENINO
+   * static Fecha fechaValida = new Fecha(System.currentTimeMillis() - 24 * 60 * 60 * 1000);
+   * static Comida prepizza = new Comida(0, "Prepizza", 1)
+   * static Comida queso = new Comida(0, "Muzzarella", 200)
+   * static Comida salsaDeTomate = new Comida(0, "Salsa de tomate", 200)
+   * static Comida jamon = new Comida(0, "Jamon", 100)
+   * static Comida oregano = new Comida(100, "Oregano", 0)
+   * static Comida azucar = new Comida(0, "azucar", 200)
+   */
+  public DetalleDeRecetaVentana(final WindowOwner owner, final RecetaWindow model) {
+    super(owner, model);
   }
   
-  public static void main(final String[] args) {
-    DetalleDeRecetaVentana _detalleDeRecetaVentana = new DetalleDeRecetaVentana();
-    _detalleDeRecetaVentana.startApplication();
-  }
-  
+  /**
+   * new() {
+   * super(
+   * 
+   * new RecetaWindow(
+   * ( new RecetaBuilder().tipoDeReceta(new Publica).nombreDelPlato("Pizza de Jamon y Morrones").
+   * agregarIngrediente(prepizza).agregarIngrediente(azucar).agregarIngrediente(jamon).
+   * agregarIngrediente(queso).agregarIngrediente(salsaDeTomate).agregarIngrediente(oregano).
+   * setearCalorias(500).setearDificultad("Facil").setearTemporadas("Todo el año").
+   * setearPreparacion(
+   * "En la prepizza volcar la salsa de tomate y cocinar por 15 minutos, luego sumar el queso y volver a cocinar. Agregar el jamon y el morron; oregano a gusto.").
+   * build), (new UsuarioBuilder().agregarPeso(52).agregarAltura(1.64).agregarSexo(Femenino).
+   * agregarNombre("Esteban").agregarFechaNacimiento(fechaValida).agregarRutina(new Rutina(61, true)).
+   * build())))
+   * 
+   * this.pizza = this.modelObject
+   * }
+   */
   public void createContents(final Panel mainPanel) {
     this.setTitle("Detalle De Receta");
     Label _label = new Label(mainPanel);
@@ -245,6 +243,10 @@ public class DetalleDeRecetaVentana extends MainWindow<RecetaWindow> {
       _xblockexpression = ObjectExtensions.<Column<Comida>>operator_doubleArrow(_column_1, _function_2);
     }
     return _xblockexpression;
+  }
+  
+  protected void createFormPanel(final Panel arg0) {
+    throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
   
   @Pure
