@@ -35,7 +35,12 @@ public class UltimasConsultasWindow extends SimpleWindow<UltimasConsultasAppMode
     UltimasConsultasAppModel _modelObject = this.getModelObject();
     String _descripcion = _modelObject.getDescripcion();
     this.setTaskDescription(_descripcion);
+    this.panelBusqueda(mainPanel);
     super.createMainTemplate(mainPanel);
+  }
+  
+  public Object panelBusqueda(final Panel panel) {
+    return null;
   }
   
   public void describeResultsGrid(final Table<Receta> table) {
@@ -150,6 +155,11 @@ public class UltimasConsultasWindow extends SimpleWindow<UltimasConsultasAppMode
     _modelObject_2.agregarRecetaVista();
   }
   
+  /**
+   * def void abrirBusqueda(){
+   * this.openDialog(new ConsultaDeRecetaWindow(this))
+   * }
+   */
   public void openDialog(final Dialog<?> dialog) {
     final Action _function = new Action() {
       public void execute() {

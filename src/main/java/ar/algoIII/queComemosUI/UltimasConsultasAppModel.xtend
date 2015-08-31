@@ -32,6 +32,9 @@ class UltimasConsultasAppModel implements Serializable {
 	List<Receta> resultados = new ArrayList<Receta>
 	List<Receta> ultimasConsultadas = new ArrayList<Receta>
 	String descripcion
+	String nombre
+	String dificultadSeleccionada
+	String temporadaSeleccionada
 	
 	//Harcodeo muchas recetas
 	Comida carne = new Comida(0, "Carne", 1)

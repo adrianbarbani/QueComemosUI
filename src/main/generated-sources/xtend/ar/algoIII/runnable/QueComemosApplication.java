@@ -2,7 +2,7 @@ package ar.algoIII.runnable;
 
 import ar.algo.adriba.tp1.Receta;
 import ar.algo.adriba.tp1.RepositorioExterno;
-import ar.algoIII.queComemosUI.UltimasConsultasWindow;
+import ar.algoIII.queComemosUI.ConsultaDeRecetaWindow;
 import org.uqbar.arena.Application;
 import org.uqbar.arena.windows.Window;
 import org.uqbar.commons.utils.ApplicationContext;
@@ -18,6 +18,6 @@ public class QueComemosApplication extends Application {
     ApplicationContext _instance = ApplicationContext.getInstance();
     RepositorioExterno _repositorioExterno = new RepositorioExterno();
     _instance.<RepositorioExterno>configureSingleton(Receta.class, _repositorioExterno);
-    return new UltimasConsultasWindow(this);
+    return new ConsultaDeRecetaWindow(this);
   }
 }

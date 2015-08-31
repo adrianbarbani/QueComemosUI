@@ -23,8 +23,12 @@ class UltimasConsultasWindow extends SimpleWindow<UltimasConsultasAppModel> {
 		title = "Bienvenido a ¿Que Comemos?"
 		taskDescription = modelObject.descripcion
 
+		this.panelBusqueda(mainPanel)
 		super.createMainTemplate(mainPanel)
 
+	}
+	
+	def panelBusqueda(Panel panel) { // template method
 	}
 
 	def void describeResultsGrid(Table<Receta> table) {
@@ -32,48 +36,49 @@ class UltimasConsultasWindow extends SimpleWindow<UltimasConsultasAppModel> {
 			title = "Nombre"
 			fixedSize = 200
 			bindContentsToProperty("nombre")
-			bindForeground("sosPublica").transformer =
-				[ Object receta | if (receta as Boolean) Color.BLUE else Color.RED ]
+			bindForeground("sosPublica").transformer = [Object receta|if(receta as Boolean) Color.BLUE else Color.RED]
 		]
 
 		new Column<Receta>(table) => [
 			title = "Calorias"
 			fixedSize = 100
 			bindContentsToProperty("caloriasReceta")
-			
 		]
-		
+
 		new Column<Receta>(table) => [
 			title = "Dificultad"
 			fixedSize = 200
 			bindContentsToProperty("dificultad")
-			
 		]
-		
+
 		new Column<Receta>(table) => [
 			title = "Temporada"
 			fixedSize = 200
 			bindContentsToProperty("temporada")
-			
 		]
 	}
 
 	override protected addActions(Panel mainPanel) {
 
 		val elementSelected = new NotNullObservable("recetaSeleccionada")
-		
+
 		val actionsPanel = new Panel(mainPanel).layout = new HorizontalLayout
 
 		new Button(actionsPanel) => [
 			caption = "Ver"
 			onClick = [|this.abrirDetalle]
 			bindEnabled(elementSelected)
-		
 		]
+
+		/*new Button(actionsPanel) => [
+			caption = "Buscar"
+			onClick = [|this.abrirBusqueda]
+			bindEnabled(elementSelected)
+		]*/
 
 		new Button(actionsPanel) => [
 			caption = "Favorita"
-			onClick = [|modelObject.marcarComoFavorita] 
+			onClick = [|modelObject.marcarComoFavorita]
 			bindEnabled(elementSelected)
 		]
 
@@ -83,22 +88,24 @@ class UltimasConsultasWindow extends SimpleWindow<UltimasConsultasAppModel> {
 		val table = new Table<Receta>(mainPanel, typeof(Receta)) => [
 			bindItemsToProperty("resultados")
 			bindValueToProperty("recetaSeleccionada")
-				
 		]
 		this.describeResultsGrid(table)
 	}
 
-//Acciones
-
-	
+	//Acciones
 	def void abrirDetalle() {
-		this.openDialog(new DetalleDeRecetaVentana(this, new RecetaWindow(modelObject.recetaSeleccionada, modelObject.usuario)))
+		this.openDialog(
+			new DetalleDeRecetaVentana(this, new RecetaWindow(modelObject.recetaSeleccionada, modelObject.usuario)))
 		modelObject.agregarRecetaVista
 	}
 
+	/*def void abrirBusqueda(){
+		this.openDialog(new ConsultaDeRecetaWindow(this))
+	}*/
 	
 	def openDialog(Dialog<?> dialog) {
 		dialog.onAccept[|modelObject.initSearch] // ver
 		dialog.open
 	}
+	
 }

@@ -37,6 +37,12 @@ public class UltimasConsultasAppModel implements Serializable {
   
   private String descripcion;
   
+  private String nombre;
+  
+  private String dificultadSeleccionada;
+  
+  private String temporadaSeleccionada;
+  
   private Comida carne = new Comida(0, "Carne", 1);
   
   private Comida harina = new Comida(0, "Harina", 20);
@@ -189,6 +195,33 @@ public class UltimasConsultasAppModel implements Serializable {
   
   public void setDescripcion(final String descripcion) {
     this.descripcion = descripcion;
+  }
+  
+  @Pure
+  public String getNombre() {
+    return this.nombre;
+  }
+  
+  public void setNombre(final String nombre) {
+    this.nombre = nombre;
+  }
+  
+  @Pure
+  public String getDificultadSeleccionada() {
+    return this.dificultadSeleccionada;
+  }
+  
+  public void setDificultadSeleccionada(final String dificultadSeleccionada) {
+    this.dificultadSeleccionada = dificultadSeleccionada;
+  }
+  
+  @Pure
+  public String getTemporadaSeleccionada() {
+    return this.temporadaSeleccionada;
+  }
+  
+  public void setTemporadaSeleccionada(final String temporadaSeleccionada) {
+    this.temporadaSeleccionada = temporadaSeleccionada;
   }
   
   @Pure
