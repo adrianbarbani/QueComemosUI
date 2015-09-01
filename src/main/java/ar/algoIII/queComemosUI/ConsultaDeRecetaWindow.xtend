@@ -1,6 +1,8 @@
 package ar.algoIII.queComemosUI
 
-import java.awt.Color
+import ar.algo.adriba.tp1.RepoDeTemporadas
+import ar.algo.adriba.tp1.RepoDificultades
+import org.uqbar.arena.bindings.ObservableProperty
 import org.uqbar.arena.layout.ColumnLayout
 import org.uqbar.arena.layout.HorizontalLayout
 import org.uqbar.arena.widgets.Button
@@ -29,45 +31,12 @@ class ConsultaDeRecetaWindow extends UltimasConsultasWindow {
 	override panelBusqueda (Panel panel) {
 		val searchFormPanel = new Panel(panel)
 		searchFormPanel.setLayout(new ColumnLayout(2))
+		val panelIzquierdo = new Panel(searchFormPanel)
+		val panelDerecho = new Panel (searchFormPanel)
 		
-		new Label(searchFormPanel) => [
-			text = "Número"
-			foreground = Color.BLUE
-		]
+		contenidoPanelIzq(panelIzquierdo)// ingrediente
 
-
-		new Label(searchFormPanel) => [
-			text = "Calorias"
-			foreground = Color.BLUE
-		]
-
-		new TextBox(searchFormPanel).bindValueToProperty("nombre")
-		new TextBox(searchFormPanel).bindValueToProperty("nombre")//calorias
-		
-		new Label(searchFormPanel).text = "Dificultad"
-		new Label(searchFormPanel).text = "Temporada"
-		
-		new Selector<Dificultad>(searchFormPanel) => [
-			allowNull = false
-			bindValueToProperty = "dificultadSeleccionada"
-			//bindItems(new ObservableProperty(repoDificultades, "dificultades"))
-			
-		]
-		
-		new Selector<Dificultad>(searchFormPanel) => [
-			allowNull = false
-			bindValueToProperty = "temporadaSeleccionada"
-			//bindItems(new ObservableProperty(repoDificultades, "dificultades"))
-			
-		]
-		
-		new Label(searchFormPanel).text = "Que contenga ingrediente"
-		new Label(searchFormPanel).text = "Aplicar filtros del usuario"
-		
-		
-		new TextBox(searchFormPanel).bindValueToProperty("nombre")// ingrediente
-		var checkFavorita = new CheckBox(searchFormPanel)
-		//checkFavorita.bindValueToProperty("favorita") aca va aplicar filtros
+		contenidoPanelDerecho(panelDerecho)
 		
 		
 		botonera(panel)
@@ -75,13 +44,67 @@ class ConsultaDeRecetaWindow extends UltimasConsultasWindow {
 		
 	}
 	
+	def contenidoPanelDerecho(Panel panelDerecho) {
+		new Label(panelDerecho) => [
+			text = "Calorias"
+		]
+		val panelCalorias = new Panel(panelDerecho)
+		panelCalorias.layout = new HorizontalLayout
+		
+		new Label(panelCalorias).text = "Desde"
+		new TextBox(panelCalorias) =>[
+			bindValueToProperty("caloriasDesde")
+			width = 50
+			]
+		new Label(panelCalorias).text = "Hasta"
+		new TextBox(panelCalorias)=>[
+			bindValueToProperty("caloriasHasta")
+			width = 50
+		
+		]
+		new Label(panelDerecho).text = "Temporada"
+		
+		
+		new Selector<String>(panelDerecho) => [
+			allowNull = true
+			bindValueToProperty = "temporadaSeleccionada"
+			bindItems(new ObservableProperty(RepoDeTemporadas.getInstance, "todasLasTemporadas"))
+			
+		]
+		
+		new Label(panelDerecho).text = "Aplicar filtros del usuario"
+		
+		
+		var checkFavorita = new CheckBox(panelDerecho)// ver el check
+		//checkFavorita.bindValueToProperty("filtrosAplicados") aca va aplicar filtros
+	}
+	
+	
+	def contenidoPanelIzq(Panel panelIzquierdo) {
+		new Label(panelIzquierdo) => [
+			text = "Nombre"
+		]
+		new TextBox(panelIzquierdo).bindValueToProperty("nombre")
+				
+		new Label(panelIzquierdo).text = "Dificultad"
+		new Selector<Dificultad>(panelIzquierdo) => [
+			allowNull = true
+			bindValueToProperty = "dificultadSeleccionada"
+			bindItems(new ObservableProperty(RepoDificultades.getInstance, "todasLasDificultades"))
+			
+		]
+		new Label(panelIzquierdo).text = "Que contenga ingrediente"
+		new TextBox(panelIzquierdo).bindValueToProperty("ingredienteABuscar")
+	}
+	
+	
 	def botonera(Panel panel) {
 		val panelBotonera = new Panel(panel)
 		panelBotonera.layout = new HorizontalLayout
 		
 		new Button(panelBotonera) => [
 			caption = "Buscar"
-			//onClick = [|this.abrirDetalle]
+			onClick = [|modelObject.buscar]
 		]
 		
 		new Button(panelBotonera) => [

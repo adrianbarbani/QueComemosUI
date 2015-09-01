@@ -23,11 +23,7 @@ import org.uqbar.commons.utils.Observable
 class UltimasConsultasAppModel implements Serializable {
 
 	//Hardcodeo un usuario
-	Sexo Femenino = Sexo.FEMENINO
-	Fecha fechaValida = new Fecha(System.currentTimeMillis() - 24 * 60 * 60 * 1000);
 
-	Usuario usuario = new UsuarioBuilder().agregarPeso(52).agregarAltura(1.64).agregarSexo(Femenino).
-		agregarNombre("Esteban").agregarFechaNacimiento(fechaValida).agregarRutina(new Rutina(61, true)).build()
 	Receta recetaSeleccionada
 	List<Receta> resultados = new ArrayList<Receta>
 	List<Receta> ultimasConsultadas = new ArrayList<Receta>
@@ -35,8 +31,17 @@ class UltimasConsultasAppModel implements Serializable {
 	String nombre
 	String dificultadSeleccionada
 	String temporadaSeleccionada
-	
-	//Harcodeo muchas recetas
+	String ingredienteABuscar
+	int caloriasDesde
+	int caloriasHasta
+//=================================================================================================================================	
+	//Usuario
+	Sexo Femenino = Sexo.FEMENINO
+	Fecha fechaValida = new Fecha(System.currentTimeMillis() - 24 * 60 * 60 * 1000);
+	Usuario usuario = new UsuarioBuilder().agregarPeso(52).agregarAltura(1.64).agregarSexo(Femenino).
+		agregarNombre("Esteban").agregarFechaNacimiento(fechaValida).agregarRutina(new Rutina(61, true)).build()
+
+	//Recetas
 	Comida carne = new Comida(0, "Carne", 1)
 	Comida harina = new Comida(0, "Harina", 20)
 	Comida huevo = new Comida(0, "Huevo", 3)
@@ -81,6 +86,8 @@ class UltimasConsultasAppModel implements Serializable {
 		"Hummus de garbanzo").agregarIngrediente(garbanzos).agregarIngrediente(limon).agregarIngrediente(ajo).
 		setearCalorias(600).build)
 
+//==========================================================================================================================================
+//APPmodel
 	
 	def void todasLasRecetas() {
 		resultados = new Busqueda(usuario, RepositorioRecetas.getInstance).filtrar
@@ -111,6 +118,10 @@ class UltimasConsultasAppModel implements Serializable {
 	def void mostrarUltimasRecetasConsultadas(){
 		resultados = ultimasConsultadas
 		descripcion = "Estas Fueron las ultimas recetas que mas consultaste"
+	}
+	
+	def void buscar(){
+		resultados= new Busqueda(usuario, RepositorioRecetas.getInstance).buscarReceta(nombre, dificultadSeleccionada, temporadaSeleccionada, ingredienteABuscar, caloriasDesde, caloriasHasta)
 	}
 
 }

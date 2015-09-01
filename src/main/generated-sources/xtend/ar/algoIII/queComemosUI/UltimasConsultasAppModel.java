@@ -23,12 +23,6 @@ import org.uqbar.commons.utils.Observable;
 @Observable
 @SuppressWarnings("all")
 public class UltimasConsultasAppModel implements Serializable {
-  private Sexo Femenino = Sexo.FEMENINO;
-  
-  private Fecha fechaValida = new Fecha((System.currentTimeMillis() - (((24 * 60) * 60) * 1000)));
-  
-  private Usuario usuario = new UsuarioBuilder().agregarPeso(52).agregarAltura(1.64).agregarSexo(this.Femenino).agregarNombre("Esteban").agregarFechaNacimiento(this.fechaValida).agregarRutina(new Rutina(61, true)).build();
-  
   private Receta recetaSeleccionada;
   
   private List<Receta> resultados = new ArrayList<Receta>();
@@ -42,6 +36,18 @@ public class UltimasConsultasAppModel implements Serializable {
   private String dificultadSeleccionada;
   
   private String temporadaSeleccionada;
+  
+  private String ingredienteABuscar;
+  
+  private int caloriasDesde;
+  
+  private int caloriasHasta;
+  
+  private Sexo Femenino = Sexo.FEMENINO;
+  
+  private Fecha fechaValida = new Fecha((System.currentTimeMillis() - (((24 * 60) * 60) * 1000)));
+  
+  private Usuario usuario = new UsuarioBuilder().agregarPeso(52).agregarAltura(1.64).agregarSexo(this.Femenino).agregarNombre("Esteban").agregarFechaNacimiento(this.fechaValida).agregarRutina(new Rutina(61, true)).build();
   
   private Comida carne = new Comida(0, "Carne", 1);
   
@@ -134,31 +140,11 @@ public class UltimasConsultasAppModel implements Serializable {
     this.descripcion = "Estas Fueron las ultimas recetas que mas consultaste";
   }
   
-  @Pure
-  public Sexo getFemenino() {
-    return this.Femenino;
-  }
-  
-  public void setFemenino(final Sexo Femenino) {
-    this.Femenino = Femenino;
-  }
-  
-  @Pure
-  public Fecha getFechaValida() {
-    return this.fechaValida;
-  }
-  
-  public void setFechaValida(final Fecha fechaValida) {
-    this.fechaValida = fechaValida;
-  }
-  
-  @Pure
-  public Usuario getUsuario() {
-    return this.usuario;
-  }
-  
-  public void setUsuario(final Usuario usuario) {
-    this.usuario = usuario;
+  public void buscar() {
+    RepositorioRecetas _instance = RepositorioRecetas.getInstance();
+    Busqueda _busqueda = new Busqueda(this.usuario, _instance);
+    List<Receta> _buscarReceta = _busqueda.buscarReceta(this.nombre, this.dificultadSeleccionada, this.temporadaSeleccionada, this.ingredienteABuscar, this.caloriasDesde, this.caloriasHasta);
+    this.resultados = _buscarReceta;
   }
   
   @Pure
@@ -222,6 +208,60 @@ public class UltimasConsultasAppModel implements Serializable {
   
   public void setTemporadaSeleccionada(final String temporadaSeleccionada) {
     this.temporadaSeleccionada = temporadaSeleccionada;
+  }
+  
+  @Pure
+  public String getIngredienteABuscar() {
+    return this.ingredienteABuscar;
+  }
+  
+  public void setIngredienteABuscar(final String ingredienteABuscar) {
+    this.ingredienteABuscar = ingredienteABuscar;
+  }
+  
+  @Pure
+  public int getCaloriasDesde() {
+    return this.caloriasDesde;
+  }
+  
+  public void setCaloriasDesde(final int caloriasDesde) {
+    this.caloriasDesde = caloriasDesde;
+  }
+  
+  @Pure
+  public int getCaloriasHasta() {
+    return this.caloriasHasta;
+  }
+  
+  public void setCaloriasHasta(final int caloriasHasta) {
+    this.caloriasHasta = caloriasHasta;
+  }
+  
+  @Pure
+  public Sexo getFemenino() {
+    return this.Femenino;
+  }
+  
+  public void setFemenino(final Sexo Femenino) {
+    this.Femenino = Femenino;
+  }
+  
+  @Pure
+  public Fecha getFechaValida() {
+    return this.fechaValida;
+  }
+  
+  public void setFechaValida(final Fecha fechaValida) {
+    this.fechaValida = fechaValida;
+  }
+  
+  @Pure
+  public Usuario getUsuario() {
+    return this.usuario;
+  }
+  
+  public void setUsuario(final Usuario usuario) {
+    this.usuario = usuario;
   }
   
   @Pure
