@@ -49,53 +49,58 @@ public class ConsultaDeRecetaWindow extends UltimasConsultasWindow {
     return _xblockexpression;
   }
   
-  public void contenidoPanelDerecho(final Panel panelDerecho) {
-    Label _label = new Label(panelDerecho);
-    final Procedure1<Label> _function = new Procedure1<Label>() {
-      public void apply(final Label it) {
-        it.setText("Calorias");
-      }
-    };
-    ObjectExtensions.<Label>operator_doubleArrow(_label, _function);
-    final Panel panelCalorias = new Panel(panelDerecho);
-    HorizontalLayout _horizontalLayout = new HorizontalLayout();
-    panelCalorias.setLayout(_horizontalLayout);
-    Label _label_1 = new Label(panelCalorias);
-    _label_1.setText("Desde");
-    TextBox _textBox = new TextBox(panelCalorias);
-    final Procedure1<TextBox> _function_1 = new Procedure1<TextBox>() {
-      public void apply(final TextBox it) {
-        it.<Object, ControlBuilder>bindValueToProperty("caloriasDesde");
-        it.setWidth(50);
-      }
-    };
-    ObjectExtensions.<TextBox>operator_doubleArrow(_textBox, _function_1);
-    Label _label_2 = new Label(panelCalorias);
-    _label_2.setText("Hasta");
-    TextBox _textBox_1 = new TextBox(panelCalorias);
-    final Procedure1<TextBox> _function_2 = new Procedure1<TextBox>() {
-      public void apply(final TextBox it) {
-        it.<Object, ControlBuilder>bindValueToProperty("caloriasHasta");
-        it.setWidth(50);
-      }
-    };
-    ObjectExtensions.<TextBox>operator_doubleArrow(_textBox_1, _function_2);
-    Label _label_3 = new Label(panelDerecho);
-    _label_3.setText("Temporada");
-    Selector<String> _selector = new Selector<String>(panelDerecho);
-    final Procedure1<Selector<String>> _function_3 = new Procedure1<Selector<String>>() {
-      public void apply(final Selector<String> it) {
-        it.allowNull(true);
-        it.bindValueToProperty("temporadaSeleccionada");
-        RepoDeTemporadas _instance = RepoDeTemporadas.getInstance();
-        ObservableProperty<Object> _observableProperty = new ObservableProperty<Object>(_instance, "todasLasTemporadas");
-        it.<Object>bindItems(_observableProperty);
-      }
-    };
-    ObjectExtensions.<Selector<String>>operator_doubleArrow(_selector, _function_3);
-    Label _label_4 = new Label(panelDerecho);
-    _label_4.setText("Aplicar filtros del usuario");
-    CheckBox checkFavorita = new CheckBox(panelDerecho);
+  public Binding<Object, Control, ControlBuilder> contenidoPanelDerecho(final Panel panelDerecho) {
+    Binding<Object, Control, ControlBuilder> _xblockexpression = null;
+    {
+      Label _label = new Label(panelDerecho);
+      final Procedure1<Label> _function = new Procedure1<Label>() {
+        public void apply(final Label it) {
+          it.setText("Calorias");
+        }
+      };
+      ObjectExtensions.<Label>operator_doubleArrow(_label, _function);
+      final Panel panelCalorias = new Panel(panelDerecho);
+      HorizontalLayout _horizontalLayout = new HorizontalLayout();
+      panelCalorias.setLayout(_horizontalLayout);
+      Label _label_1 = new Label(panelCalorias);
+      _label_1.setText("Desde");
+      TextBox _textBox = new TextBox(panelCalorias);
+      final Procedure1<TextBox> _function_1 = new Procedure1<TextBox>() {
+        public void apply(final TextBox it) {
+          it.<Object, ControlBuilder>bindValueToProperty("caloriasDesde");
+          it.setWidth(50);
+        }
+      };
+      ObjectExtensions.<TextBox>operator_doubleArrow(_textBox, _function_1);
+      Label _label_2 = new Label(panelCalorias);
+      _label_2.setText("Hasta");
+      TextBox _textBox_1 = new TextBox(panelCalorias);
+      final Procedure1<TextBox> _function_2 = new Procedure1<TextBox>() {
+        public void apply(final TextBox it) {
+          it.<Object, ControlBuilder>bindValueToProperty("caloriasHasta");
+          it.setWidth(50);
+        }
+      };
+      ObjectExtensions.<TextBox>operator_doubleArrow(_textBox_1, _function_2);
+      Label _label_3 = new Label(panelDerecho);
+      _label_3.setText("Temporada");
+      Selector<String> _selector = new Selector<String>(panelDerecho);
+      final Procedure1<Selector<String>> _function_3 = new Procedure1<Selector<String>>() {
+        public void apply(final Selector<String> it) {
+          it.allowNull(true);
+          it.bindValueToProperty("temporadaSeleccionada");
+          RepoDeTemporadas _instance = RepoDeTemporadas.getInstance();
+          ObservableProperty<Object> _observableProperty = new ObservableProperty<Object>(_instance, "todasLasTemporadas");
+          it.<Object>bindItems(_observableProperty);
+        }
+      };
+      ObjectExtensions.<Selector<String>>operator_doubleArrow(_selector, _function_3);
+      Label _label_4 = new Label(panelDerecho);
+      _label_4.setText("Aplicar filtros del usuario");
+      CheckBox checkFavorita = new CheckBox(panelDerecho);
+      _xblockexpression = checkFavorita.<Object, ControlBuilder>bindValueToProperty("filtrosAplicados");
+    }
+    return _xblockexpression;
   }
   
   public Binding<Object, Control, ControlBuilder> contenidoPanelIzq(final Panel panelIzquierdo) {

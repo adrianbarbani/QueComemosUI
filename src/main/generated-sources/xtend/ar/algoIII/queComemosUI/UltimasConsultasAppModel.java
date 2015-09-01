@@ -3,6 +3,7 @@ package ar.algoIII.queComemosUI;
 import ar.algo.adriba.tp1.Busqueda;
 import ar.algo.adriba.tp1.Comida;
 import ar.algo.adriba.tp1.Fecha;
+import ar.algo.adriba.tp1.Filtro;
 import ar.algo.adriba.tp1.Privada;
 import ar.algo.adriba.tp1.Publica;
 import ar.algo.adriba.tp1.Receta;
@@ -28,6 +29,8 @@ public class UltimasConsultasAppModel implements Serializable {
   private List<Receta> resultados = new ArrayList<Receta>();
   
   private List<Receta> ultimasConsultadas = new ArrayList<Receta>();
+  
+  private List<Filtro> filtros = new ArrayList<Filtro>();
   
   private String descripcion;
   
@@ -142,7 +145,7 @@ public class UltimasConsultasAppModel implements Serializable {
   
   public void buscar() {
     RepositorioRecetas _instance = RepositorioRecetas.getInstance();
-    Busqueda _busqueda = new Busqueda(this.usuario, _instance);
+    Busqueda _busqueda = new Busqueda(this.usuario, _instance, this.filtros);
     List<Receta> _buscarReceta = _busqueda.buscarReceta(this.nombre, this.dificultadSeleccionada, this.temporadaSeleccionada, this.ingredienteABuscar, this.caloriasDesde, this.caloriasHasta);
     this.resultados = _buscarReceta;
   }
@@ -154,6 +157,15 @@ public class UltimasConsultasAppModel implements Serializable {
     this.ingredienteABuscar = null;
     this.caloriasDesde = 0;
     this.caloriasHasta = 0;
+  }
+  
+  public void setFiltrosAplicados(final boolean aplicarFiltros) {
+    List<Filtro> _filtrosPerfilUsuario = this.usuario.getFiltrosPerfilUsuario();
+    this.filtros = _filtrosPerfilUsuario;
+  }
+  
+  public boolean getFiltrosAplicados() {
+    return true;
   }
   
   @Pure
@@ -181,6 +193,15 @@ public class UltimasConsultasAppModel implements Serializable {
   
   public void setUltimasConsultadas(final List<Receta> ultimasConsultadas) {
     this.ultimasConsultadas = ultimasConsultadas;
+  }
+  
+  @Pure
+  public List<Filtro> getFiltros() {
+    return this.filtros;
+  }
+  
+  public void setFiltros(final List<Filtro> filtros) {
+    this.filtros = filtros;
   }
   
   @Pure

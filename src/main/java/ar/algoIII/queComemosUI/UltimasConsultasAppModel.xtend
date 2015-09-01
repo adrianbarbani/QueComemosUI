@@ -3,6 +3,7 @@ package ar.algoIII.queComemosUI
 import ar.algo.adriba.tp1.Busqueda
 import ar.algo.adriba.tp1.Comida
 import ar.algo.adriba.tp1.Fecha
+import ar.algo.adriba.tp1.Filtro
 import ar.algo.adriba.tp1.Privada
 import ar.algo.adriba.tp1.Publica
 import ar.algo.adriba.tp1.Receta
@@ -27,6 +28,7 @@ class UltimasConsultasAppModel implements Serializable {
 	Receta recetaSeleccionada
 	List<Receta> resultados = new ArrayList<Receta>
 	List<Receta> ultimasConsultadas = new ArrayList<Receta>
+	List<Filtro> filtros = new ArrayList<Filtro>	
 	String descripcion
 	String nombre
 	String dificultadSeleccionada
@@ -121,7 +123,7 @@ class UltimasConsultasAppModel implements Serializable {
 	}
 	
 	def void buscar(){
-		resultados= new Busqueda(usuario, RepositorioRecetas.getInstance).buscarReceta(nombre, dificultadSeleccionada, temporadaSeleccionada, ingredienteABuscar, caloriasDesde, caloriasHasta)
+		resultados= new Busqueda(usuario, RepositorioRecetas.getInstance,filtros).buscarReceta(nombre, dificultadSeleccionada, temporadaSeleccionada, ingredienteABuscar, caloriasDesde, caloriasHasta)
 	}
 	
 	def void clear(){
@@ -131,6 +133,14 @@ class UltimasConsultasAppModel implements Serializable {
 		ingredienteABuscar=null
 		caloriasDesde=0
 		caloriasHasta=0
+	}
+	
+	def void setFiltrosAplicados(boolean aplicarFiltros){
+		filtros = usuario.filtrosPerfilUsuario
+	}
+	
+	def boolean getFiltrosAplicados(){ // ver esto
+		true
 	}
 
 }

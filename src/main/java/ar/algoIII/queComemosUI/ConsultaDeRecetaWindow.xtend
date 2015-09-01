@@ -76,7 +76,7 @@ class ConsultaDeRecetaWindow extends UltimasConsultasWindow {
 		
 		
 		var checkFavorita = new CheckBox(panelDerecho)// ver el check
-		//checkFavorita.bindValueToProperty("filtrosAplicados") aca va aplicar filtros
+		checkFavorita.bindValueToProperty("filtrosAplicados") 
 	}
 	
 	
