@@ -147,6 +147,15 @@ public class UltimasConsultasAppModel implements Serializable {
     this.resultados = _buscarReceta;
   }
   
+  public void clear() {
+    this.nombre = null;
+    this.dificultadSeleccionada = null;
+    this.temporadaSeleccionada = null;
+    this.ingredienteABuscar = null;
+    this.caloriasDesde = 0;
+    this.caloriasHasta = 0;
+  }
+  
   @Pure
   public Receta getRecetaSeleccionada() {
     return this.recetaSeleccionada;

@@ -123,6 +123,15 @@ class UltimasConsultasAppModel implements Serializable {
 	def void buscar(){
 		resultados= new Busqueda(usuario, RepositorioRecetas.getInstance).buscarReceta(nombre, dificultadSeleccionada, temporadaSeleccionada, ingredienteABuscar, caloriasDesde, caloriasHasta)
 	}
+	
+	def void clear(){
+		nombre=null
+		dificultadSeleccionada= null
+		temporadaSeleccionada= null
+		ingredienteABuscar=null
+		caloriasDesde=0
+		caloriasHasta=0
+	}
 
 }
 

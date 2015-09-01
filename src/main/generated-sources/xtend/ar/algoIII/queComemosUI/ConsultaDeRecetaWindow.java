@@ -155,6 +155,13 @@ public class ConsultaDeRecetaWindow extends UltimasConsultasWindow {
       final Procedure1<Button> _function_1 = new Procedure1<Button>() {
         public void apply(final Button it) {
           it.setCaption("Volver");
+          final Action _function = new Action() {
+            public void execute() {
+              UltimasConsultasAppModel _modelObject = ConsultaDeRecetaWindow.this.getModelObject();
+              _modelObject.clear();
+            }
+          };
+          it.onClick(_function);
         }
       };
       _xblockexpression = ObjectExtensions.<Button>operator_doubleArrow(_button_1, _function_1);
