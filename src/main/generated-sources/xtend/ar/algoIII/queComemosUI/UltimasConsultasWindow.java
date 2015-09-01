@@ -12,6 +12,8 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.uqbar.arena.bindings.NotNullObservable;
 import org.uqbar.arena.layout.HorizontalLayout;
 import org.uqbar.arena.widgets.Button;
+import org.uqbar.arena.widgets.Control;
+import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.tables.Column;
 import org.uqbar.arena.widgets.tables.Table;
@@ -21,22 +23,20 @@ import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
 import org.uqbar.lacar.ui.model.Action;
 import org.uqbar.lacar.ui.model.ControlBuilder;
+import org.uqbar.lacar.ui.model.bindings.Binding;
 
 @SuppressWarnings("all")
 public class UltimasConsultasWindow extends SimpleWindow<UltimasConsultasAppModel> {
-  public UltimasConsultasWindow(final WindowOwner parent) {
-    super(parent, new UltimasConsultasAppModel());
+  public UltimasConsultasWindow(final WindowOwner parent, final Usuario usuario) {
+    super(parent, new UltimasConsultasAppModel(usuario));
     UltimasConsultasAppModel _modelObject = this.getModelObject();
     _modelObject.initSearch();
+    this.setTitle("Bienvenido a ¿Que Comemos?");
   }
   
-  public void createMainTemplate(final Panel mainPanel) {
-    this.setTitle("Bienvenido a ¿Que Comemos?");
-    UltimasConsultasAppModel _modelObject = this.getModelObject();
-    String _descripcion = _modelObject.getDescripcion();
-    this.setTaskDescription(_descripcion);
-    this.panelBusqueda(mainPanel);
-    super.createMainTemplate(mainPanel);
+  public Binding<Object, Control, ControlBuilder> descripcionPrimaria(final Panel mainPanel) {
+    Label _label = new Label(mainPanel);
+    return _label.<Object, ControlBuilder>bindValueToProperty("descripcion");
   }
   
   public Object panelBusqueda(final Panel panel) {
@@ -44,6 +44,8 @@ public class UltimasConsultasWindow extends SimpleWindow<UltimasConsultasAppMode
   }
   
   protected void createFormPanel(final Panel mainPanel) {
+    this.panelBusqueda(mainPanel);
+    this.descripcionPrimaria(mainPanel);
     Table<Receta> _table = new Table<Receta>(mainPanel, Receta.class);
     final Procedure1<Table<Receta>> _function = new Procedure1<Table<Receta>>() {
       public void apply(final Table<Receta> it) {

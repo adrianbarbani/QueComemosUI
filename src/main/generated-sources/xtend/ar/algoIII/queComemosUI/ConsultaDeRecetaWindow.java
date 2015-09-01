@@ -2,6 +2,7 @@ package ar.algoIII.queComemosUI;
 
 import ar.algo.adriba.tp1.RepoDeTemporadas;
 import ar.algo.adriba.tp1.RepoDificultades;
+import ar.algo.adriba.tp1.Usuario;
 import ar.algoIII.queComemosUI.UltimasConsultasAppModel;
 import ar.algoIII.queComemosUI.UltimasConsultasWindow;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -24,14 +25,13 @@ import queComemos.entrega3.dominio.Dificultad;
 
 @SuppressWarnings("all")
 public class ConsultaDeRecetaWindow extends UltimasConsultasWindow {
-  public ConsultaDeRecetaWindow(final WindowOwner parent) {
-    super(parent);
+  public ConsultaDeRecetaWindow(final WindowOwner owner, final Usuario usuario) {
+    super(owner, usuario);
   }
   
   public void createMainTemplate(final Panel mainPanel) {
     super.createMainTemplate(mainPanel);
     this.setTitle("Consulta de Receta");
-    this.setTaskDescription("");
   }
   
   public Object panelBusqueda(final Panel panel) {
@@ -125,6 +125,7 @@ public class ConsultaDeRecetaWindow extends UltimasConsultasWindow {
           RepoDificultades _instance = RepoDificultades.getInstance();
           ObservableProperty<Object> _observableProperty = new ObservableProperty<Object>(_instance, "todasLasDificultades");
           it.<Object>bindItems(_observableProperty);
+          it.setWidth(250);
         }
       };
       ObjectExtensions.<Selector<Dificultad>>operator_doubleArrow(_selector, _function_1);
@@ -172,5 +173,9 @@ public class ConsultaDeRecetaWindow extends UltimasConsultasWindow {
       _xblockexpression = ObjectExtensions.<Button>operator_doubleArrow(_button_1, _function_1);
     }
     return _xblockexpression;
+  }
+  
+  public Binding<Object, Control, ControlBuilder> descripcionPrimaria(final Panel p) {
+    return null;
   }
 }

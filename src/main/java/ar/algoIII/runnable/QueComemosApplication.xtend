@@ -2,8 +2,8 @@ package ar.algoIII.runnable
 
 import ar.algo.adriba.tp1.Receta
 import ar.algo.adriba.tp1.RepoDificultades
-import ar.algo.adriba.tp1.RepositorioExterno
 import ar.algoIII.queComemosUI.ConsultaDeRecetaWindow
+import ar.algoIII.queComemosUI.RecetasObjectSet
 import org.uqbar.arena.Application
 import org.uqbar.arena.windows.Window
 import org.uqbar.commons.utils.ApplicationContext
@@ -15,9 +15,9 @@ class QueComemosApplication extends Application {
 	}
 
 	override protected Window<?> createMainWindow() {
-		ApplicationContext.instance.configureSingleton(typeof(Receta), new RepoDificultades)
-		ApplicationContext.instance.configureSingleton(typeof(Receta), new RepositorioExterno)// TODO: ver esto que no se que mierda estoy haciendo
-		return new ConsultaDeRecetaWindow(this)
+		val usuario = RecetasObjectSet.INSTANCE.crearUsuario
+		RecetasObjectSet.INSTANCE.crearRecetas(usuario)
+		return new ConsultaDeRecetaWindow(this, usuario)
 	}
 
 }

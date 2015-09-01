@@ -27,9 +27,9 @@ class UltimasConsultasAppModel implements Serializable {
 	//Hardcodeo un usuario
 
 	Receta recetaSeleccionada
-	List<Receta> resultados = new ArrayList<Receta>
-	List<Receta> ultimasConsultadas = new ArrayList<Receta>
-	List<Filtro> filtros = new ArrayList<Filtro>	
+	List<Receta> resultados = newArrayList
+	List<Receta> ultimasConsultadas = newArrayList
+	boolean filtrosAplicados = false
 	String descripcion
 	String nombre
 	String dificultadSeleccionada
@@ -37,61 +37,12 @@ class UltimasConsultasAppModel implements Serializable {
 	String ingredienteABuscar
 	int caloriasDesde
 	int caloriasHasta
-//=================================================================================================================================	
-	//Usuario
-	Sexo Femenino = Sexo.FEMENINO
-	Fecha fechaValida = new Fecha(System.currentTimeMillis() - 24 * 60 * 60 * 1000);
-	Usuario usuario = new UsuarioBuilder().agregarPeso(52).agregarAltura(1.64).agregarSexo(Femenino).
-		agregarNombre("Esteban").agregarFechaNacimiento(fechaValida).agregarRutina(new Rutina(61, true)).build()
-
-	//Recetas
-	Comida carne = new Comida(0, "Carne", 1)
-	Comida harina = new Comida(0, "Harina", 20)
-	Comida huevo = new Comida(0, "Huevo", 3)
-	Comida panRallado = new Comida(0, "Pan Rallado", 50)
-	Comida verdura = new Comida(0, "Verdura", 12)
-	Comida queso = new Comida(0, "Muzzarella", 200)
-	Comida prepizza = new Comida(0, "Prepizza", 1)
-	Comida salsaDeTomate = new Comida(0, "Salsa de tomate", 200)
-	Comida sal = new Comida(18, "Sal", 0)
-	Comida salsaBlanca = new Comida(0, "Salsa Blanca", 400)
-	Comida lomo = new Comida(0, "Lomo", 200)
-	Comida garbanzos = new Comida(0, "Garbanzos", 500)
-	Comida limon = new Comida(10, "Limon", 0)
-	Comida ajo = new Comida(5, "Ajo", 0)
-
-	Comida jamon = new Comida(0, "Jamon", 100)
-	Comida oregano = new Comida(100, "Oregano", 0)
-	Comida azucar = new Comida(0, "azucar", 200)
+	Usuario usuario
 	
-	Receta milanesa = new RecetaBuilder().tipoDeReceta(new Publica).nombreDelPlato("Milanesas").
-		agregarIngrediente(harina).agregarIngrediente(huevo).setearTemporadas("Todo el año").agregarIngrediente(panRallado).agregarIngrediente(carne).
-		setearCalorias(150).setearDificultad("Dificil").build
+	new(Usuario usuario) {
+		this.usuario = usuario
+	}
 
-	Receta milanesaNapolitana = new RecetaBuilder().tipoDeReceta(new Publica).nombreDelPlato("Milanesa napolitana").
-		agregarIngrediente(harina).agregarIngrediente(huevo).agregarIngrediente(panRallado).agregarIngrediente(carne).
-		agregarIngrediente(queso).agregarIngrediente(salsaDeTomate).setearCalorias(8000).setearTemporadas("Todo el año").setearDificultad("Dificil").build
-
-	Receta sopaDeVerdura = new RecetaBuilder().tipoDeReceta(new Publica).nombreDelPlato("Sopa de Verdura").
-		agregarIngrediente(verdura).agregarIngrediente(sal).setearCalorias(200).setearTemporadas("Invierno").setearDificultad("Dificil").build
-
-	Receta pizza = new RecetaBuilder().tipoDeReceta(new Publica).nombreDelPlato("Pizza de muzzarella").
-		agregarIngrediente(prepizza).agregarIngrediente(salsaDeTomate).agregarIngrediente(oregano).agregarIngrediente(queso).setearTemporadas("Todo el año").setearDificultad("Facil").setearCalorias(500).build
-
-	Receta pizzaDeVerdura = new RecetaBuilder().tipoDeReceta(new Publica).nombreDelPlato(
-		"Pizza de verdura y salsa blanca").agregarIngrediente(prepizza).agregarIngrediente(salsaDeTomate).
-		agregarIngrediente(queso).agregarIngrediente(salsaBlanca).agregarIngrediente(verdura).setearTemporadas("Todo el año").setearCalorias(560).setearDificultad("Dificil").build
-
-	Receta lomoALaPlancha = new RecetaBuilder().tipoDeReceta(new Publica).nombreDelPlato("Lomo a la Plancha").
-		agregarIngrediente(lomo).setearCalorias(300).setearTemporadas("Otoño").setearDificultad("Media").build
-
-	Receta hummus = (new RecetaBuilder().tipoDeReceta(new Privada(usuario)).nombreDelPlato(
-		"Hummus de garbanzo").agregarIngrediente(garbanzos).agregarIngrediente(limon).agregarIngrediente(ajo).
-		setearCalorias(600).build)
-
-//==========================================================================================================================================
-//APPmodel
-	
 	def void todasLasRecetas() {
 		resultados = new Busqueda(usuario, RepositorioRecetas.getInstance, new MostrarLosPrimerosDiez).filtrar
 		descripcion = "estas son las mas consultadas"
@@ -123,8 +74,12 @@ class UltimasConsultasAppModel implements Serializable {
 		descripcion = "Estas Fueron las ultimas recetas que mas consultaste"
 	}
 	
-	def void buscar(){
+	def void buscar() {
 		resultados= new Busqueda(usuario, RepositorioRecetas.getInstance,filtros).buscarReceta(nombre, dificultadSeleccionada, temporadaSeleccionada, ingredienteABuscar, caloriasDesde, caloriasHasta)
+	}
+	
+	def filtros() {
+		if(filtrosAplicados) usuario.filtrosPerfilUsuario else newArrayList
 	}
 	
 	def void clear(){
@@ -136,16 +91,7 @@ class UltimasConsultasAppModel implements Serializable {
 		caloriasHasta=0
 	}
 	
-	def void setFiltrosAplicados(boolean aplicarFiltros){
-		filtros = usuario.filtrosPerfilUsuario
-	}
-	
-	def boolean getFiltrosAplicados(){ // ver esto
-		true
-	}
-
 }
 
 //pregunta 1: como hardcodear las recetas directamente en el repo
-//pregunta 2: como restringir la coleccion para que me muestre hasta 10 resultados
 //pregunta 3: initSearch no me gusta es if es horrible.

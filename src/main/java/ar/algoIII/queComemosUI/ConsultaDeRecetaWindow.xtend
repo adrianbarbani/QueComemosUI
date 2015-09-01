@@ -13,18 +13,19 @@ import org.uqbar.arena.widgets.Selector
 import org.uqbar.arena.widgets.TextBox
 import org.uqbar.arena.windows.WindowOwner
 import queComemos.entrega3.dominio.Dificultad
+import ar.algoIII.runnable.QueComemosApplication
+import ar.algo.adriba.tp1.Usuario
 
 class ConsultaDeRecetaWindow extends UltimasConsultasWindow {
 	
-	new(WindowOwner parent) {
-		super(parent)
+	new(WindowOwner owner, Usuario usuario) {
+		super(owner, usuario)
 	}
 	
 	override createMainTemplate(Panel mainPanel){
 		
 		super.createMainTemplate(mainPanel)
 		title = "Consulta de Receta"
-		taskDescription = ""// no se como sacar el taskDescription de la ventana anterior
 		
 	}
 	
@@ -90,7 +91,7 @@ class ConsultaDeRecetaWindow extends UltimasConsultasWindow {
 			allowNull = true
 			bindValueToProperty = "dificultadSeleccionada"
 			bindItems(new ObservableProperty(RepoDificultades.getInstance, "todasLasDificultades"))
-			
+			width = 250
 		]
 		new Label(panelIzquierdo).text = "Que contenga ingrediente"
 		new TextBox(panelIzquierdo).bindValueToProperty("ingredienteABuscar")
@@ -112,7 +113,9 @@ class ConsultaDeRecetaWindow extends UltimasConsultasWindow {
 		]
 	}
 	
-
+	override descripcionPrimaria(Panel p){
+		
+	}
 	
 	
 	
