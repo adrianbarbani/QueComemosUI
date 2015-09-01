@@ -2,8 +2,8 @@ package ar.algoIII.queComemosUI;
 
 import ar.algo.adriba.tp1.Receta;
 import ar.algo.adriba.tp1.Usuario;
+import ar.algoIII.queComemosUI.DetalleDeRecetaAppModel;
 import ar.algoIII.queComemosUI.DetalleDeRecetaVentana;
-import ar.algoIII.queComemosUI.RecetaWindow;
 import ar.algoIII.queComemosUI.UltimasConsultasAppModel;
 import java.awt.Color;
 import org.apache.commons.collections15.Transformer;
@@ -43,7 +43,19 @@ public class UltimasConsultasWindow extends SimpleWindow<UltimasConsultasAppMode
     return null;
   }
   
-  public void describeResultsGrid(final Table<Receta> table) {
+  protected void createFormPanel(final Panel mainPanel) {
+    Table<Receta> _table = new Table<Receta>(mainPanel, Receta.class);
+    final Procedure1<Table<Receta>> _function = new Procedure1<Table<Receta>>() {
+      public void apply(final Table<Receta> it) {
+        it.bindItemsToProperty("resultados");
+        it.<Object, ControlBuilder>bindValueToProperty("recetaSeleccionada");
+      }
+    };
+    final Table<Receta> table = ObjectExtensions.<Table<Receta>>operator_doubleArrow(_table, _function);
+    this.grillaDeResultados(table);
+  }
+  
+  public void grillaDeResultados(final Table<Receta> table) {
     Column<Receta> _column = new Column<Receta>(table);
     final Procedure1<Column<Receta>> _function = new Procedure1<Column<Receta>>() {
       public void apply(final Column<Receta> it) {
@@ -131,35 +143,18 @@ public class UltimasConsultasWindow extends SimpleWindow<UltimasConsultasAppMode
     ObjectExtensions.<Button>operator_doubleArrow(_button_1, _function_1);
   }
   
-  protected void createFormPanel(final Panel mainPanel) {
-    Table<Receta> _table = new Table<Receta>(mainPanel, Receta.class);
-    final Procedure1<Table<Receta>> _function = new Procedure1<Table<Receta>>() {
-      public void apply(final Table<Receta> it) {
-        it.bindItemsToProperty("resultados");
-        it.<Object, ControlBuilder>bindValueToProperty("recetaSeleccionada");
-      }
-    };
-    final Table<Receta> table = ObjectExtensions.<Table<Receta>>operator_doubleArrow(_table, _function);
-    this.describeResultsGrid(table);
-  }
-  
   public void abrirDetalle() {
     UltimasConsultasAppModel _modelObject = this.getModelObject();
     Receta _recetaSeleccionada = _modelObject.getRecetaSeleccionada();
     UltimasConsultasAppModel _modelObject_1 = this.getModelObject();
     Usuario _usuario = _modelObject_1.getUsuario();
-    RecetaWindow _recetaWindow = new RecetaWindow(_recetaSeleccionada, _usuario);
-    DetalleDeRecetaVentana _detalleDeRecetaVentana = new DetalleDeRecetaVentana(this, _recetaWindow);
+    DetalleDeRecetaAppModel _detalleDeRecetaAppModel = new DetalleDeRecetaAppModel(_recetaSeleccionada, _usuario);
+    DetalleDeRecetaVentana _detalleDeRecetaVentana = new DetalleDeRecetaVentana(this, _detalleDeRecetaAppModel);
     this.openDialog(_detalleDeRecetaVentana);
     UltimasConsultasAppModel _modelObject_2 = this.getModelObject();
     _modelObject_2.agregarRecetaVista();
   }
   
-  /**
-   * def void abrirBusqueda(){
-   * this.openDialog(new ConsultaDeRecetaWindow(this))
-   * }
-   */
   public void openDialog(final Dialog<?> dialog) {
     final Action _function = new Action() {
       public void execute() {

@@ -28,10 +28,18 @@ class UltimasConsultasWindow extends SimpleWindow<UltimasConsultasAppModel> {
 
 	}
 	
-	def panelBusqueda(Panel panel) { // template method
+	def panelBusqueda(Panel panel) { // Template Method
+	}
+	
+	override protected createFormPanel(Panel mainPanel) {
+		val table = new Table<Receta>(mainPanel, typeof(Receta)) => [
+			bindItemsToProperty("resultados")
+			bindValueToProperty("recetaSeleccionada")
+		]
+		this.grillaDeResultados(table)
 	}
 
-	def void describeResultsGrid(Table<Receta> table) {
+	def void grillaDeResultados(Table<Receta> table) {
 		new Column<Receta>(table) => [
 			title = "Nombre"
 			fixedSize = 200
@@ -70,12 +78,6 @@ class UltimasConsultasWindow extends SimpleWindow<UltimasConsultasAppModel> {
 			bindEnabled(elementSelected)
 		]
 
-		/*new Button(actionsPanel) => [
-			caption = "Buscar"
-			onClick = [|this.abrirBusqueda]
-			bindEnabled(elementSelected)
-		]*/
-
 		new Button(actionsPanel) => [
 			caption = "Favorita"
 			onClick = [|modelObject.marcarComoFavorita]
@@ -84,25 +86,13 @@ class UltimasConsultasWindow extends SimpleWindow<UltimasConsultasAppModel> {
 
 	}
 
-	override protected createFormPanel(Panel mainPanel) {
-		val table = new Table<Receta>(mainPanel, typeof(Receta)) => [
-			bindItemsToProperty("resultados")
-			bindValueToProperty("recetaSeleccionada")
-		]
-		this.describeResultsGrid(table)
-	}
-
 	//Acciones
 	def void abrirDetalle() {
 		this.openDialog(
-			new DetalleDeRecetaVentana(this, new RecetaWindow(modelObject.recetaSeleccionada, modelObject.usuario)))
+			new DetalleDeRecetaVentana(this, new DetalleDeRecetaAppModel(modelObject.recetaSeleccionada, modelObject.usuario)))
 		modelObject.agregarRecetaVista
 	}
 
-	/*def void abrirBusqueda(){
-		this.openDialog(new ConsultaDeRecetaWindow(this))
-	}*/
-	
 	def openDialog(Dialog<?> dialog) {
 		dialog.onAccept[|modelObject.initSearch] // ver
 		dialog.open

@@ -8,7 +8,7 @@ import org.uqbar.commons.utils.Observable
 
 @Accessors
 @Observable
-class RecetaWindow {
+class DetalleDeRecetaAppModel {
 	Receta unaReceta
 	Persona unUsuario
 	

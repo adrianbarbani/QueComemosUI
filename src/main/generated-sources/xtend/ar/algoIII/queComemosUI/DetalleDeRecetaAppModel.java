@@ -10,12 +10,12 @@ import org.uqbar.commons.utils.Observable;
 @Accessors
 @Observable
 @SuppressWarnings("all")
-public class RecetaWindow {
+public class DetalleDeRecetaAppModel {
   private Receta unaReceta;
   
   private Persona unUsuario;
   
-  public RecetaWindow(final Receta receta, final Usuario usuario) {
+  public DetalleDeRecetaAppModel(final Receta receta, final Usuario usuario) {
     this.unaReceta = receta;
     this.unUsuario = usuario;
   }

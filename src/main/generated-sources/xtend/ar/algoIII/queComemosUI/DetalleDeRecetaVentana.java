@@ -3,8 +3,7 @@ package ar.algoIII.queComemosUI;
 import ar.algo.adriba.tp1.Comida;
 import ar.algo.adriba.tp1.CondicionPreexistente;
 import ar.algo.adriba.tp1.Cosas;
-import ar.algo.adriba.tp1.Receta;
-import ar.algoIII.queComemosUI.RecetaWindow;
+import ar.algoIII.queComemosUI.DetalleDeRecetaAppModel;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,46 +30,14 @@ import org.uqbar.lacar.ui.model.bindings.Binding;
 
 @Accessors
 @SuppressWarnings("all")
-public class DetalleDeRecetaVentana extends TransactionalDialog<RecetaWindow> {
-  private RecetaWindow pizza;
-  
+public class DetalleDeRecetaVentana extends TransactionalDialog<DetalleDeRecetaAppModel> {
   private List<String> comidaQueLeDisgusta = new ArrayList<String>();
   
-  private Receta pizzita;
-  
-  /**
-   * static Sexo Femenino = Sexo.FEMENINO
-   * static Fecha fechaValida = new Fecha(System.currentTimeMillis() - 24 * 60 * 60 * 1000);
-   * static Comida prepizza = new Comida(0, "Prepizza", 1)
-   * static Comida queso = new Comida(0, "Muzzarella", 200)
-   * static Comida salsaDeTomate = new Comida(0, "Salsa de tomate", 200)
-   * static Comida jamon = new Comida(0, "Jamon", 100)
-   * static Comida oregano = new Comida(100, "Oregano", 0)
-   * static Comida azucar = new Comida(0, "azucar", 200)
-   */
-  public DetalleDeRecetaVentana(final WindowOwner owner, final RecetaWindow model) {
+  public DetalleDeRecetaVentana(final WindowOwner owner, final DetalleDeRecetaAppModel model) {
     super(owner, model);
   }
   
-  /**
-   * new() {
-   * super(
-   * 
-   * new RecetaWindow(
-   * ( new RecetaBuilder().tipoDeReceta(new Publica).nombreDelPlato("Pizza de Jamon y Morrones").
-   * agregarIngrediente(prepizza).agregarIngrediente(azucar).agregarIngrediente(jamon).
-   * agregarIngrediente(queso).agregarIngrediente(salsaDeTomate).agregarIngrediente(oregano).
-   * setearCalorias(500).setearDificultad("Facil").setearTemporadas("Todo el año").
-   * setearPreparacion(
-   * "En la prepizza volcar la salsa de tomate y cocinar por 15 minutos, luego sumar el queso y volver a cocinar. Agregar el jamon y el morron; oregano a gusto.").
-   * build), (new UsuarioBuilder().agregarPeso(52).agregarAltura(1.64).agregarSexo(Femenino).
-   * agregarNombre("Esteban").agregarFechaNacimiento(fechaValida).agregarRutina(new Rutina(61, true)).
-   * build())))
-   * 
-   * this.pizza = this.modelObject
-   * }
-   */
-  public void createContents(final Panel mainPanel) {
+  protected void createFormPanel(final Panel mainPanel) {
     this.setTitle("Detalle De Receta");
     Label _label = new Label(mainPanel);
     final Procedure1<Label> _function = new Procedure1<Label>() {
@@ -82,54 +49,29 @@ public class DetalleDeRecetaVentana extends TransactionalDialog<RecetaWindow> {
       }
     };
     ObjectExtensions.<Label>operator_doubleArrow(_label, _function);
-    this.addPanelCalorias(mainPanel);
+    this.addPanelCaloriasYDuenio(mainPanel);
     this.addPanelDificultadYTemporada(mainPanel);
-    final Panel panelIngredientesYCondimentos = new Panel(mainPanel);
-    HorizontalLayout _horizontalLayout = new HorizontalLayout();
-    panelIngredientesYCondimentos.setLayout(_horizontalLayout);
-    final Panel panelIngredientes = new Panel(panelIngredientesYCondimentos);
-    final Panel panelCondimentos = new Panel(panelIngredientesYCondimentos);
-    Label _label_1 = new Label(panelIngredientes);
-    _label_1.setText("Ingredientes");
-    this.grillaIngredientes(panelIngredientes);
-    Label _label_2 = new Label(panelCondimentos);
-    _label_2.setText("Condimentos");
-    this.listaDeCondimentos(panelCondimentos);
-    final Panel panelFavoritaYCondiciones = new Panel(mainPanel);
-    HorizontalLayout _horizontalLayout_1 = new HorizontalLayout();
-    panelFavoritaYCondiciones.setLayout(_horizontalLayout_1);
-    final Panel panelFavorita = new Panel(panelFavoritaYCondiciones);
-    HorizontalLayout _horizontalLayout_2 = new HorizontalLayout();
-    panelFavorita.setLayout(_horizontalLayout_2);
-    final Panel panelCondiciones = new Panel(panelFavoritaYCondiciones);
-    Label _label_3 = new Label(panelFavorita);
-    _label_3.setText("Favorita");
-    CheckBox checkFavorita = new CheckBox(panelFavorita);
-    checkFavorita.<Object, ControlBuilder>bindValueToProperty("favorita");
-    Label _label_4 = new Label(panelCondiciones);
-    _label_4.setText("Condiciones Preexistentes");
-    this.listaCondicionesPreexistentes(panelCondiciones);
-    final GroupPanel panelProcesoDePreparacion = new GroupPanel(mainPanel);
-    panelProcesoDePreparacion.setTitle("Proceso de Preparación");
-    Label _label_5 = new Label(panelProcesoDePreparacion);
-    final Procedure1<Label> _function_1 = new Procedure1<Label>() {
-      public void apply(final Label it) {
-        it.<Object, ControlBuilder>bindValueToProperty("unaReceta.explicacionDeLaPreparacion");
-        Color _color = new Color(176, 176, 176);
-        it.setBackground(_color);
-      }
-    };
-    ObjectExtensions.<Label>operator_doubleArrow(_label_5, _function_1);
-    final Panel panelBotonVolver = new Panel(mainPanel);
-    Button _button = new Button(panelBotonVolver);
-    final Procedure1<Button> _function_2 = new Procedure1<Button>() {
-      public void apply(final Button it) {
-        it.setCaption("Volver");
-      }
-    };
-    ObjectExtensions.<Button>operator_doubleArrow(_button, _function_2);
-    Label _label_6 = new Label(panelBotonVolver);
-    _label_6.<Object, ControlBuilder>bindValueToProperty("unUsuario.cantidadDeFavorita");
+    this.addPanelIngredientesYCondimentos(mainPanel);
+    this.addPanelFavoritaYCondiciones(mainPanel);
+    this.addPanelProcesoDePreparacion(mainPanel);
+    this.addPanelBotonVolver(mainPanel);
+  }
+  
+  public Binding<Object, Control, ControlBuilder> addPanelCaloriasYDuenio(final Panel mainPanel) {
+    Binding<Object, Control, ControlBuilder> _xblockexpression = null;
+    {
+      final GroupPanel panelCaloriasYDueño = new GroupPanel(mainPanel);
+      panelCaloriasYDueño.setTitle("");
+      HorizontalLayout _horizontalLayout = new HorizontalLayout();
+      panelCaloriasYDueño.setLayout(_horizontalLayout);
+      Label _label = new Label(panelCaloriasYDueño);
+      _label.<Object, ControlBuilder>bindValueToProperty("unaReceta.caloriasReceta");
+      Label _label_1 = new Label(panelCaloriasYDueño);
+      _label_1.setText("calorias");
+      Label _label_2 = new Label(panelCaloriasYDueño);
+      _xblockexpression = _label_2.<Object, ControlBuilder>bindValueToProperty("propietario");
+    }
+    return _xblockexpression;
   }
   
   public Binding<Object, Control, ControlBuilder> addPanelDificultadYTemporada(final Panel mainPanel) {
@@ -152,19 +94,76 @@ public class DetalleDeRecetaVentana extends TransactionalDialog<RecetaWindow> {
     return _xblockexpression;
   }
   
-  public Binding<Object, Control, ControlBuilder> addPanelCalorias(final Panel mainPanel) {
+  public Panel addPanelIngredientesYCondimentos(final Panel mainPanel) {
+    Panel _xblockexpression = null;
+    {
+      final Panel panelIngredientesYCondimentos = new Panel(mainPanel);
+      HorizontalLayout _horizontalLayout = new HorizontalLayout();
+      panelIngredientesYCondimentos.setLayout(_horizontalLayout);
+      final Panel panelIngredientes = new Panel(panelIngredientesYCondimentos);
+      Label _label = new Label(panelIngredientes);
+      _label.setText("Ingredientes");
+      this.grillaIngredientes(panelIngredientes);
+      final Panel panelCondimentos = new Panel(panelIngredientesYCondimentos);
+      Label _label_1 = new Label(panelCondimentos);
+      _label_1.setText("Condimentos");
+      _xblockexpression = this.listaDeCondimentos(panelCondimentos);
+    }
+    return _xblockexpression;
+  }
+  
+  public Panel addPanelFavoritaYCondiciones(final Panel mainPanel) {
+    Panel _xblockexpression = null;
+    {
+      final Panel panelFavoritaYCondiciones = new Panel(mainPanel);
+      HorizontalLayout _horizontalLayout = new HorizontalLayout();
+      panelFavoritaYCondiciones.setLayout(_horizontalLayout);
+      final Panel panelFavorita = new Panel(panelFavoritaYCondiciones);
+      HorizontalLayout _horizontalLayout_1 = new HorizontalLayout();
+      panelFavorita.setLayout(_horizontalLayout_1);
+      Label _label = new Label(panelFavorita);
+      _label.setText("Favorita");
+      CheckBox checkFavorita = new CheckBox(panelFavorita);
+      checkFavorita.<Object, ControlBuilder>bindValueToProperty("favorita");
+      final Panel panelCondiciones = new Panel(panelFavoritaYCondiciones);
+      Label _label_1 = new Label(panelCondiciones);
+      _label_1.setText("Condiciones Preexistentes");
+      _xblockexpression = this.listaCondicionesPreexistentes(panelCondiciones);
+    }
+    return _xblockexpression;
+  }
+  
+  public Label addPanelProcesoDePreparacion(final Panel mainPanel) {
+    Label _xblockexpression = null;
+    {
+      final GroupPanel panelProcesoDePreparacion = new GroupPanel(mainPanel);
+      panelProcesoDePreparacion.setTitle("Proceso de Preparación");
+      Label _label = new Label(panelProcesoDePreparacion);
+      final Procedure1<Label> _function = new Procedure1<Label>() {
+        public void apply(final Label it) {
+          it.<Object, ControlBuilder>bindValueToProperty("unaReceta.explicacionDeLaPreparacion");
+          Color _color = new Color(176, 176, 176);
+          it.setBackground(_color);
+        }
+      };
+      _xblockexpression = ObjectExtensions.<Label>operator_doubleArrow(_label, _function);
+    }
+    return _xblockexpression;
+  }
+  
+  public Binding<Object, Control, ControlBuilder> addPanelBotonVolver(final Panel mainPanel) {
     Binding<Object, Control, ControlBuilder> _xblockexpression = null;
     {
-      final GroupPanel panelCaloriasYDueño = new GroupPanel(mainPanel);
-      panelCaloriasYDueño.setTitle("");
-      HorizontalLayout _horizontalLayout = new HorizontalLayout();
-      panelCaloriasYDueño.setLayout(_horizontalLayout);
-      Label _label = new Label(panelCaloriasYDueño);
-      _label.<Object, ControlBuilder>bindValueToProperty("unaReceta.caloriasReceta");
-      Label _label_1 = new Label(panelCaloriasYDueño);
-      _label_1.setText("calorias");
-      Label _label_2 = new Label(panelCaloriasYDueño);
-      _xblockexpression = _label_2.<Object, ControlBuilder>bindValueToProperty("propietario");
+      final Panel panelBotonVolver = new Panel(mainPanel);
+      Button _button = new Button(panelBotonVolver);
+      final Procedure1<Button> _function = new Procedure1<Button>() {
+        public void apply(final Button it) {
+          it.setCaption("Volver");
+        }
+      };
+      ObjectExtensions.<Button>operator_doubleArrow(_button, _function);
+      Label _label = new Label(panelBotonVolver);
+      _xblockexpression = _label.<Object, ControlBuilder>bindValueToProperty("unUsuario.cantidadDeFavorita");
     }
     return _xblockexpression;
   }
@@ -245,19 +244,6 @@ public class DetalleDeRecetaVentana extends TransactionalDialog<RecetaWindow> {
     return _xblockexpression;
   }
   
-  protected void createFormPanel(final Panel arg0) {
-    throw new UnsupportedOperationException("TODO: auto-generated method stub");
-  }
-  
-  @Pure
-  public RecetaWindow getPizza() {
-    return this.pizza;
-  }
-  
-  public void setPizza(final RecetaWindow pizza) {
-    this.pizza = pizza;
-  }
-  
   @Pure
   public List<String> getComidaQueLeDisgusta() {
     return this.comidaQueLeDisgusta;
@@ -265,14 +251,5 @@ public class DetalleDeRecetaVentana extends TransactionalDialog<RecetaWindow> {
   
   public void setComidaQueLeDisgusta(final List<String> comidaQueLeDisgusta) {
     this.comidaQueLeDisgusta = comidaQueLeDisgusta;
-  }
-  
-  @Pure
-  public Receta getPizzita() {
-    return this.pizzita;
-  }
-  
-  public void setPizzita(final Receta pizzita) {
-    this.pizzita = pizzita;
   }
 }
