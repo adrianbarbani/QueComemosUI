@@ -38,7 +38,6 @@ class ConsultaDeRecetaWindow extends UltimasConsultasWindow {
 
 		contenidoPanelDerecho(panelDerecho)
 		
-		
 		botonera(panel)
 		
 		

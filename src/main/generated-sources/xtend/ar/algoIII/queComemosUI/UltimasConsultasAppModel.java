@@ -4,6 +4,7 @@ import ar.algo.adriba.tp1.Busqueda;
 import ar.algo.adriba.tp1.Comida;
 import ar.algo.adriba.tp1.Fecha;
 import ar.algo.adriba.tp1.Filtro;
+import ar.algo.adriba.tp1.MostrarLosPrimerosDiez;
 import ar.algo.adriba.tp1.Privada;
 import ar.algo.adriba.tp1.Publica;
 import ar.algo.adriba.tp1.Receta;
@@ -104,7 +105,8 @@ public class UltimasConsultasAppModel implements Serializable {
   
   public void todasLasRecetas() {
     RepositorioRecetas _instance = RepositorioRecetas.getInstance();
-    Busqueda _busqueda = new Busqueda(this.usuario, _instance);
+    MostrarLosPrimerosDiez _mostrarLosPrimerosDiez = new MostrarLosPrimerosDiez();
+    Busqueda _busqueda = new Busqueda(this.usuario, _instance, _mostrarLosPrimerosDiez);
     List<Receta> _filtrar = _busqueda.filtrar();
     this.resultados = _filtrar;
     this.descripcion = "estas son las mas consultadas";

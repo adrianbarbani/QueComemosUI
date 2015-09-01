@@ -4,6 +4,7 @@ import ar.algo.adriba.tp1.Busqueda
 import ar.algo.adriba.tp1.Comida
 import ar.algo.adriba.tp1.Fecha
 import ar.algo.adriba.tp1.Filtro
+import ar.algo.adriba.tp1.MostrarLosPrimerosDiez
 import ar.algo.adriba.tp1.Privada
 import ar.algo.adriba.tp1.Publica
 import ar.algo.adriba.tp1.Receta
@@ -92,7 +93,7 @@ class UltimasConsultasAppModel implements Serializable {
 //APPmodel
 	
 	def void todasLasRecetas() {
-		resultados = new Busqueda(usuario, RepositorioRecetas.getInstance).filtrar
+		resultados = new Busqueda(usuario, RepositorioRecetas.getInstance, new MostrarLosPrimerosDiez).filtrar
 		descripcion = "estas son las mas consultadas"
 	}
 
