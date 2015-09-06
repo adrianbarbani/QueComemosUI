@@ -86,6 +86,12 @@ class UltimasConsultasWindow extends SimpleWindow<UltimasConsultasAppModel> {
 			onClick = [|modelObject.marcarComoFavorita]
 			bindEnabled(elementSelected)
 		]
+		
+		new Button(actionsPanel) => [
+			caption = "Copìar Receta"
+			onClick = [|this.abrirCopiaReceta]
+			bindEnabled(elementSelected)
+		]
 
 	}
 
@@ -94,6 +100,11 @@ class UltimasConsultasWindow extends SimpleWindow<UltimasConsultasAppModel> {
 		this.openDialog(
 			new DetalleDeRecetaVentana(this, new DetalleDeRecetaAppModel(modelObject.recetaSeleccionada, modelObject.usuario)))
 		modelObject.agregarRecetaVista
+	}
+	
+	def void abrirCopiaReceta(){
+		this.openDialog(
+			new CopiarRecetaWindow(this, new CopiarRecetaAppModel(modelObject.recetaSeleccionada, modelObject.usuario)))
 	}
 
 	def openDialog(Dialog<?> dialog) {

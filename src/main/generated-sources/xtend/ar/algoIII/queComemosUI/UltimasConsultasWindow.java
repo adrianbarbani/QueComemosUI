@@ -2,6 +2,8 @@ package ar.algoIII.queComemosUI;
 
 import ar.algo.adriba.tp1.Receta;
 import ar.algo.adriba.tp1.Usuario;
+import ar.algoIII.queComemosUI.CopiarRecetaAppModel;
+import ar.algoIII.queComemosUI.CopiarRecetaWindow;
 import ar.algoIII.queComemosUI.DetalleDeRecetaAppModel;
 import ar.algoIII.queComemosUI.DetalleDeRecetaVentana;
 import ar.algoIII.queComemosUI.UltimasConsultasAppModel;
@@ -143,6 +145,20 @@ public class UltimasConsultasWindow extends SimpleWindow<UltimasConsultasAppMode
       }
     };
     ObjectExtensions.<Button>operator_doubleArrow(_button_1, _function_1);
+    Button _button_2 = new Button(actionsPanel);
+    final Procedure1<Button> _function_2 = new Procedure1<Button>() {
+      public void apply(final Button it) {
+        it.setCaption("Copìar Receta");
+        final Action _function = new Action() {
+          public void execute() {
+            UltimasConsultasWindow.this.abrirCopiaReceta();
+          }
+        };
+        it.onClick(_function);
+        it.<Object, ControlBuilder>bindEnabled(elementSelected);
+      }
+    };
+    ObjectExtensions.<Button>operator_doubleArrow(_button_2, _function_2);
   }
   
   public void abrirDetalle() {
@@ -155,6 +171,16 @@ public class UltimasConsultasWindow extends SimpleWindow<UltimasConsultasAppMode
     this.openDialog(_detalleDeRecetaVentana);
     UltimasConsultasAppModel _modelObject_2 = this.getModelObject();
     _modelObject_2.agregarRecetaVista();
+  }
+  
+  public void abrirCopiaReceta() {
+    UltimasConsultasAppModel _modelObject = this.getModelObject();
+    Receta _recetaSeleccionada = _modelObject.getRecetaSeleccionada();
+    UltimasConsultasAppModel _modelObject_1 = this.getModelObject();
+    Usuario _usuario = _modelObject_1.getUsuario();
+    CopiarRecetaAppModel _copiarRecetaAppModel = new CopiarRecetaAppModel(_recetaSeleccionada, _usuario);
+    CopiarRecetaWindow _copiarRecetaWindow = new CopiarRecetaWindow(this, _copiarRecetaAppModel);
+    this.openDialog(_copiarRecetaWindow);
   }
   
   public void openDialog(final Dialog<?> dialog) {

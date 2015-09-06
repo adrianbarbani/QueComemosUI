@@ -7,6 +7,7 @@ import ar.algoIII.queComemosUI.RecetasObjectSet
 import org.uqbar.arena.Application
 import org.uqbar.arena.windows.Window
 import org.uqbar.commons.utils.ApplicationContext
+import ar.algoIII.queComemosUI.LoginWindow
 
 class QueComemosApplication extends Application {
 
@@ -18,6 +19,7 @@ class QueComemosApplication extends Application {
 		val usuario = RecetasObjectSet.INSTANCE.crearUsuario
 		RecetasObjectSet.INSTANCE.crearRecetas(usuario)
 		return new ConsultaDeRecetaWindow(this, usuario)
+		//return new LoginWindow(this)
 	}
 
 }
