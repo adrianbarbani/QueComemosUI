@@ -19,7 +19,7 @@ class CopiarRecetaAppModel {
 	}
 	
 	def copiarReceta() {
-	//hacer
+		receta.crearCopia(usuario, nombreDeCopia)
 	}
 	
 	

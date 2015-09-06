@@ -21,8 +21,8 @@ public class CopiarRecetaAppModel {
     this.usuario = unUsuario;
   }
   
-  public Object copiarReceta() {
-    return null;
+  public void copiarReceta() {
+    this.receta.crearCopia(this.usuario, this.nombreDeCopia);
   }
   
   @Pure
