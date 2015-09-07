@@ -146,7 +146,7 @@ public class RecetasObjectSet {
     UsuarioBuilder _agregarFechaNacimiento = _agregarNombre.agregarFechaNacimiento(this.fechaValida);
     Rutina _rutina = new Rutina(61, true);
     UsuarioBuilder _agregarRutina = _agregarFechaNacimiento.agregarRutina(_rutina);
-    return _agregarRutina.build();
+    return _agregarRutina.build("1234");
   }
   
   public final static RecetasObjectSet INSTANCE = new RecetasObjectSet();
