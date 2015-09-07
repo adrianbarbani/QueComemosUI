@@ -13,9 +13,9 @@ class QueComemosApplication extends Application {
 	}
 
 	override protected Window<?> createMainWindow() {
-		//val usuario = RecetasObjectSet.INSTANCE.crearUsuario
+		val usuario = RecetasObjectSet.INSTANCE.crearUsuario
 		UsuariosObjectSet.INSTANCE.crearUsuarios()
-		//RecetasObjectSet.INSTANCE.crearRecetas(usuario) //necesito un usuario???? como relacionamos esto con el login dios
+		RecetasObjectSet.INSTANCE.crearRecetas(usuario) 
 		//return new ConsultaDeRecetaWindow(this, usuario)
 		return new LoginWindow(this)
 	}

@@ -2,11 +2,13 @@ package ar.algoIII.queComemosUI;
 
 import ar.algo.adriba.tp1.Comida;
 import ar.algo.adriba.tp1.Fecha;
-import ar.algo.adriba.tp1.Privada;
 import ar.algo.adriba.tp1.Publica;
 import ar.algo.adriba.tp1.Receta;
 import ar.algo.adriba.tp1.RecetaBuilder;
+import ar.algo.adriba.tp1.Rutina;
+import ar.algo.adriba.tp1.Sexo;
 import ar.algo.adriba.tp1.Usuario;
+import ar.algo.adriba.tp1.UsuarioBuilder;
 
 @SuppressWarnings("all")
 public class RecetasObjectSet {
@@ -117,22 +119,24 @@ public class RecetasObjectSet {
       RecetaBuilder _setearCalorias_5 = _agregarIngrediente_21.setearCalorias(300);
       RecetaBuilder _setearTemporadas_5 = _setearCalorias_5.setearTemporadas("Otoño");
       RecetaBuilder _setearDificultad_5 = _setearTemporadas_5.setearDificultad("Media");
-      _setearDificultad_5.build();
-      RecetaBuilder _recetaBuilder_6 = new RecetaBuilder();
-      Privada _privada = new Privada(usuario);
-      RecetaBuilder _tipoDeReceta_6 = _recetaBuilder_6.tipoDeReceta(_privada);
-      RecetaBuilder _nombreDelPlato_6 = _tipoDeReceta_6.nombreDelPlato(
-        "Hummus de garbanzo");
-      RecetaBuilder _agregarIngrediente_22 = _nombreDelPlato_6.agregarIngrediente(this.garbanzos);
-      RecetaBuilder _agregarIngrediente_23 = _agregarIngrediente_22.agregarIngrediente(this.limon);
-      RecetaBuilder _agregarIngrediente_24 = _agregarIngrediente_23.agregarIngrediente(this.ajo);
-      RecetaBuilder _setearCalorias_6 = _agregarIngrediente_24.setearCalorias(600);
-      _xblockexpression = _setearCalorias_6.build();
+      _xblockexpression = _setearDificultad_5.build();
     }
     return _xblockexpression;
   }
   
   private Fecha fechaValida = new Fecha((System.currentTimeMillis() - (((24 * 60) * 60) * 1000)));
+  
+  public Usuario crearUsuario() {
+    UsuarioBuilder _usuarioBuilder = new UsuarioBuilder();
+    UsuarioBuilder _agregarPeso = _usuarioBuilder.agregarPeso(52);
+    UsuarioBuilder _agregarAltura = _agregarPeso.agregarAltura(1.64);
+    UsuarioBuilder _agregarSexo = _agregarAltura.agregarSexo(Sexo.FEMENINO);
+    UsuarioBuilder _agregarNombre = _agregarSexo.agregarNombre("Esteban");
+    UsuarioBuilder _agregarFechaNacimiento = _agregarNombre.agregarFechaNacimiento(this.fechaValida);
+    Rutina _rutina = new Rutina(61, true);
+    UsuarioBuilder _agregarRutina = _agregarFechaNacimiento.agregarRutina(_rutina);
+    return _agregarRutina.build("1234");
+  }
   
   public final static RecetasObjectSet INSTANCE = new RecetasObjectSet();
 }
