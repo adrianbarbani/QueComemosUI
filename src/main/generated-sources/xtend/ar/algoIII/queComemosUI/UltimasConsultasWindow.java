@@ -11,6 +11,7 @@ import java.awt.Color;
 import org.apache.commons.collections15.Transformer;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.uqbar.arena.aop.windows.TransactionalDialog;
 import org.uqbar.arena.bindings.NotNullObservable;
 import org.uqbar.arena.layout.HorizontalLayout;
 import org.uqbar.arena.widgets.Button;
@@ -21,14 +22,13 @@ import org.uqbar.arena.widgets.tables.Column;
 import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.widgets.tables.labelprovider.ForegroundProvider;
 import org.uqbar.arena.windows.Dialog;
-import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
 import org.uqbar.lacar.ui.model.Action;
 import org.uqbar.lacar.ui.model.ControlBuilder;
 import org.uqbar.lacar.ui.model.bindings.Binding;
 
 @SuppressWarnings("all")
-public class UltimasConsultasWindow extends SimpleWindow<UltimasConsultasAppModel> {
+public class UltimasConsultasWindow extends TransactionalDialog<UltimasConsultasAppModel> {
   public UltimasConsultasWindow(final WindowOwner parent, final Usuario usuario) {
     super(parent, new UltimasConsultasAppModel(usuario));
     UltimasConsultasAppModel _modelObject = this.getModelObject();

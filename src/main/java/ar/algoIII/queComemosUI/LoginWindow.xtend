@@ -7,6 +7,7 @@ import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.widgets.TextBox
 import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
+import org.uqbar.arena.windows.Dialog
 
 class LoginWindow extends SimpleWindow<LoginAppModel> {
 
@@ -24,7 +25,7 @@ class LoginWindow extends SimpleWindow<LoginAppModel> {
 			caption = "Ok"
 			onClick = [|
 				modelObject.autorizarLogin
-				//this.entrar
+				this.entrar
 			]
 			setAsDefault
 			disableOnError
@@ -53,8 +54,12 @@ class LoginWindow extends SimpleWindow<LoginAppModel> {
 			]	
 	}
 
-	/*def void entrar() {
+	def void entrar() {
 		this.openDialog(
-			new UltimasConsultasWindow(this, modelObject.usuarioLogin))
-	}*/
+			new ConsultaDeRecetaWindow(this, modelObject.usuarioLogin))
+	}
+	
+	def openDialog(Dialog<?> dialog) {
+		dialog.open
+	}
 }

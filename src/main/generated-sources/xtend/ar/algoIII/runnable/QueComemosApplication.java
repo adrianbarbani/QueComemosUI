@@ -1,7 +1,7 @@
 package ar.algoIII.runnable;
 
 import ar.algo.adriba.tp1.Usuario;
-import ar.algoIII.queComemosUI.ConsultaDeRecetaWindow;
+import ar.algoIII.queComemosUI.LoginWindow;
 import ar.algoIII.queComemosUI.RecetasObjectSet;
 import org.uqbar.arena.Application;
 import org.uqbar.arena.windows.Window;
@@ -16,6 +16,6 @@ public class QueComemosApplication extends Application {
   protected Window<?> createMainWindow() {
     final Usuario usuario = RecetasObjectSet.INSTANCE.crearUsuario();
     RecetasObjectSet.INSTANCE.crearRecetas(usuario);
-    return new ConsultaDeRecetaWindow(this, usuario);
+    return new LoginWindow(this);
   }
 }

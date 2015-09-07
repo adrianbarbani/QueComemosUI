@@ -1,5 +1,7 @@
 package ar.algoIII.queComemosUI;
 
+import ar.algo.adriba.tp1.Usuario;
+import ar.algoIII.queComemosUI.ConsultaDeRecetaWindow;
 import ar.algoIII.queComemosUI.LoginAppModel;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -8,6 +10,7 @@ import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.TextBox;
+import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
 import org.uqbar.lacar.ui.model.Action;
@@ -32,6 +35,7 @@ public class LoginWindow extends SimpleWindow<LoginAppModel> {
           public void execute() {
             LoginAppModel _modelObject = LoginWindow.this.getModelObject();
             _modelObject.autorizarLogin();
+            LoginWindow.this.entrar();
           }
         };
         it.onClick(_function);
@@ -78,5 +82,16 @@ public class LoginWindow extends SimpleWindow<LoginAppModel> {
       }
     };
     ObjectExtensions.<TextBox>operator_doubleArrow(_textBox_1, _function_1);
+  }
+  
+  public void entrar() {
+    LoginAppModel _modelObject = this.getModelObject();
+    Usuario _usuarioLogin = _modelObject.getUsuarioLogin();
+    ConsultaDeRecetaWindow _consultaDeRecetaWindow = new ConsultaDeRecetaWindow(this, _usuarioLogin);
+    this.openDialog(_consultaDeRecetaWindow);
+  }
+  
+  public void openDialog(final Dialog<?> dialog) {
+    dialog.open();
   }
 }

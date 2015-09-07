@@ -13,8 +13,9 @@ import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
 import org.uqbar.arena.widgets.Label
 import ar.algo.adriba.tp1.Usuario
+import org.uqbar.arena.aop.windows.TransactionalDialog
 
-class UltimasConsultasWindow extends SimpleWindow<UltimasConsultasAppModel> {
+class UltimasConsultasWindow extends TransactionalDialog<UltimasConsultasAppModel> {
 
 	new(WindowOwner parent, Usuario usuario) {
 		super(parent, new UltimasConsultasAppModel(usuario))

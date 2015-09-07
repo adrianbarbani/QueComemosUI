@@ -18,8 +18,8 @@ class QueComemosApplication extends Application {
 	override protected Window<?> createMainWindow() {
 		val usuario = RecetasObjectSet.INSTANCE.crearUsuario
 		RecetasObjectSet.INSTANCE.crearRecetas(usuario)
-		return new ConsultaDeRecetaWindow(this, usuario)
-		//return new LoginWindow(this)
+		//return new ConsultaDeRecetaWindow(this, usuario)
+		return new LoginWindow(this)
 	}
 
 }
