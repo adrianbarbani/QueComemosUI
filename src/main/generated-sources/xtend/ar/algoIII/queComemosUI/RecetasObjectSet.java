@@ -6,10 +6,7 @@ import ar.algo.adriba.tp1.Privada;
 import ar.algo.adriba.tp1.Publica;
 import ar.algo.adriba.tp1.Receta;
 import ar.algo.adriba.tp1.RecetaBuilder;
-import ar.algo.adriba.tp1.Rutina;
-import ar.algo.adriba.tp1.Sexo;
 import ar.algo.adriba.tp1.Usuario;
-import ar.algo.adriba.tp1.UsuarioBuilder;
 
 @SuppressWarnings("all")
 public class RecetasObjectSet {
@@ -136,18 +133,6 @@ public class RecetasObjectSet {
   }
   
   private Fecha fechaValida = new Fecha((System.currentTimeMillis() - (((24 * 60) * 60) * 1000)));
-  
-  public Usuario crearUsuario() {
-    UsuarioBuilder _usuarioBuilder = new UsuarioBuilder();
-    UsuarioBuilder _agregarPeso = _usuarioBuilder.agregarPeso(52);
-    UsuarioBuilder _agregarAltura = _agregarPeso.agregarAltura(1.64);
-    UsuarioBuilder _agregarSexo = _agregarAltura.agregarSexo(Sexo.FEMENINO);
-    UsuarioBuilder _agregarNombre = _agregarSexo.agregarNombre("Esteban");
-    UsuarioBuilder _agregarFechaNacimiento = _agregarNombre.agregarFechaNacimiento(this.fechaValida);
-    Rutina _rutina = new Rutina(61, true);
-    UsuarioBuilder _agregarRutina = _agregarFechaNacimiento.agregarRutina(_rutina);
-    return _agregarRutina.build();
-  }
   
   public final static RecetasObjectSet INSTANCE = new RecetasObjectSet();
 }
