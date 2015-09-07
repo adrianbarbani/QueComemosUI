@@ -88,7 +88,7 @@ class UltimasConsultasWindow extends TransactionalDialog<UltimasConsultasAppMode
 		]
 		
 		new Button(actionsPanel) => [
-			caption = "Copìar Receta"
+			caption = "Copiar Receta"
 			onClick = [|this.abrirCopiaReceta]
 			bindEnabled(elementSelected)
 		]

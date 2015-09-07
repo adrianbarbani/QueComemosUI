@@ -148,7 +148,7 @@ public class UltimasConsultasWindow extends TransactionalDialog<UltimasConsultas
     Button _button_2 = new Button(actionsPanel);
     final Procedure1<Button> _function_2 = new Procedure1<Button>() {
       public void apply(final Button it) {
-        it.setCaption("Copìar Receta");
+        it.setCaption("Copiar Receta");
         final Action _function = new Action() {
           public void execute() {
             UltimasConsultasWindow.this.abrirCopiaReceta();
