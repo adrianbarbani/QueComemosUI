@@ -21,8 +21,7 @@ class UltimasConsultasWindow extends SimpleWindow<UltimasConsultasAppModel> {
 		modelObject.initSearch()
 		
 		title = "Bienvenido a ¿Que Comemos?"
-	}
-	
+	}	
 	def descripcionPrimaria(Panel mainPanel) {
 		new Label(mainPanel).bindValueToProperty("descripcion")
 	}
