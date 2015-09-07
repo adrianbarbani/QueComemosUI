@@ -3,7 +3,6 @@ package ar.algoIII.queComemosUI;
 import ar.algo.adriba.tp1.RepoDeTemporadas;
 import ar.algo.adriba.tp1.RepoDificultades;
 import ar.algo.adriba.tp1.Usuario;
-import ar.algoIII.queComemosUI.UltimasConsultasAppModel;
 import ar.algoIII.queComemosUI.UltimasConsultasWindow;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -18,7 +17,6 @@ import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.Selector;
 import org.uqbar.arena.widgets.TextBox;
 import org.uqbar.arena.windows.WindowOwner;
-import org.uqbar.lacar.ui.model.Action;
 import org.uqbar.lacar.ui.model.ControlBuilder;
 import org.uqbar.lacar.ui.model.bindings.Binding;
 import queComemos.entrega3.dominio.Dificultad;
@@ -138,41 +136,9 @@ public class ConsultaDeRecetaWindow extends UltimasConsultasWindow {
   }
   
   public Button botonera(final Panel panel) {
-    Button _xblockexpression = null;
-    {
-      final Panel panelBotonera = new Panel(panel);
-      HorizontalLayout _horizontalLayout = new HorizontalLayout();
-      panelBotonera.setLayout(_horizontalLayout);
-      Button _button = new Button(panelBotonera);
-      final Procedure1<Button> _function = new Procedure1<Button>() {
-        public void apply(final Button it) {
-          it.setCaption("Buscar");
-          final Action _function = new Action() {
-            public void execute() {
-              UltimasConsultasAppModel _modelObject = ConsultaDeRecetaWindow.this.getModelObject();
-              _modelObject.buscar();
-            }
-          };
-          it.onClick(_function);
-        }
-      };
-      ObjectExtensions.<Button>operator_doubleArrow(_button, _function);
-      Button _button_1 = new Button(panelBotonera);
-      final Procedure1<Button> _function_1 = new Procedure1<Button>() {
-        public void apply(final Button it) {
-          it.setCaption("Volver");
-          final Action _function = new Action() {
-            public void execute() {
-              UltimasConsultasAppModel _modelObject = ConsultaDeRecetaWindow.this.getModelObject();
-              _modelObject.clear();
-            }
-          };
-          it.onClick(_function);
-        }
-      };
-      _xblockexpression = ObjectExtensions.<Button>operator_doubleArrow(_button_1, _function_1);
-    }
-    return _xblockexpression;
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method buscar is undefined for the type ConsultaDeRecetaWindow"
+      + "\nThe method clear is undefined for the type ConsultaDeRecetaWindow");
   }
   
   public Binding<Object, Control, ControlBuilder> descripcionPrimaria(final Panel p) {
