@@ -1,13 +1,10 @@
 package ar.algoIII.runnable
 
-import ar.algo.adriba.tp1.Receta
-import ar.algo.adriba.tp1.RepoDificultades
-import ar.algoIII.queComemosUI.ConsultaDeRecetaWindow
+import ar.algoIII.queComemosUI.LoginWindow
 import ar.algoIII.queComemosUI.RecetasObjectSet
+import ar.algoIII.queComemosUI.UsuariosObjectSet
 import org.uqbar.arena.Application
 import org.uqbar.arena.windows.Window
-import org.uqbar.commons.utils.ApplicationContext
-import ar.algoIII.queComemosUI.LoginWindow
 
 class QueComemosApplication extends Application {
 
@@ -16,8 +13,9 @@ class QueComemosApplication extends Application {
 	}
 
 	override protected Window<?> createMainWindow() {
-		val usuario = RecetasObjectSet.INSTANCE.crearUsuario
-		RecetasObjectSet.INSTANCE.crearRecetas(usuario)
+		//val usuario = RecetasObjectSet.INSTANCE.crearUsuario
+		UsuariosObjectSet.INSTANCE.crearUsuarios()
+		//RecetasObjectSet.INSTANCE.crearRecetas(usuario) //necesito un usuario???? como relacionamos esto con el login dios
 		//return new ConsultaDeRecetaWindow(this, usuario)
 		return new LoginWindow(this)
 	}

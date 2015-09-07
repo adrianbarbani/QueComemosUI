@@ -15,6 +15,7 @@ class LoginAppModel {
 	
 	def autorizarLogin() {
 		RepoDeUsuariosMock.getInstance.compararContraseña(nombreUsuarioABuscar,contrasenia)
+		usuarioLogin= RepoDeUsuariosMock.getInstance.obtenerUsuario(nombreUsuarioABuscar)
 	}
 	
 	def clear(){

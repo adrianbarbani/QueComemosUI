@@ -17,8 +17,15 @@ public class LoginAppModel {
   private Usuario usuarioLogin;
   
   public Usuario autorizarLogin() {
-    RepoDeUsuariosMock _instance = RepoDeUsuariosMock.getInstance();
-    return _instance.compararContraseña(this.nombreUsuarioABuscar, this.contrasenia);
+    Usuario _xblockexpression = null;
+    {
+      RepoDeUsuariosMock _instance = RepoDeUsuariosMock.getInstance();
+      _instance.compararContraseña(this.nombreUsuarioABuscar, this.contrasenia);
+      RepoDeUsuariosMock _instance_1 = RepoDeUsuariosMock.getInstance();
+      Usuario _obtenerUsuario = _instance_1.obtenerUsuario(this.nombreUsuarioABuscar);
+      _xblockexpression = this.usuarioLogin = _obtenerUsuario;
+    }
+    return _xblockexpression;
   }
   
   public String clear() {
