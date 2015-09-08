@@ -66,7 +66,7 @@ public class UsuariosObjectSet {
       UsuarioBuilder _agregarFechaNacimiento_5 = _agregarNombre_5.agregarFechaNacimiento(this.fechaValida);
       Rutina _rutina_5 = new Rutina(10, true);
       UsuarioBuilder _agregarRutina_5 = _agregarFechaNacimiento_5.agregarRutina(_rutina_5);
-      _xblockexpression = _agregarRutina_5.build("pacquiao");
+      _xblockexpression = _agregarRutina_5.build("pacman");
     }
     return _xblockexpression;
   }

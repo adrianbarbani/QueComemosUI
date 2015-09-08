@@ -158,7 +158,7 @@ public class DetalleDeRecetaVentana extends TransactionalDialog<DetalleDeRecetaA
         public void apply(final Button it) {
           final Action _function = new Action() {
             public void execute() {
-              DetalleDeRecetaVentana.this.accept();
+              DetalleDeRecetaVentana.this.cancel();
             }
           };
           it.onClick(_function);

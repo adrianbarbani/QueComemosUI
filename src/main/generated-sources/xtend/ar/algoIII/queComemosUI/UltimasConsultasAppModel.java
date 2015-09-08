@@ -66,14 +66,12 @@ public class UltimasConsultasAppModel implements Serializable {
   
   public void initSearch() {
     this.recetasFavoritas();
-    int _size = this.resultados.size();
-    boolean _equals = (_size == 0);
-    if (_equals) {
+    boolean _isEmpty = this.resultados.isEmpty();
+    if (_isEmpty) {
       this.mostrarUltimasRecetasConsultadas();
     }
-    int _size_1 = this.resultados.size();
-    boolean _equals_1 = (_size_1 == 0);
-    if (_equals_1) {
+    boolean _isEmpty_1 = this.resultados.isEmpty();
+    if (_isEmpty_1) {
       this.todasLasRecetas();
     }
   }

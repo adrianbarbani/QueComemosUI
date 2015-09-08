@@ -59,9 +59,9 @@ class UltimasConsultasAppModel implements Serializable {
 	
 	def initSearch() {
 		this.recetasFavoritas
-		if (resultados.size == 0)
+		if (resultados.empty)
 		this.mostrarUltimasRecetasConsultadas
-		if (resultados.size == 0)
+		if (resultados.empty)
 		this.todasLasRecetas
 	}
 	

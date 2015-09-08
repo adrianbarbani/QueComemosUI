@@ -10,7 +10,7 @@ import org.uqbar.commons.utils.Observable
 class CopiarRecetaAppModel {
 	
 	Receta receta
-	String nombreDeCopia
+	String nombreDeCopia 
 	Usuario usuario
 	
 	new(Receta unaReceta, Usuario unUsuario) {

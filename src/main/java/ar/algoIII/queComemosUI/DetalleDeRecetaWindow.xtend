@@ -120,7 +120,7 @@ class DetalleDeRecetaVentana extends TransactionalDialog<DetalleDeRecetaAppModel
 	def addPanelBotonVolver(Panel mainPanel) {
 		val panelBotonVolver = new Panel(mainPanel)
 		new Button(panelBotonVolver) => [
-			onClick [|this.accept]
+			onClick [|this.cancel]
 			caption = "Volver"
 		]
 

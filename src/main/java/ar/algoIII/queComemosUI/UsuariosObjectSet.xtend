@@ -36,7 +36,7 @@ class UsuariosObjectSet {
 		new UsuarioBuilder().agregarPeso(1500).agregarAltura(1.44).
 			agregarSexo(Sexo.FEMENINO).agregarNombre("Ariel").agregarFechaNacimiento(fechaValida).
 			agregarRutina(new Rutina(10, true))		
-			.build("pacquiao")
+			.build("pacman")
 		
 }
 
