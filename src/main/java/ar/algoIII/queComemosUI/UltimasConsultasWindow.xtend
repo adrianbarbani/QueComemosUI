@@ -92,7 +92,9 @@ class UltimasConsultasWindow extends TransactionalDialog<UltimasConsultasAppMode
 			onClick = [|this.abrirCopiaReceta]
 			bindEnabled(elementSelected)
 		]
-
+		
+		
+		
 	}
 
 	//Acciones

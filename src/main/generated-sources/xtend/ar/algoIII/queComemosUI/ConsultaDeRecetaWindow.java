@@ -160,7 +160,7 @@ public class ConsultaDeRecetaWindow extends UltimasConsultasWindow {
       Button _button_1 = new Button(panelBotonera);
       final Procedure1<Button> _function_1 = new Procedure1<Button>() {
         public void apply(final Button it) {
-          it.setCaption("Volver");
+          it.setCaption("Restablecer");
           final Action _function = new Action() {
             public void execute() {
               UltimasConsultasAppModel _modelObject = ConsultaDeRecetaWindow.this.getModelObject();
@@ -170,7 +170,20 @@ public class ConsultaDeRecetaWindow extends UltimasConsultasWindow {
           it.onClick(_function);
         }
       };
-      _xblockexpression = ObjectExtensions.<Button>operator_doubleArrow(_button_1, _function_1);
+      ObjectExtensions.<Button>operator_doubleArrow(_button_1, _function_1);
+      Button _button_2 = new Button(panelBotonera);
+      final Procedure1<Button> _function_2 = new Procedure1<Button>() {
+        public void apply(final Button it) {
+          it.setCaption("Salir");
+          final Action _function = new Action() {
+            public void execute() {
+              ConsultaDeRecetaWindow.this.accept();
+            }
+          };
+          it.onClick(_function);
+        }
+      };
+      _xblockexpression = ObjectExtensions.<Button>operator_doubleArrow(_button_2, _function_2);
     }
     return _xblockexpression;
   }

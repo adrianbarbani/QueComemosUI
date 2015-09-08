@@ -120,11 +120,11 @@ class DetalleDeRecetaVentana extends TransactionalDialog<DetalleDeRecetaAppModel
 	def addPanelBotonVolver(Panel mainPanel) {
 		val panelBotonVolver = new Panel(mainPanel)
 		new Button(panelBotonVolver) => [
-			//onClick [ | ] aca hay que ver que hace cuando lo tocamos
+			onClick [ |this.accept ]
 			caption = "Volver"
 		]
 
-		new Label(panelBotonVolver).bindValueToProperty("unUsuario.cantidadDeFavorita")
+		//new Label(panelBotonVolver).bindValueToProperty("unUsuario.cantidadDeFavorita")
 	}
 
 	//Lista de condiciones preexistentes

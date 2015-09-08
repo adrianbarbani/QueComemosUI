@@ -108,8 +108,14 @@ class ConsultaDeRecetaWindow extends UltimasConsultasWindow {
 		]
 		
 		new Button(panelBotonera) => [
-			caption = "Volver"
+			caption = "Restablecer"
 			onClick = [|modelObject.clear]
+		]
+		
+		new Button(panelBotonera) => [
+			caption = "Salir"
+			onClick = [|this.accept]
+			
 		]
 	}
 	

@@ -24,6 +24,7 @@ import org.uqbar.arena.widgets.Selector;
 import org.uqbar.arena.widgets.tables.Column;
 import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.WindowOwner;
+import org.uqbar.lacar.ui.model.Action;
 import org.uqbar.lacar.ui.model.ControlBuilder;
 import org.uqbar.lacar.ui.model.ListBuilder;
 import org.uqbar.lacar.ui.model.bindings.Binding;
@@ -151,19 +152,23 @@ public class DetalleDeRecetaVentana extends TransactionalDialog<DetalleDeRecetaA
     return _xblockexpression;
   }
   
-  public Binding<Object, Control, ControlBuilder> addPanelBotonVolver(final Panel mainPanel) {
-    Binding<Object, Control, ControlBuilder> _xblockexpression = null;
+  public Button addPanelBotonVolver(final Panel mainPanel) {
+    Button _xblockexpression = null;
     {
       final Panel panelBotonVolver = new Panel(mainPanel);
       Button _button = new Button(panelBotonVolver);
       final Procedure1<Button> _function = new Procedure1<Button>() {
         public void apply(final Button it) {
+          final Action _function = new Action() {
+            public void execute() {
+              DetalleDeRecetaVentana.this.accept();
+            }
+          };
+          it.onClick(_function);
           it.setCaption("Volver");
         }
       };
-      ObjectExtensions.<Button>operator_doubleArrow(_button, _function);
-      Label _label = new Label(panelBotonVolver);
-      _xblockexpression = _label.<Object, ControlBuilder>bindValueToProperty("unUsuario.cantidadDeFavorita");
+      _xblockexpression = ObjectExtensions.<Button>operator_doubleArrow(_button, _function);
     }
     return _xblockexpression;
   }

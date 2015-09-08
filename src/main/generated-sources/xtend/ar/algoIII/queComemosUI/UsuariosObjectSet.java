@@ -17,11 +17,11 @@ public class UsuariosObjectSet {
       UsuarioBuilder _agregarPeso = _usuarioBuilder.agregarPeso(52);
       UsuarioBuilder _agregarAltura = _agregarPeso.agregarAltura(1.64);
       UsuarioBuilder _agregarSexo = _agregarAltura.agregarSexo(Sexo.FEMENINO);
-      UsuarioBuilder _agregarNombre = _agregarSexo.agregarNombre("Esteban");
+      UsuarioBuilder _agregarNombre = _agregarSexo.agregarNombre("Javier");
       UsuarioBuilder _agregarFechaNacimiento = _agregarNombre.agregarFechaNacimiento(this.fechaValida);
       Rutina _rutina = new Rutina(61, true);
       UsuarioBuilder _agregarRutina = _agregarFechaNacimiento.agregarRutina(_rutina);
-      _agregarRutina.build("homero");
+      _agregarRutina.build("javi");
       UsuarioBuilder _usuarioBuilder_1 = new UsuarioBuilder();
       UsuarioBuilder _agregarPeso_1 = _usuarioBuilder_1.agregarPeso(52);
       UsuarioBuilder _agregarAltura_1 = _agregarPeso_1.agregarAltura(1.64);
@@ -35,7 +35,7 @@ public class UsuariosObjectSet {
       UsuarioBuilder _agregarPeso_2 = _usuarioBuilder_2.agregarPeso(52);
       UsuarioBuilder _agregarAltura_2 = _agregarPeso_2.agregarAltura(1.64);
       UsuarioBuilder _agregarSexo_2 = _agregarAltura_2.agregarSexo(Sexo.MASCULINO);
-      UsuarioBuilder _agregarNombre_2 = _agregarSexo_2.agregarNombre("Carlos");
+      UsuarioBuilder _agregarNombre_2 = _agregarSexo_2.agregarNombre("Juancho");
       UsuarioBuilder _agregarFechaNacimiento_2 = _agregarNombre_2.agregarFechaNacimiento(this.fechaValida);
       Rutina _rutina_2 = new Rutina(61, true);
       UsuarioBuilder _agregarRutina_2 = _agregarFechaNacimiento_2.agregarRutina(_rutina_2);
@@ -48,7 +48,7 @@ public class UsuariosObjectSet {
       UsuarioBuilder _agregarFechaNacimiento_3 = _agregarNombre_3.agregarFechaNacimiento(this.fechaValida);
       Rutina _rutina_3 = new Rutina(74, true);
       UsuarioBuilder _agregarRutina_3 = _agregarFechaNacimiento_3.agregarRutina(_rutina_3);
-      _agregarRutina_3.build("pacquiao");
+      _agregarRutina_3.build("a");
       UsuarioBuilder _usuarioBuilder_4 = new UsuarioBuilder();
       UsuarioBuilder _agregarPeso_4 = _usuarioBuilder_4.agregarPeso(80);
       UsuarioBuilder _agregarAltura_4 = _agregarPeso_4.agregarAltura(1.74);
@@ -57,16 +57,16 @@ public class UsuariosObjectSet {
       UsuarioBuilder _agregarFechaNacimiento_4 = _agregarNombre_4.agregarFechaNacimiento(this.fechaValida);
       Rutina _rutina_4 = new Rutina(82, true);
       UsuarioBuilder _agregarRutina_4 = _agregarFechaNacimiento_4.agregarRutina(_rutina_4);
-      _agregarRutina_4.build("bob");
+      _agregarRutina_4.build("messi");
       UsuarioBuilder _usuarioBuilder_5 = new UsuarioBuilder();
       UsuarioBuilder _agregarPeso_5 = _usuarioBuilder_5.agregarPeso(1500);
       UsuarioBuilder _agregarAltura_5 = _agregarPeso_5.agregarAltura(1.44);
       UsuarioBuilder _agregarSexo_5 = _agregarAltura_5.agregarSexo(Sexo.FEMENINO);
-      UsuarioBuilder _agregarNombre_5 = _agregarSexo_5.agregarNombre("Esteban");
+      UsuarioBuilder _agregarNombre_5 = _agregarSexo_5.agregarNombre("Ariel");
       UsuarioBuilder _agregarFechaNacimiento_5 = _agregarNombre_5.agregarFechaNacimiento(this.fechaValida);
       Rutina _rutina_5 = new Rutina(10, true);
       UsuarioBuilder _agregarRutina_5 = _agregarFechaNacimiento_5.agregarRutina(_rutina_5);
-      _xblockexpression = _agregarRutina_5.build("barovero");
+      _xblockexpression = _agregarRutina_5.build("pacquiao");
     }
     return _xblockexpression;
   }

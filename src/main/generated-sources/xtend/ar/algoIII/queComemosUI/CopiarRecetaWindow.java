@@ -47,6 +47,7 @@ public class CopiarRecetaWindow extends TransactionalDialog<CopiarRecetaAppModel
           public void execute() {
             CopiarRecetaAppModel _modelObject = CopiarRecetaWindow.this.getModelObject();
             _modelObject.copiarReceta();
+            CopiarRecetaWindow.this.accept();
           }
         };
         it.onClick(_function);

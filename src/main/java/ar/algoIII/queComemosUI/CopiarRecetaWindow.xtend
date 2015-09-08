@@ -34,6 +34,7 @@ class CopiarRecetaWindow extends TransactionalDialog<CopiarRecetaAppModel> {
 			caption = "Copiar"
 			onClick = [|
 				modelObject.copiarReceta
+				this.accept
 			]
 			setAsDefault
 			disableOnError
