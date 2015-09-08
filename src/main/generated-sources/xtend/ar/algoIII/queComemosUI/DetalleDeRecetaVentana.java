@@ -13,6 +13,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.uqbar.arena.aop.windows.TransactionalDialog;
 import org.uqbar.arena.bindings.PropertyAdapter;
+import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.layout.HorizontalLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.CheckBox;
@@ -51,9 +52,14 @@ public class DetalleDeRecetaVentana extends TransactionalDialog<DetalleDeRecetaA
     };
     ObjectExtensions.<Label>operator_doubleArrow(_label, _function);
     this.addPanelCaloriasYDuenio(mainPanel);
-    this.addPanelDificultadYTemporada(mainPanel);
-    this.addPanelIngredientesYCondimentos(mainPanel);
-    this.addPanelFavoritaYCondiciones(mainPanel);
+    final Panel searchFormPanel = new Panel(mainPanel);
+    ColumnLayout _columnLayout = new ColumnLayout(2);
+    searchFormPanel.setLayout(_columnLayout);
+    final Panel panelIzquierdo = new Panel(searchFormPanel);
+    final Panel panelDerecho = new Panel(searchFormPanel);
+    this.addPanelDificultadYTemporada(panelIzquierdo, panelDerecho);
+    this.addPanelIngredientesYCondimentos(panelIzquierdo, panelDerecho);
+    this.addPanelFavoritaYCondiciones(panelIzquierdo, panelDerecho);
     this.addPanelProcesoDePreparacion(mainPanel);
     this.addPanelBotonVolver(mainPanel);
   }
@@ -75,18 +81,15 @@ public class DetalleDeRecetaVentana extends TransactionalDialog<DetalleDeRecetaA
     return _xblockexpression;
   }
   
-  public Binding<Object, Control, ControlBuilder> addPanelDificultadYTemporada(final Panel mainPanel) {
+  public Binding<Object, Control, ControlBuilder> addPanelDificultadYTemporada(final Panel panelIzquierdo, final Panel panelDerecho) {
     Binding<Object, Control, ControlBuilder> _xblockexpression = null;
     {
-      final Panel panelDificultadYTemporada = new Panel(mainPanel);
-      HorizontalLayout _horizontalLayout = new HorizontalLayout();
-      panelDificultadYTemporada.setLayout(_horizontalLayout);
-      final Panel panelDificultad = new Panel(panelDificultadYTemporada);
+      final Panel panelDificultad = new Panel(panelIzquierdo);
       Label _label = new Label(panelDificultad);
       _label.setText("Dificultad");
       Label _label_1 = new Label(panelDificultad);
       _label_1.<Object, ControlBuilder>bindValueToProperty("unaReceta.dificultad");
-      final Panel panelTemporada = new Panel(panelDificultadYTemporada);
+      final Panel panelTemporada = new Panel(panelDerecho);
       Label _label_2 = new Label(panelTemporada);
       _label_2.setText("Temporada");
       Label _label_3 = new Label(panelTemporada);
@@ -95,17 +98,14 @@ public class DetalleDeRecetaVentana extends TransactionalDialog<DetalleDeRecetaA
     return _xblockexpression;
   }
   
-  public Panel addPanelIngredientesYCondimentos(final Panel mainPanel) {
+  public Panel addPanelIngredientesYCondimentos(final Panel panelIzquierdo, final Panel panelDerecho) {
     Panel _xblockexpression = null;
     {
-      final Panel panelIngredientesYCondimentos = new Panel(mainPanel);
-      HorizontalLayout _horizontalLayout = new HorizontalLayout();
-      panelIngredientesYCondimentos.setLayout(_horizontalLayout);
-      final Panel panelIngredientes = new Panel(panelIngredientesYCondimentos);
+      final Panel panelIngredientes = new Panel(panelIzquierdo);
       Label _label = new Label(panelIngredientes);
       _label.setText("Ingredientes");
       this.grillaIngredientes(panelIngredientes);
-      final Panel panelCondimentos = new Panel(panelIngredientesYCondimentos);
+      final Panel panelCondimentos = new Panel(panelDerecho);
       Label _label_1 = new Label(panelCondimentos);
       _label_1.setText("Condimentos");
       _xblockexpression = this.listaDeCondimentos(panelCondimentos);
@@ -113,20 +113,17 @@ public class DetalleDeRecetaVentana extends TransactionalDialog<DetalleDeRecetaA
     return _xblockexpression;
   }
   
-  public Panel addPanelFavoritaYCondiciones(final Panel mainPanel) {
+  public Panel addPanelFavoritaYCondiciones(final Panel panelIzquierdo, final Panel panelDerecho) {
     Panel _xblockexpression = null;
     {
-      final Panel panelFavoritaYCondiciones = new Panel(mainPanel);
+      final Panel panelFavorita = new Panel(panelIzquierdo);
       HorizontalLayout _horizontalLayout = new HorizontalLayout();
-      panelFavoritaYCondiciones.setLayout(_horizontalLayout);
-      final Panel panelFavorita = new Panel(panelFavoritaYCondiciones);
-      HorizontalLayout _horizontalLayout_1 = new HorizontalLayout();
-      panelFavorita.setLayout(_horizontalLayout_1);
+      panelFavorita.setLayout(_horizontalLayout);
       Label _label = new Label(panelFavorita);
       _label.setText("Favorita");
       CheckBox checkFavorita = new CheckBox(panelFavorita);
       checkFavorita.<Object, ControlBuilder>bindValueToProperty("favorita");
-      final Panel panelCondiciones = new Panel(panelFavoritaYCondiciones);
+      final Panel panelCondiciones = new Panel(panelDerecho);
       Label _label_1 = new Label(panelCondiciones);
       _label_1.setText("Condiciones Preexistentes");
       _xblockexpression = this.listaCondicionesPreexistentes(panelCondiciones);
@@ -185,8 +182,8 @@ public class DetalleDeRecetaVentana extends TransactionalDialog<DetalleDeRecetaA
             Binding<?, Selector<Object>, ListBuilder<Object>> propiedadCondiciones = it.bindItemsToProperty("unaReceta.paraQueCondicionesSoyInadecuada");
             PropertyAdapter _propertyAdapter = new PropertyAdapter(CondicionPreexistente.class, "nombre");
             propiedadCondiciones.setAdapter(_propertyAdapter);
-            it.setWidth(100);
-            it.setHeight(120);
+            it.setWidth(150);
+            it.setHeight(30);
           }
         };
         ObjectExtensions.<org.uqbar.arena.widgets.List<Object>>operator_doubleArrow(_list, _function);
@@ -207,8 +204,8 @@ public class DetalleDeRecetaVentana extends TransactionalDialog<DetalleDeRecetaA
             Binding<?, Selector<Object>, ListBuilder<Object>> propiedadCondimentos = it.bindItemsToProperty("unaReceta.condimentos");
             PropertyAdapter _propertyAdapter = new PropertyAdapter(Cosas.class, "nombre");
             propiedadCondimentos.setAdapter(_propertyAdapter);
-            it.setWidth(100);
-            it.setHeight(200);
+            it.setWidth(150);
+            it.setHeight(30);
           }
         };
         ObjectExtensions.<org.uqbar.arena.widgets.List<Object>>operator_doubleArrow(_list, _function);
@@ -223,8 +220,8 @@ public class DetalleDeRecetaVentana extends TransactionalDialog<DetalleDeRecetaA
       Table<Comida> _table = new Table<Comida>(panel, Comida.class);
       final Procedure1<Table<Comida>> _function = new Procedure1<Table<Comida>>() {
         public void apply(final Table<Comida> it) {
-          it.setWidth(1000);
-          it.setHeight(8000);
+          it.setWidth(150);
+          it.setHeight(30);
           it.bindItemsToProperty("unaReceta.ingredientes");
         }
       };

@@ -8,6 +8,7 @@ import java.util.ArrayList
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.arena.aop.windows.TransactionalDialog
 import org.uqbar.arena.bindings.PropertyAdapter
+import org.uqbar.arena.layout.ColumnLayout
 import org.uqbar.arena.layout.HorizontalLayout
 import org.uqbar.arena.widgets.Button
 import org.uqbar.arena.widgets.CheckBox
@@ -21,7 +22,7 @@ import org.uqbar.arena.windows.WindowOwner
 
 @Accessors
 class DetalleDeRecetaVentana extends TransactionalDialog<DetalleDeRecetaAppModel> {
-	
+
 	java.util.List<String> comidaQueLeDisgusta = new ArrayList<String>
 
 	new(WindowOwner owner, DetalleDeRecetaAppModel model) {
@@ -39,11 +40,16 @@ class DetalleDeRecetaVentana extends TransactionalDialog<DetalleDeRecetaAppModel
 
 		addPanelCaloriasYDuenio(mainPanel)
 
-		addPanelDificultadYTemporada(mainPanel)
+		val searchFormPanel = new Panel(mainPanel)
+		searchFormPanel.setLayout(new ColumnLayout(2))
+		val panelIzquierdo = new Panel(searchFormPanel)
+		val panelDerecho = new Panel(searchFormPanel)
 
-		addPanelIngredientesYCondimentos(mainPanel)
+		addPanelDificultadYTemporada(panelIzquierdo, panelDerecho)
 
-		addPanelFavoritaYCondiciones(mainPanel)
+		addPanelIngredientesYCondimentos(panelIzquierdo, panelDerecho)
+
+		addPanelFavoritaYCondiciones(panelIzquierdo, panelDerecho)
 
 		addPanelProcesoDePreparacion(mainPanel)
 
@@ -62,46 +68,40 @@ class DetalleDeRecetaVentana extends TransactionalDialog<DetalleDeRecetaAppModel
 	}
 
 	//Dificultad de la receta y temporada
-	def addPanelDificultadYTemporada(Panel mainPanel) {
-		val panelDificultadYTemporada = new Panel(mainPanel) //Hago un panel grande que sea horizontal
-		panelDificultadYTemporada.layout = new HorizontalLayout
+	def addPanelDificultadYTemporada(Panel panelIzquierdo, Panel panelDerecho) {
 
-		val panelDificultad = new Panel(panelDificultadYTemporada) //Ese mismo panel lo divido en dos verticales
+		val panelDificultad = new Panel(panelIzquierdo)
 		new Label(panelDificultad).text = "Dificultad"
 		new Label(panelDificultad).bindValueToProperty("unaReceta.dificultad")
 
-		val panelTemporada = new Panel(panelDificultadYTemporada)
+		val panelTemporada = new Panel(panelDerecho)
 		new Label(panelTemporada).text = "Temporada"
 		new Label(panelTemporada).bindValueToProperty("unaReceta.temporada")
 	}
 
 	//Grilla de ingredientes y lista de condimentos
-	def addPanelIngredientesYCondimentos(Panel mainPanel) {
-		val panelIngredientesYCondimentos = new Panel(mainPanel)
-		panelIngredientesYCondimentos.layout = new HorizontalLayout
+	def addPanelIngredientesYCondimentos(Panel panelIzquierdo, Panel panelDerecho) {
 
-		val panelIngredientes = new Panel(panelIngredientesYCondimentos)
+		val panelIngredientes = new Panel(panelIzquierdo)
 		new Label(panelIngredientes).text = "Ingredientes"
 		grillaIngredientes(panelIngredientes)
 
-		val panelCondimentos = new Panel(panelIngredientesYCondimentos)
+		val panelCondimentos = new Panel(panelDerecho)
 		new Label(panelCondimentos).text = "Condimentos"
 		listaDeCondimentos(panelCondimentos)
 
 	}
 
 	//Checkbox de favorita y lista de condiciones preexistentes
-	def addPanelFavoritaYCondiciones(Panel mainPanel) {
-		val panelFavoritaYCondiciones = new Panel(mainPanel)
-		panelFavoritaYCondiciones.layout = new HorizontalLayout
+	def addPanelFavoritaYCondiciones(Panel panelIzquierdo, Panel panelDerecho) {
 
-		val panelFavorita = new Panel(panelFavoritaYCondiciones)
+		val panelFavorita = new Panel(panelIzquierdo)
 		panelFavorita.layout = new HorizontalLayout
 		new Label(panelFavorita).text = "Favorita"
 		var checkFavorita = new CheckBox(panelFavorita)
 		checkFavorita.bindValueToProperty("favorita")
 
-		val panelCondiciones = new Panel(panelFavoritaYCondiciones)
+		val panelCondiciones = new Panel(panelDerecho)
 		new Label(panelCondiciones).text = "Condiciones Preexistentes"
 		listaCondicionesPreexistentes(panelCondiciones)
 	}
@@ -120,11 +120,11 @@ class DetalleDeRecetaVentana extends TransactionalDialog<DetalleDeRecetaAppModel
 	def addPanelBotonVolver(Panel mainPanel) {
 		val panelBotonVolver = new Panel(mainPanel)
 		new Button(panelBotonVolver) => [
-			onClick [ |this.accept ]
+			onClick [|this.accept]
 			caption = "Volver"
 		]
 
-		//new Label(panelBotonVolver).bindValueToProperty("unUsuario.cantidadDeFavorita")
+	//new Label(panelBotonVolver).bindValueToProperty("unUsuario.cantidadDeFavorita")
 	}
 
 	//Lista de condiciones preexistentes
@@ -132,9 +132,9 @@ class DetalleDeRecetaVentana extends TransactionalDialog<DetalleDeRecetaAppModel
 		new Panel(panelCondiciones) => [layout = new HorizontalLayout
 			new List(it) => [
 				var propiedadCondiciones = bindItemsToProperty("unaReceta.paraQueCondicionesSoyInadecuada")
-				propiedadCondiciones.adapter = new PropertyAdapter(typeof(CondicionPreexistente), "nombre") //No lo tenemos en una propiedad si no en un metodo
-				width = 100
-				height = 120
+				propiedadCondiciones.adapter = new PropertyAdapter(typeof(CondicionPreexistente), "nombre") 
+				width = 150
+				height = 30
 			]]
 	}
 
@@ -142,18 +142,18 @@ class DetalleDeRecetaVentana extends TransactionalDialog<DetalleDeRecetaAppModel
 	def listaDeCondimentos(Panel panelCondimentos) {
 		new Panel(panelCondimentos) => [layout = new HorizontalLayout
 			new List(it) => [
-				var propiedadCondimentos = bindItemsToProperty("unaReceta.condimentos") // Los condimentos junto con las subrecetas y las comidas las tenemos todas juntas en esta col.Receta.
+				var propiedadCondimentos = bindItemsToProperty("unaReceta.condimentos")
 				propiedadCondimentos.adapter = new PropertyAdapter(typeof(Cosas), "nombre")
-				width = 100
-				height = 200
+				width = 150
+				height = 30
 			]]
 	}
 
 	//Grilla de ingredientes
 	def grillaIngredientes(Panel panel) {
 		val gridIngredientes = new Table(panel, typeof(Comida)) => [
-			width = 1000
-			height = 8000
+			width = 150
+			height = 30
 			bindItemsToProperty("unaReceta.ingredientes")
 		]
 
